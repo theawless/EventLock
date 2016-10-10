@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Settings">
+        <MultiSelectListPreference
+            android:defaultValue="@array/selected_calendars_default"
+            android:key="@string/selected_calendars_key"
+            android:summary="These calendars will be used to show the events"
+            android:title="Selected calendars" />
         <ListPreference
             android:defaultValue="@string/max_events_default"
             android:entries="@array/max_events_entvals"
