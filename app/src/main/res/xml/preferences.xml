@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Settings">
+        <ListPreference
+            android:defaultValue="@string/max_events_default"
+            android:entries="@array/max_events_entvals"
+            android:entryValues="@array/max_events_entvals"
+            android:key="@string/max_events_key"
+            android:summary="How many events will be shown"
+            android:title="Number of Events" />
+        <ListPreference
+            android:defaultValue="@string/to_default"
+            android:entries="@array/to_entries"
+            android:entryValues="@array/to_values"
+            android:key="@string/to_key"
+            android:summary="Time till which events will be shown"
+            android:title="End time" />
+        <CheckBoxPreference
+            android:defaultValue="@string/from_default"
+            android:key="@string/from_key"
+            android:summary="Disable to make start time 12:00 AM"
+            android:title="Start at now?" />
+        <CheckBoxPreference
+            android:defaultValue="@string/free_default"
+            android:key="@string/free_key"
+            android:summary="Show when you are free"
+            android:title="Free text" />
+        <ListPreference
+            android:defaultValue="@string/time_font_default"
+            android:entries="@array/font_entries"
+            android:entryValues="@array/font_values"
+            android:key="@string/time_font_key"
+            android:summary="The display size of time text"
+            android:title="Time font" />
+        <ListPreference
+            android:defaultValue="@string/time_font_default"
+            android:entries="@array/font_entries"
+            android:entryValues="@array/font_values"
+            android:key="@string/title_font_key"
+            android:summary="The display size of title text"
+            android:title="Title font" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="About">
+        <Preference
+            android:summary="github.com/theawless/Lockscreen-Calendar"
+            android:title="View project on Github">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://www.github.com/theawless/Lockscreen-Calendar" />
+        </Preference>
+        <Preference
+            android:summary="1.0.0"
+            android:title="Version" />
+    </PreferenceCategory>
+</PreferenceScreen>
