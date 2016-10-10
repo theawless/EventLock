@@ -5,6 +5,7 @@ android {
     buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "com.gobbledygook.theawless.eventlock"
+        buildConfigField("int", "MODULE_VERSION", "3")
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
