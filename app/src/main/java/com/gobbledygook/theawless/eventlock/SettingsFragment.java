@@ -34,6 +34,7 @@ public class SettingsFragment extends PreferenceFragment {
         }
     }
 
+    @SuppressWarnings("MissingPermission")
     private void createMultiSelectCalendars() {
         ContentResolver resolver = getActivity().getContentResolver();
         Uri calendarUri = CalendarContract.Calendars.CONTENT_URI;
@@ -41,9 +42,12 @@ public class SettingsFragment extends PreferenceFragment {
         Cursor cursor = resolver.query(calendarUri, projection, null, null, null);
         final ArrayList<String> calendarNames = new ArrayList<>();
         final ArrayList<String> calendarIds = new ArrayList<>();
-        while (cursor != null && cursor.moveToNext()) {
-            calendarNames.add(cursor.getString(1));
-            calendarIds.add(Integer.valueOf(cursor.getInt(0)).toString());
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                calendarNames.add(cursor.getString(1));
+                calendarIds.add(Integer.valueOf(cursor.getInt(0)).toString());
+            }
+            cursor.close();
         }
         MultiSelectListPreference selectedCalendarPref = (MultiSelectListPreference) findPreference(getString(R.string.selected_calendars_key));
         selectedCalendarPref.setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
