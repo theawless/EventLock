@@ -47,11 +47,11 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="About">
         <Preference
-            android:summary="github.com/theawless/Lockscreen-Calendar"
+            android:summary="@string/github_url"
             android:title="View project on Github">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="http://www.github.com/theawless/Lockscreen-Calendar" />
+                android:data="@string/github_url" />
         </Preference>
         <Preference
             android:summary="1.0.0"

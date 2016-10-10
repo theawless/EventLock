@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="github_url">https://github.com/theawless/EventLock</string>
+    <string name="github_issues_url">https://github.com/theawless/EventLock/issues</string>
+    <string name="xposed_forum_url">https://forum.xda-developers.com/showthread.php?t=3034811</string>
+</resources>

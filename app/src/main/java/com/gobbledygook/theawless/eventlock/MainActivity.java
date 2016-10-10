@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private void startXposedActivity(String section) {
         if (!XposedUtils.startXposedActivity(this, section)) {
             Toast.makeText(this, R.string.xposed_not_installed, Toast.LENGTH_SHORT).show();
-            startBrowserActivity("http://forum.xda-developers.com/showthread.php?t=3034811");
+            startBrowserActivity(getString(R.string.xposed_forum_url));
         }
     }
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNeutralButton(R.string.report_bug, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startBrowserActivity("https://github.com/theawless/EventLock/issues");
+                        startBrowserActivity(getString(R.string.github_issues_url));
                     }
                 })
                 .setNegativeButton(R.string.ignore, null)
