@@ -10,6 +10,7 @@ public class PreferenceConsts {
     public final static String max_events_key = "max_events_preference_key";
     public final static String time_font_key = "time_font_preference_key";
     public final static String title_font_key = "title_font_preference_key";
+    public final static String free_key = "free_preference_key";
 
     public final static String event_title_key = "event_title_preference_key";
     public final static String event_time_key = "event_time_preference_key";
@@ -20,7 +21,7 @@ public class PreferenceConsts {
     public final static String time_font_default = "14";
     public final static String title_font_default = "14";
     public final static String max_events_default = "2";
-    public final static String free_default = "true";
+    public final static String free_default = "Free yay!";
 
     private PreferenceConsts() {
     }

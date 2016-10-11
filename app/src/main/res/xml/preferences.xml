@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Settings">
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="@string/event_title_key"
+            android:title="title" />
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="@string/event_time_key"
+            android:title="time" />
+        <EditTextPreference
+            android:defaultValue="@string/free_default"
+            android:key="@string/free_key"
+            android:summary="@string/free_summary"
+            android:title="@string/free_title" />
         <ListPreference
             android:defaultValue="@string/selected_calendars_default"
             android:key="@string/selected_calendars_key"
@@ -27,11 +40,6 @@
             android:key="@string/from_key"
             android:summary="@string/from_summary"
             android:title="@string/from_title" />
-        <CheckBoxPreference
-            android:defaultValue="@string/free_default"
-            android:key="@string/free_key"
-            android:summary="@string/free_summary"
-            android:title="@string/free_title" />
         <ListPreference
             android:defaultValue="@string/time_font_default"
             android:entries="@array/font_entries"

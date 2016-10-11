@@ -16,7 +16,7 @@
     <string name="to_title">End time</string>
     <string name="from_summary">Disable to make start time 12:00 AM</string>
     <string name="from_title">Start at now</string>
-    <string name="free_summary">Show when you are free</string>
+    <string name="free_summary">Shown when we find no more events in the range</string>
     <string name="free_title">Free text</string>
     <string name="time_font_summary">The display size of time text</string>
     <string name="time_font_title">Time font</string>
