@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Settings">
-        <MultiSelectListPreference
-            android:defaultValue="@array/selected_calendars_default"
+        <ListPreference
+            android:defaultValue="@string/selected_calendars_default"
             android:key="@string/selected_calendars_key"
-            android:summary="These calendars will be used to show the events"
-            android:title="Selected calendars" />
+            android:summary="This calendar will be used to show the events"
+            android:title="Selected calendar" />
+        <!--
         <ListPreference
             android:defaultValue="@string/max_events_default"
             android:entries="@array/max_events_entvals"
@@ -13,6 +14,7 @@
             android:key="@string/max_events_key"
             android:summary="How many events will be shown"
             android:title="Number of Events" />
+        -->
         <ListPreference
             android:defaultValue="@string/to_default"
             android:entries="@array/to_entries"
@@ -24,7 +26,7 @@
             android:defaultValue="@string/from_default"
             android:key="@string/from_key"
             android:summary="Disable to make start time 12:00 AM"
-            android:title="Start at now?" />
+            android:title="Start at now" />
         <CheckBoxPreference
             android:defaultValue="@string/free_default"
             android:key="@string/free_key"

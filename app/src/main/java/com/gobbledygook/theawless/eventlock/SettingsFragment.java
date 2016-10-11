@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.MultiSelectListPreference;
+import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.provider.CalendarContract;
 import android.util.Log;
@@ -49,7 +49,7 @@ public class SettingsFragment extends PreferenceFragment {
             }
             cursor.close();
         }
-        MultiSelectListPreference selectedCalendarPref = (MultiSelectListPreference) findPreference(getString(R.string.selected_calendars_key));
+        ListPreference selectedCalendarPref = (ListPreference) findPreference(getString(R.string.selected_calendars_key));
         selectedCalendarPref.setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
         selectedCalendarPref.setEntryValues(calendarIds.toArray(new CharSequence[calendarNames.size()]));
     }
