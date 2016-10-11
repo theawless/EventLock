@@ -1,10 +1,14 @@
 package com.gobbledygook.theawless.eventlock;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.XModuleResources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
+
+import com.crossbowffs.remotepreferences.RemotePreferences;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -17,15 +21,15 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPackageResources, IXposedHookLoadPackage {
+public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPackageResources, IXposedHookLoadPackage, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PACKAGE_NAME = BuildConfig.APPLICATION_ID;
     private static String sModulePath;
     private TextView eventTitleTextView;
     private TextView eventTimeTextView;
     private XModuleResources moduleRes;
+    private SharedPreferences sharedPreferences;
 
-    @SuppressWarnings("MissingPermission")
-    private void refreshEvents() {
+    private void refreshShownEvents() {
         XposedBridge.log("refresh");
         eventTitleTextView.setText(eventTitleTextView.getText() + ".");
         eventTimeTextView.setText(eventTimeTextView.getText() + ".");
@@ -41,6 +45,7 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
             protected void afterHookedMethod(MethodHookParam param) {
                 XposedBridge.log("inject views");
                 GridLayout self = (GridLayout) param.thisObject;
+                Context context = self.getContext();
                 LayoutInflater layoutInflater = LayoutInflater.from(self.getContext());
                 XmlPullParser parser;
                 parser = moduleRes.getLayout(moduleRes.getIdentifier("lockscreen", "layout", PACKAGE_NAME));
@@ -49,10 +54,19 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
                 eventTitleTextView = (TextView) view.findViewById(moduleRes.getIdentifier("event_title", "id", PACKAGE_NAME));
                 eventTimeTextView = (TextView) view.findViewById(moduleRes.getIdentifier("event_time", "id", PACKAGE_NAME));
                 XposedBridge.log("finished injecting");
-                refreshEvents();
+                sharedPreferences = new RemotePreferences(context, PreferenceConsts.authority, PreferenceConsts.preferences);
+                sharedPreferences.registerOnSharedPreferenceChangeListener(LockscreenHook.this);
+                XposedBridge.log("registered with prefs");
+                refreshShownEvents();
             }
         });
         XposedBridge.log("Lockscreen calender Xposed module initialized!");
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        XposedBridge.log("preferences changed");
+        refreshShownEvents();
     }
 
     @Override
@@ -64,6 +78,4 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
     public void initZygote(StartupParam startupParam) throws Throwable {
         sModulePath = startupParam.modulePath;
     }
-
-
 }
