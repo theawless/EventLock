@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
-            android:name="PreferenceProvider"
-            android:authorities="com.example.app.preferences"
+            android:name=".PreferenceProvider"
+            android:authorities="@string/authority"
             android:exported="true" />
 
         <meta-data
