@@ -4,8 +4,8 @@
         <ListPreference
             android:defaultValue="@string/selected_calendars_default"
             android:key="@string/selected_calendars_key"
-            android:summary="This calendar will be used to show the events"
-            android:title="Selected calendar" />
+            android:summary="@string/selected_calendars_summary"
+            android:title="@string/selected_calendars_title" />
         <!--
         <ListPreference
             android:defaultValue="@string/max_events_default"
@@ -20,32 +20,32 @@
             android:entries="@array/to_entries"
             android:entryValues="@array/to_values"
             android:key="@string/to_key"
-            android:summary="Time till which events will be shown"
-            android:title="End time" />
+            android:summary="@string/to_summary"
+            android:title="@string/to_title" />
         <CheckBoxPreference
             android:defaultValue="@string/from_default"
             android:key="@string/from_key"
-            android:summary="Disable to make start time 12:00 AM"
-            android:title="Start at now" />
+            android:summary="@string/from_summary"
+            android:title="@string/from_title" />
         <CheckBoxPreference
             android:defaultValue="@string/free_default"
             android:key="@string/free_key"
-            android:summary="Show when you are free"
-            android:title="Free text" />
+            android:summary="@string/free_summary"
+            android:title="@string/free_title" />
         <ListPreference
             android:defaultValue="@string/time_font_default"
             android:entries="@array/font_entries"
             android:entryValues="@array/font_values"
             android:key="@string/time_font_key"
-            android:summary="The display size of time text"
-            android:title="Time font" />
+            android:summary="@string/time_font_summary"
+            android:title="@string/time_font_title" />
         <ListPreference
             android:defaultValue="@string/time_font_default"
             android:entries="@array/font_entries"
             android:entryValues="@array/font_values"
             android:key="@string/title_font_key"
-            android:summary="The display size of title text"
-            android:title="Title font" />
+            android:summary="@string/title_font_summary"
+            android:title="@string/title_font_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="About">
         <Preference

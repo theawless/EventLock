@@ -58,7 +58,7 @@ public class SettingsFragment extends PreferenceFragment {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == CALENDAR_READ_REQUEST_CODE) {
             if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getActivity(), "Calendar read permission is required. Exiting!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.read_permission_error, Toast.LENGTH_SHORT).show();
                 getActivity().finish();
             } else {
                 createMultiSelectCalendars();
