@@ -9,18 +9,4 @@
     <string name="max_events_key">max_events_preference_key</string>
     <string name="time_font_key">time_font_preference_key</string>
     <string name="title_font_key">title_font_preference_key</string>
-
-    <string name="selected_calendars_default">1</string>
-    <string name="to_default">0</string>
-    <string name="from_default">true</string>
-    <string name="time_font_default">14</string>
-    <string name="title_font_default">14</string>
-    <string name="max_events_default">2</string>
-    <string name="free_default">true</string>
-    <!--
-    </string-array>
-    <string-array name="selected_calendars_default">
-    <item>1</item>
-    </string-array>
-    -->
 </resources>

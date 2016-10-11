@@ -31,5 +31,18 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+    -->
+    <string name="selected_calendars_default">1</string>
+    <string name="to_default">0</string>
+    <string name="from_default">true</string>
+    <string name="time_font_default">14</string>
+    <string name="title_font_default">14</string>
+    <string name="max_events_default">2</string>
+    <string name="free_default">true</string>
+    <!--
+    <string-array name="selected_calendars_default">
+    <item>1</item>
+    </string-array>
     -->
 </resources>
