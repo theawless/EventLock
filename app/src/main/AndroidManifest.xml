@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gobbledygook.theawless.eventlock">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/eventlock_icon"
@@ -33,6 +36,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".AlarmReceiver" />
+        <service android:name=".SchedulingService" />
+        <receiver
+            android:name=".CommonReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="content" />
+                <action android:name="android.intent.action.PROVIDER_CHANGED" />
+                <data android:host="com.android.calendar" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="content" />
+                <action android:name="android.intent.action.PROVIDER_CHANGED" />
+                <data android:host="com.google.android.calendar" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
