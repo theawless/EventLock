@@ -40,7 +40,7 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
         eventTitleTextView.setText(title);
         eventTimeTextView.setText(time);
         //there are no events
-        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(time)) {
+        if (TextUtils.isEmpty(title)) {
             String freeText = preferences.getString(PreferenceConsts.free_key, PreferenceConsts.free_default);
             if (TextUtils.isEmpty(freeText)) {
                 eventTitleTextView.setVisibility(View.GONE);
