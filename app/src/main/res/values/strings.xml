@@ -12,16 +12,25 @@
     <string name="reboot">Reboot</string>
     <string name="selected_calendars_summary">This calendar will be used to show the events</string>
     <string name="selected_calendars_title">Selected calendar</string>
-    <string name="to_summary">Time till which events will be shown</string>
+    <string name="to_summary">How many days after today should we look for events</string>
     <string name="to_title">End time</string>
-    <string name="from_summary">Disable to make start time 12:00 AM</string>
-    <string name="from_title">Start at now</string>
-    <string name="free_summary">Shown when we find no more events in the range</string>
+    <string name="from_summary">Enable: now, Disable: yesterday midnight</string>
+    <string name="from_title">Begin time</string>
+    <string name="free_summary">Shown when no more events in the range are found</string>
     <string name="free_title">Free text</string>
-    <string name="time_font_summary">The display size of time text</string>
+    <string name="time_font_summary">The display size of event time text</string>
     <string name="time_font_title">Time font</string>
-    <string name="title_font_summary">The display size of title text</string>
+    <string name="title_font_summary">The display size of event title text</string>
     <string name="title_font_title">Title font</string>
     <string name="read_permission_error">Calendar read permission is required. Exiting!</string>
+    <string name="tomorrow">tomorrow</string>
+    <string name="day_after_tomorrow">day after tomorrow</string>
+    <string name="days">days</string>
+    <string name="after">after</string>
+    <string name="all_day">All day</string>
+    <string name="at">at</string>
+    <string name="projectgithub_title">View project on Github</string>
+    <string name="version_title">Version</string>
+    <string name="version_number">1.0.0</string>
 
 </resources>

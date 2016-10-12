@@ -19,6 +19,6 @@
     <string name="time_font_default">14</string>
     <string name="title_font_default">14</string>
     <string name="max_events_default">2</string>
-    <string name="free_default">Free yay!</string>
+    <string name="free_default">No more events</string>
 
 </resources>

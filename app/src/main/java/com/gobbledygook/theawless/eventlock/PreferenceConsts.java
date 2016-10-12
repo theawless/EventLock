@@ -21,7 +21,7 @@ public class PreferenceConsts {
     public final static String time_font_default = "14";
     public final static String title_font_default = "14";
     public final static String max_events_default = "2";
-    public final static String free_default = "Free yay!";
+    public final static String free_default = "No more events";
     public final static String start_text = "Select a calendar from the main application";
 
     private PreferenceConsts() {
