@@ -32,21 +32,23 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
         XposedBridge.log("refresh");
         String title = preferences.getString(PreferenceConsts.event_title_key, null);
         String time = preferences.getString(PreferenceConsts.event_time_key, null);
+        //case when the calendar checking service didn't start
         if (title == null || time == null) {
-            title = "";
+            title = PreferenceConsts.start_text;
             time = "";
         }
         eventTitleTextView.setText(title);
         eventTimeTextView.setText(time);
+        //there are no events
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(time)) {
             String freeText = preferences.getString(PreferenceConsts.free_key, PreferenceConsts.free_default);
             if (TextUtils.isEmpty(freeText)) {
                 eventTitleTextView.setVisibility(View.GONE);
             } else {
                 eventTitleTextView.setText(freeText);
+                eventTimeTextView.setVisibility(View.VISIBLE);
             }
             eventTimeTextView.setVisibility(View.GONE);
-
         } else {
             eventTimeTextView.setVisibility(View.VISIBLE);
             eventTitleTextView.setVisibility(View.VISIBLE);

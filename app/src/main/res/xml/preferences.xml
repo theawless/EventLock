@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Settings">
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="@string/event_title_key"
-            android:title="title" />
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="@string/event_time_key"
-            android:title="time" />
-        <EditTextPreference
-            android:defaultValue="@string/free_default"
-            android:key="@string/free_key"
-            android:summary="@string/free_summary"
-            android:title="@string/free_title" />
         <ListPreference
             android:defaultValue="@string/selected_calendars_default"
             android:key="@string/selected_calendars_key"
             android:summary="@string/selected_calendars_summary"
             android:title="@string/selected_calendars_title" />
+        <EditTextPreference
+            android:defaultValue="@string/free_default"
+            android:key="@string/free_key"
+            android:summary="@string/free_summary"
+            android:title="@string/free_title" />
         <!--
         <ListPreference
             android:defaultValue="@string/max_events_default"
