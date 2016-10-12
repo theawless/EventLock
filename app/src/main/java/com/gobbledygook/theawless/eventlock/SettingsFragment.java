@@ -2,6 +2,8 @@ package com.gobbledygook.theawless.eventlock;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -15,16 +17,40 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final int CALENDAR_READ_REQUEST_CODE = 0;
     private static final String TAG = "SETTINGS_FRAGMENT";
+    private int versionCount = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getPreferenceManager().setSharedPreferencesName(getString(R.string.preferences));
+        getPreferenceManager().setSharedPreferencesName(PreferenceConsts.preferences);
+        getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         addPreferencesFromResource(R.xml.preferences);
         checkAndRequestPermission();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Intent intent = new Intent(getActivity(), SchedulingService.class);
+        getActivity().startService(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (!key.equals(PreferenceConsts.from_key) && !key.equals(PreferenceConsts.to_key) && !key.equals(PreferenceConsts.selected_calendars_key)) {
+            return;
+        }
+        Intent intent = new Intent(getActivity(), SchedulingService.class);
+        getActivity().startService(intent);
     }
 
     void checkAndRequestPermission() {
@@ -50,7 +76,7 @@ public class SettingsFragment extends PreferenceFragment {
             }
             cursor.close();
         }
-        ListPreference selectedCalendarPref = (ListPreference) findPreference(getString(R.string.selected_calendars_key));
+        ListPreference selectedCalendarPref = (ListPreference) findPreference(PreferenceConsts.selected_calendars_key);
         selectedCalendarPref.setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
         selectedCalendarPref.setEntryValues(calendarIds.toArray(new CharSequence[calendarNames.size()]));
     }
@@ -68,6 +94,4 @@ public class SettingsFragment extends PreferenceFragment {
             Log.wtf(TAG, "Weird request code!");
         }
     }
-
-
 }

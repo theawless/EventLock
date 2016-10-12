@@ -28,13 +28,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Intent intent = new Intent(this, SchedulingService.class);
-        startService(intent);
-    }
-
     private void startXposedActivity(String section) {
         if (!XposedUtils.startXposedActivity(this, section)) {
             Toast.makeText(this, R.string.xposed_not_installed, Toast.LENGTH_SHORT).show();
