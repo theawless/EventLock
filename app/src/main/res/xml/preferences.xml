@@ -6,11 +6,6 @@
             android:key="@string/selected_calendars_key"
             android:summary="@string/selected_calendars_summary"
             android:title="@string/selected_calendars_title" />
-        <EditTextPreference
-            android:defaultValue="@string/free_default"
-            android:key="@string/free_key"
-            android:summary="@string/free_summary"
-            android:title="@string/free_title" />
         <!--
         <ListPreference
             android:defaultValue="@string/max_events_default"
@@ -20,25 +15,23 @@
             android:summary="How many events will be shown"
             android:title="Number of Events" />
         -->
-        <ListPreference
-            android:defaultValue="@string/to_default"
-            android:entries="@array/to_entries"
-            android:entryValues="@array/to_values"
-            android:key="@string/to_key"
-            android:summary="@string/to_summary"
-            android:title="@string/to_title" />
         <CheckBoxPreference
             android:defaultValue="@string/from_default"
             android:key="@string/from_key"
             android:summary="@string/from_summary"
             android:title="@string/from_title" />
-        <ListPreference
-            android:defaultValue="@string/time_font_default"
-            android:entries="@array/font_entries"
-            android:entryValues="@array/font_values"
-            android:key="@string/time_font_key"
-            android:summary="@string/time_font_summary"
-            android:title="@string/time_font_title" />
+        <EditTextPreference
+            android:defaultValue="@string/to_default"
+            android:inputType="number"
+            android:key="@string/to_key"
+            android:numeric="integer"
+            android:summary="@string/to_summary"
+            android:title="@string/to_title" />
+        <EditTextPreference
+            android:defaultValue="@string/free_default"
+            android:key="@string/free_key"
+            android:summary="@string/free_summary"
+            android:title="@string/free_title" />
         <ListPreference
             android:defaultValue="@string/time_font_default"
             android:entries="@array/font_entries"
@@ -46,17 +39,24 @@
             android:key="@string/title_font_key"
             android:summary="@string/title_font_summary"
             android:title="@string/title_font_title" />
+        <ListPreference
+            android:defaultValue="@string/time_font_default"
+            android:entries="@array/font_entries"
+            android:entryValues="@array/font_values"
+            android:key="@string/time_font_key"
+            android:summary="@string/time_font_summary"
+            android:title="@string/time_font_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="About">
         <Preference
             android:summary="@string/github_url"
-            android:title="View project on Github">
+            android:title="@string/projectgithub_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="@string/github_url" />
         </Preference>
         <Preference
-            android:summary="1.0.0"
-            android:title="Version" />
+            android:summary="@string/version_number"
+            android:title="@string/version_title" />
     </PreferenceCategory>
 </PreferenceScreen>
