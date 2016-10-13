@@ -14,7 +14,6 @@ public class CommonReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         Log.v(TAG, "on receive action:" + action);
         if (action.equals(Intent.ACTION_BOOT_COMPLETED) || action.equals(Intent.ACTION_PROVIDER_CHANGED)) {
-            Log.v(TAG, "calling handleIntent in service");
             schedulingService.handleIntent(context);
         }
     }

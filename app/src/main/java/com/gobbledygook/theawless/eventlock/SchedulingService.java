@@ -27,7 +27,6 @@ public class SchedulingService extends IntentService {
 
     public SchedulingService() {
         super(TAG);
-        Log.v(TAG, "Constructing");
     }
 
     @Override

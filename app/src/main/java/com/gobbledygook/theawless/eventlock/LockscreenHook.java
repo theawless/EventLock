@@ -29,7 +29,6 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
     private RemotePreferences preferences;
 
     private void refreshShownEvents() {
-        XposedBridge.log("refresh");
         String title = preferences.getString(PreferenceConsts.event_title_key, null);
         String time = preferences.getString(PreferenceConsts.event_time_key, null);
         //case when the calendar checking service didn't start
@@ -65,7 +64,7 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
         XposedHelpers.findAndHookMethod("com.android.keyguard.KeyguardStatusView", lpparam.classLoader, "onFinishInflate", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) {
-                XposedBridge.log("inject views");
+                XposedBridge.log("EventLock inject views");
                 GridLayout self = (GridLayout) param.thisObject;
                 Context context = self.getContext();
                 LayoutInflater layoutInflater = LayoutInflater.from(self.getContext());
@@ -73,19 +72,18 @@ public class LockscreenHook implements IXposedHookZygoteInit, IXposedHookInitPac
                 self.addView(view);
                 eventTitleTextView = (TextView) view.findViewById(moduleRes.getIdentifier("event_title", "id", PACKAGE_NAME));
                 eventTimeTextView = (TextView) view.findViewById(moduleRes.getIdentifier("event_time", "id", PACKAGE_NAME));
-                XposedBridge.log("finished injecting");
+                XposedBridge.log("EventLock finished injecting");
                 preferences = new RemotePreferences(context, PreferenceConsts.authority, PreferenceConsts.preferences);
                 preferences.registerOnSharedPreferenceChangeListener(LockscreenHook.this);
-                XposedBridge.log("registered with prefs");
+                XposedBridge.log("EventLock registered with prefs");
                 refreshShownEvents();
             }
         });
-        XposedBridge.log("Lockscreen calender Xposed module initialized!");
+        XposedBridge.log("EventLock Xposed module initialized!");
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        XposedBridge.log("preferences changed");
         refreshShownEvents();
     }
 
