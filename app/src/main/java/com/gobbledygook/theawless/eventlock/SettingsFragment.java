@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final int CALENDAR_READ_REQUEST_CODE = 0;
     private static final String TAG = "SETTINGS_FRAGMENT";
-    private int versionCount = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,11 +52,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 editor.putString(key, "0");
                 editor.apply();
             }
-            return;
         }
-        if (!key.equals(PreferenceConsts.from_key) && !key.equals(PreferenceConsts.to_key) && !key.equals(PreferenceConsts.selected_calendars_key)) {
-            return;
-        }
+        Log.v(TAG, "Staring service");
         Intent intent = new Intent(getActivity(), SchedulingService.class);
         getActivity().startService(intent);
     }
