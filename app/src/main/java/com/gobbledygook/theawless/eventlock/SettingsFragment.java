@@ -46,6 +46,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(PreferenceConsts.to_key)) {
+            String keyVal = sharedPreferences.getString(key, "");
+            if (keyVal.isEmpty()) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(key, "0");
+                editor.apply();
+            }
+            return;
+        }
         if (!key.equals(PreferenceConsts.from_key) && !key.equals(PreferenceConsts.to_key) && !key.equals(PreferenceConsts.selected_calendars_key)) {
             return;
         }
