@@ -9,8 +9,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
+import android.preference.MultiSelectListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.provider.CalendarContract;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final int CALENDAR_READ_REQUEST_CODE = 0;
     private static final String TAG = "SETTINGS_FRAGMENT";
+    private int versionClickCount = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,34 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onDestroy() {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (!preference.getTitle().equals(getString(R.string.version_title))) {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        } else {
+            ++versionClickCount;
+            switch (versionClickCount) {
+                case 1: {
+                    Toast.makeText(getActivity(), R.string.version_count_three, Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                case 6: {
+                    Toast.makeText(getActivity(), R.string.version_count_six, Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                case 12: {
+                    Toast.makeText(getActivity(), R.string.version_count_twelve, Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                case 18: {
+                    Toast.makeText(getActivity(), R.string.version_count_eighteen, Toast.LENGTH_SHORT).show();
+                    break;
+                }
+            }
+            return true;
+        }
     }
 
     @Override
@@ -81,7 +112,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             }
             cursor.close();
         }
-        ListPreference selectedCalendarPref = (ListPreference) findPreference(PreferenceConsts.selected_calendars_key);
+        MultiSelectListPreference selectedCalendarPref = (MultiSelectListPreference) findPreference(PreferenceConsts.selected_calendars_key);
         selectedCalendarPref.setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
         selectedCalendarPref.setEntryValues(calendarIds.toArray(new CharSequence[calendarNames.size()]));
     }
