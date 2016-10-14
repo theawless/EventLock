@@ -25,9 +25,7 @@
         <item>5</item>
     </string-array>
     -->
-    <!--
     <string-array name="selected_calendars_default">
-    <item>1</item>
+        <item>1</item>
     </string-array>
-    -->
 </resources>

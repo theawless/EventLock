@@ -13,8 +13,7 @@
     <string name="event_title_key">event_title_preference_key</string>
     <string name="event_time_key">event_time_preference_key</string>
 
-    <string name="selected_calendars_default">1</string>
-    <string name="to_default">0</string>
+    <string name="to_default">3</string>
     <string name="from_default">true</string>
     <string name="time_font_default">14</string>
     <string name="title_font_default">14</string>

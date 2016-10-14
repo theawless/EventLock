@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Settings">
-        <ListPreference
-            android:defaultValue="@string/selected_calendars_default"
+        <MultiSelectListPreference
+            android:defaultValue="@array/selected_calendars_default"
             android:key="@string/selected_calendars_key"
             android:summary="@string/selected_calendars_summary"
             android:title="@string/selected_calendars_title" />
