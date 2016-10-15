@@ -6,20 +6,6 @@
             android:key="@string/selected_calendars_key"
             android:summary="@string/selected_calendars_summary"
             android:title="@string/selected_calendars_title" />
-        <!--
-        <ListPreference
-            android:defaultValue="@string/max_events_default"
-            android:entries="@array/max_events_entvals"
-            android:entryValues="@array/max_events_entvals"
-            android:key="@string/max_events_key"
-            android:summary="How many events will be shown"
-            android:title="Number of Events" />
-        -->
-        <CheckBoxPreference
-            android:defaultValue="@string/from_default"
-            android:key="@string/from_key"
-            android:summary="@string/from_summary"
-            android:title="@string/from_title" />
         <EditTextPreference
             android:defaultValue="@string/to_default"
             android:inputType="number"

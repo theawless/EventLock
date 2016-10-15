@@ -14,8 +14,6 @@
     <string name="selected_calendars_title">Selected calendars</string>
     <string name="to_summary">How many days after today should we look for events</string>
     <string name="to_title">End time</string>
-    <string name="from_summary">Enable: now, Disable: yesterday midnight</string>
-    <string name="from_title">Begin time</string>
     <string name="free_summary">Shown when no more events in the range are found</string>
     <string name="free_title">Free text</string>
     <string name="time_font_summary">The display size of event time text</string>

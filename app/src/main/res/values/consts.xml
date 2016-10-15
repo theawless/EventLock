@@ -3,9 +3,7 @@
     <string name="preferences">event_lock_prefs</string>
     <string name="authority">com.gobbledygook.theawless.eventlock.preferences</string>
     <string name="selected_calendars_key">selected_calendars_preference_key</string>
-    <string name="from_key">from_preference_key</string>
     <string name="to_key">to_preference_key</string>
-    <string name="max_events_key">max_events_preference_key</string>
     <string name="time_font_key">time_font_preference_key</string>
     <string name="title_font_key">title_font_preference_key</string>
     <string name="free_key">free_preference_key</string>
@@ -17,7 +15,6 @@
     <string name="from_default">true</string>
     <string name="time_font_default">14</string>
     <string name="title_font_default">14</string>
-    <string name="max_events_default">2</string>
     <string name="free_default">No more events</string>
 
 </resources>
