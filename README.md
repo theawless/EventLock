@@ -6,6 +6,10 @@ An Xposed module to show your calendar events on the lockscreen.
 * After Kitkat, the lockscreen widgets were disabled and so calendar widget can't be put on the lockscreen.
 * AOSP lockscreen for lolipop/marshmallow does not show calendar events on lockscreen either.
 
+### Screenshots
+<img src="/images/1.png" width="256" height="495"/>]
+<img src="/images/2.png" width="256" height="495"/>]
+
 ### Requirements
 
 * Root
