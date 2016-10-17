@@ -1,4 +1,4 @@
-package com.gobbledygook.theawless.eventlock;
+package com.gobbledygook.theawless.eventlock.app;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +9,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
+
+import com.gobbledygook.theawless.eventlock.R;
+import com.gobbledygook.theawless.eventlock.xposed.XposedUtils;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,6 @@
-package com.gobbledygook.theawless.eventlock;
+package com.gobbledygook.theawless.eventlock.xposed;
+
+import com.gobbledygook.theawless.eventlock.BuildConfig;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodReplacement;

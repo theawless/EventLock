@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preferences">event_lock_preferences</string>
+    <string name="authority">com.gobbledygook.theawless.eventlock.preferences</string>
+
+    <string name="selected_calendars_key">selected_calendars_preference_key</string>
+    <string name="days_till_key">days_till_preference_key</string>
+    <string name="time_font_size_key">time_font_size_preference_key</string>
+    <string name="title_font_size_key">title_font_size_preference_key</string>
+    <string name="time_font_orientation_key">time_font_orientation_preference_key</string>
+    <string name="title_font_orientation_key">title_font_orientation_preference_key</string>
+    <string name="free_text_key">free_text_preference_key</string>
+
+    <string name="event_to_display_key">event_to_display_preference_key</string>
+    <string name="event_titles_key">event_titles_preference_key</string>
+    <string name="event_times_key">event_times_preference_key</string>
+    <string name="event_long_end_times_key">event_long_end_times_preference_key</string>
+
+    <string name="event_to_display_default">0</string>
+    <string name="days_till_default">3</string>
+    <string name="time_font_size_default">14</string>
+    <string name="title_font_size_default">14</string>
+    <string name="time_font_orientation_default">left</string>
+    <string name="title_font_orientation_default">left</string>
+    <string name="free_text_default">No more events</string>
+    <string name="padding_from_above_default">24</string>
+    <string name="show_color_default">true</string>
+</resources>

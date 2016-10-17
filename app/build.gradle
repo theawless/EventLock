@@ -8,8 +8,8 @@ android {
         buildConfigField("int", "MODULE_VERSION", "3")
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.2"
+        versionCode 5
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

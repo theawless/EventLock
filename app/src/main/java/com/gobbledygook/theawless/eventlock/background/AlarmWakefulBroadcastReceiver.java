@@ -1,4 +1,4 @@
-package com.gobbledygook.theawless.eventlock;
+package com.gobbledygook.theawless.eventlock.background;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,22 +7,29 @@ import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 
-//calls Scheduling Service after required time, then Scheduling service sets the alram again. LOOP.
-public class AlarmReceiver extends WakefulBroadcastReceiver {
-    private static final String TAG = AlarmReceiver.class.getSimpleName();
+
+public class AlarmWakefulBroadcastReceiver extends WakefulBroadcastReceiver {
+    private final String TAG;
+    private final Class classType;
     private PendingIntent alarmIntent;
     private AlarmManager alarmManager;
+
+    AlarmWakefulBroadcastReceiver(Class classType) {
+        super();
+        this.TAG = classType.getSimpleName();
+        this.classType = classType;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.v(TAG, "onReceive");
-        Intent service = new Intent(context, SchedulingService.class);
+        Intent service = new Intent(context, classType);
         startWakefulService(context, service);
     }
 
     public void setAlarm(Context context, long setTimeMillis) {
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReceiver.class);
+        Intent intent = new Intent(context, CalendarLoaderAlarm.class);
         alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         alarmManager.set(AlarmManager.RTC_WAKEUP, setTimeMillis, alarmIntent);
         Log.v(TAG, "alarm set");

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="font_entries">
-        <item>14 pt</item>
-        <item>16 pt</item>
-        <item>18 pt</item>
-        <item>20 pt</item>
-        <item>22 pt</item>
-        <item>24 pt</item>
+    <string-array name="orientation_entvals">
+        <item>left</item>
+        <item>center</item>
+        <item>right</item>
     </string-array>
-    <string-array name="font_values">
+    <string-array name="padding_entvals">
+        <item>0</item>
+        <item>12</item>
+        <item>24</item>
+        <item>36</item>
+        <item>48</item>
+    </string-array>
+    <string-array name="font_entvals">
         <item>14</item>
         <item>16</item>
         <item>18</item>

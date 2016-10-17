@@ -1,4 +1,4 @@
-package com.gobbledygook.theawless.eventlock;
+package com.gobbledygook.theawless.eventlock.app;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -17,6 +17,9 @@ import android.provider.CalendarContract;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.gobbledygook.theawless.eventlock.R;
+import com.gobbledygook.theawless.eventlock.background.CalendarLoaderService;
+
 import java.util.ArrayList;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -27,7 +30,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getPreferenceManager().setSharedPreferencesName(PreferenceConsts.preferences);
+        getPreferenceManager().setSharedPreferencesName(getString(R.string.preferences));
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         addPreferencesFromResource(R.xml.preferences);
         checkAndRequestPermission();
@@ -36,7 +39,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onStart() {
         super.onStart();
-        Intent intent = new Intent(getActivity(), SchedulingService.class);
+        Intent intent = new Intent(getActivity(), CalendarLoaderService.class);
         getActivity().startService(intent);
     }
 
@@ -76,7 +79,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PreferenceConsts.to_key)) {
+        if (key.equals(getString(R.string.days_till_key))) {
             String keyVal = sharedPreferences.getString(key, "");
             if (keyVal.isEmpty()) {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -84,9 +87,11 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 editor.apply();
             }
         }
-        Log.v(TAG, "Staring service");
-        Intent intent = new Intent(getActivity(), SchedulingService.class);
-        getActivity().startService(intent);
+        if (key.equals(getString(R.string.selected_calendars_key)) || key.equals(getString(R.string.days_till_key))) {
+            Log.v(TAG, "Staring service");
+            Intent intent = new Intent(getActivity(), CalendarLoaderService.class);
+            getActivity().startService(intent);
+        }
     }
 
     void checkAndRequestPermission() {
@@ -112,7 +117,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             }
             cursor.close();
         }
-        MultiSelectListPreference selectedCalendarPref = (MultiSelectListPreference) findPreference(PreferenceConsts.selected_calendars_key);
+        MultiSelectListPreference selectedCalendarPref = (MultiSelectListPreference) findPreference(getString(R.string.selected_calendars_key));
         selectedCalendarPref.setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
         selectedCalendarPref.setEntryValues(calendarIds.toArray(new CharSequence[calendarNames.size()]));
     }

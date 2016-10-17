@@ -7,31 +7,51 @@
             android:summary="@string/selected_calendars_summary"
             android:title="@string/selected_calendars_title" />
         <EditTextPreference
-            android:defaultValue="@string/to_default"
+            android:defaultValue="@string/days_till_default"
             android:inputType="number"
-            android:key="@string/to_key"
+            android:key="@string/days_till_key"
             android:numeric="integer"
-            android:summary="@string/to_summary"
-            android:title="@string/to_title" />
+            android:summary="@string/days_till_summary"
+            android:title="@string/days_till_title" />
         <EditTextPreference
-            android:defaultValue="@string/free_default"
-            android:key="@string/free_key"
-            android:summary="@string/free_summary"
-            android:title="@string/free_title" />
+            android:defaultValue="@string/free_text_default"
+            android:key="@string/free_text_key"
+            android:summary="@string/free_text_summary"
+            android:title="@string/free_text_title" />
         <ListPreference
-            android:defaultValue="@string/time_font_default"
-            android:entries="@array/font_entries"
-            android:entryValues="@array/font_values"
-            android:key="@string/title_font_key"
-            android:summary="@string/title_font_summary"
-            android:title="@string/title_font_title" />
+            android:defaultValue="@string/time_font_size_default"
+            android:entries="@array/font_entvals"
+            android:entryValues="@array/font_entvals"
+            android:key="@string/title_font_size_key"
+            android:summary="@string/title_font_size_summary"
+            android:title="@string/title_font_size_title" />
         <ListPreference
-            android:defaultValue="@string/time_font_default"
-            android:entries="@array/font_entries"
-            android:entryValues="@array/font_values"
-            android:key="@string/time_font_key"
-            android:summary="@string/time_font_summary"
-            android:title="@string/time_font_title" />
+            android:defaultValue="@string/title_font_orientation_default"
+            android:entries="@array/orientation_entvals"
+            android:entryValues="@array/orientation_entvals"
+            android:key="@string/title_font_orientation_key"
+            android:summary="@string/title_font_orientation_summary"
+            android:title="@string/title_font_orientation_title" />
+        <ListPreference
+            android:defaultValue="@string/time_font_size_default"
+            android:entries="@array/font_entvals"
+            android:entryValues="@array/font_entvals"
+            android:key="@string/time_font_size_key"
+            android:summary="@string/time_font_size_summary"
+            android:title="@string/time_font_size_title" />
+        <ListPreference
+            android:defaultValue="@string/time_font_orientation_default"
+            android:entries="@array/orientation_entvals"
+            android:entryValues="@array/orientation_entvals"
+            android:key="@string/time_font_orientation_key"
+            android:summary="@string/time_font_orientation_summary"
+            android:title="@string/time_font_orientation_title" />
+        <ListPreference
+            android:defaultValue="@string/padding_from_above_default"
+            android:entries="@array/padding_entvals"
+            android:entryValues="@array/padding_entvals"
+            android:summary="@string/padding_from_above_summary"
+            android:title="@string/padding_from_above_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="About">
         <Preference

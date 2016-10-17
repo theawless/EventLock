@@ -7,13 +7,12 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/eventlock_icon"
+        android:label="@string/application_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
-            android:name=".PreferenceProvider"
+            android:name=".background.PreferenceProvider"
             android:authorities="@string/authority"
             android:exported="true" />
 
@@ -22,14 +21,14 @@
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Shows calendar events on lockscreen." />
+            android:value="Shows your calendar events on the lock screen." />
         <meta-data
             android:name="xposedminversion"
             android:value="53" />
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:name=".app.MainActivity"
+            android:label="@string/application_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,11 +36,23 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmReceiver" />
-        <service android:name=".SchedulingService" />
+        <service
+            android:name=".background.CalendarLoaderService"
+            android:label="@string/calendar_loader_service_name" />
+        <service
+            android:name=".background.CurrentEventUpdaterService"
+            android:label="@string/current_event_updater_service_name" />
+
         <receiver
-            android:name=".CommonReceiver"
-            android:enabled="true">
+            android:name=".background.CurrentEventUpdaterAlarm"
+            android:label="@string/current_event_updater_alarm_name" />
+        <receiver
+            android:name=".background.CalendarLoaderAlarm"
+            android:label="@string/calendar_loader_alarm_name" />
+        <receiver
+            android:name=".background.CommonReceiver"
+            android:enabled="true"
+            android:label="@string/common_receiver_alarm_name">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -50,12 +61,6 @@
                 <action android:name="android.intent.action.PROVIDER_CHANGED" />
                 <data android:host="com.android.calendar" />
             </intent-filter>
-            <intent-filter>
-                <data android:scheme="content" />
-                <action android:name="android.intent.action.PROVIDER_CHANGED" />
-                <data android:host="com.google.android.calendar" />
-            </intent-filter>
         </receiver>
     </application>
-
 </manifest>

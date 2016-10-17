@@ -1,38 +1,60 @@
 <resources>
-    <string name="app_name">EventLock</string>
+    <string name="application_name">EventLock</string>
+    <string name="calendar_loader_service_name">EventLockCalendarLoaderService</string>
+    <string name="current_event_updater_service_name">EventLockCurrentEventUpdaterService</string>
+    <string name="calendar_loader_alarm_name">EventLockCalendarLoaderAlarm</string>
+    <string name="current_event_updater_alarm_name">EventLockCurrentEventUpdaterAlarm</string>
+    <string name="common_receiver_alarm_name">EventLockCommonReceiverAlarm</string>
+
 
     <string name="xposed_not_installed">Xposed framework is not installed</string>
     <string name="enable_xposed_module_title">Enable this module</string>
-    <string name="enable_xposed_module_message">For EventLock to function correctly, you must enable the Xposed Module.</string>
+    <string name="enable_xposed_module_message">For EventLock to function correctly, you must enable the Xposed Module</string>
     <string name="enable">Enable</string>
     <string name="report_bug">Report bug</string>
     <string name="ignore">Ignore</string>
+
     <string name="module_outdated_title">Xposed module updated</string>
-    <string name="module_outdated_message">Please reboot your device for changes to take effect.</string>
+    <string name="module_outdated_message">Please reboot your device for changes to take effect</string>
     <string name="reboot">Reboot</string>
+
+    <string name="read_permission_error">Calendar read permission is required. Exiting!</string>
+    <string name="projectgithub_title">View project on Github</string>
+
     <string name="selected_calendars_summary">These calendar will be used to show the events</string>
     <string name="selected_calendars_title">Selected calendars</string>
-    <string name="to_summary">How many days after today should we look for events</string>
-    <string name="to_title">End time</string>
-    <string name="free_summary">Shown when no more events in the range are found</string>
-    <string name="free_title">Free text</string>
-    <string name="time_font_summary">The display size of event time text</string>
-    <string name="time_font_title">Time font</string>
-    <string name="title_font_summary">The display size of event title text</string>
-    <string name="title_font_title">Title font</string>
-    <string name="read_permission_error">Calendar read permission is required. Exiting!</string>
+    <string name="days_till_summary">How many days after today should we look for events</string>
+    <string name="days_till_title">Days till</string>
+    <string name="free_text_summary">Shown when no more events in the range are found</string>
+    <string name="free_text_title">Free text</string>
+
+    <string name="time_font_size_summary">The display size of event time text</string>
+    <string name="time_font_size_title">Time font size</string>
+    <string name="time_font_orientation_summary">The display orientation of event title text</string>
+    <string name="time_font_orientation_title">Time font orientation</string>
+
+    <string name="title_font_size_summary">The display size of event title text</string>
+    <string name="title_font_size_title">Title font size</string>
+    <string name="title_font_orientation_summary">The display orientation of event title text</string>
+    <string name="title_font_orientation_title">Title font orientation</string>
+
+    <string name="padding_from_above_summary">Padding from above in the lock screen</string>
+    <string name="padding_from_above_title">Padding from above</string>
+    <string name="show_color_summary">Show events color on the lock screen</string>
+    <string name="show_color_title">Show event color</string>
+
     <string name="tomorrow">tomorrow</string>
     <string name="day_after_tomorrow">day after tomorrow</string>
     <string name="days">days</string>
     <string name="after">after</string>
     <string name="all_day">All day</string>
     <string name="at">at</string>
-    <string name="projectgithub_title">View project on Github</string>
+
     <string name="version_title">Version</string>
-    <string name="version_number">1.1.0</string>
+    <string name="version_number">2.0.5</string>
     <string name="version_count_three">What? I thought no one clicked this</string>
     <string name="version_count_six">Nothing interesting ahead…</string>
     <string name="version_count_twelve">Still???</string>
     <string name="version_count_eighteen">The answer is 42.</string>
-
+    <string name="comma">,</string>
 </resources>
