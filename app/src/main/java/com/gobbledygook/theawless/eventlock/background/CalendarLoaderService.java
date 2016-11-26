@@ -43,6 +43,7 @@ public class CalendarLoaderService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.v(TAG, "onHandleIntent");
+        preferences = getSharedPreferences(getString(R.string.preferences), MODE_PRIVATE);
         handleIntent();
         //if got called by alarm, complete intent else blah blah blah
         CalendarLoaderAlarm.completeWakefulIntent(intent);
@@ -50,7 +51,6 @@ public class CalendarLoaderService extends IntentService {
 
     private void handleIntent() {
         Log.v(TAG, "handleIntent");
-        preferences = getSharedPreferences(getString(R.string.preferences), MODE_PRIVATE);
         if (!checkPermissions()) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove(getString(R.string.event_titles_key));
@@ -137,15 +137,19 @@ public class CalendarLoaderService extends IntentService {
         SharedPreferences.Editor editor = preferences.edit();
         //convert to JSON
         //because prefs.putStringSet wouldn't work for equal titles and times
-        JSONArray titles = new JSONArray(), times = new JSONArray(), longEndTimes = new JSONArray();
+        JSONArray titles = new JSONArray(), times = new JSONArray(), longEndTimes = new JSONArray(), colors = new JSONArray(), descriptions = new JSONArray();
         for (Event event : events) {
             titles.put(event.getFormattedTitle(this));
             times.put(event.getFormattedTime(this));
             longEndTimes.put(event.endTime);
+            descriptions.put(event.description);
+            colors.put(event.color);
         }
         editor.putString(getString(R.string.event_titles_key), titles.toString());
         editor.putString(getString(R.string.event_times_key), times.toString());
         editor.putString(getString(R.string.event_long_end_times_key), longEndTimes.toString());
+        editor.putString((getString(R.string.event_descriptions_key)), descriptions.toString());
+        editor.putString(getString(R.string.event_colors_key), colors.toString());
         editor.putInt(getString(R.string.event_to_display_key), eventToDisplay);
         editor.apply();
     }
