@@ -7,10 +7,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,18 +16,15 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.gobbledygook.theawless.eventlock.R;
-import com.gobbledygook.theawless.eventlock.api.CalendarLoaderAndFetcher;
 import com.gobbledygook.theawless.eventlock.api.Event;
-import com.gobbledygook.theawless.eventlock.api.EventsAdapter;
+import com.gobbledygook.theawless.eventlock.api.EventsGismo;
 import com.gobbledygook.theawless.eventlock.background.CalendarLoaderService;
 import com.gobbledygook.theawless.eventlock.xposed.XposedUtils;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private Boolean previewOn = false;
-    private ArrayList<Event> events;
-    private RecyclerView recyclerView = null;
+    private boolean previewOn = false;
+    private boolean previewLoaded = false;
+    private EventsGismo eventGismo = new EventsGismo(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +41,17 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    protected void onDestroy() {
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actions, menu);
         return true;
@@ -56,18 +61,23 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_preview: {
+                if (!previewLoaded) {
+                    ((FrameLayout) findViewById(R.id.events_placeholder)).addView(eventGismo.getRecyclerView());
+                    previewLoaded = true;
+                }
                 if (!previewOn) {
-                    addPreview();
+                    eventGismo.fetchNewEvents();
+                    findViewById(R.id.events_placeholder).setVisibility(View.VISIBLE);
                     item.setIcon(getDrawable(R.drawable.action_preview_off_icon));
                 } else {
-                    removePreview();
+                    findViewById(R.id.events_placeholder).setVisibility(View.GONE);
                     item.setIcon(getDrawable(R.drawable.action_preview_on_icon));
                 }
                 previewOn = !previewOn;
                 return true;
             }
             case R.id.action_refresh: {
-                fetchNewEvents();
+                eventGismo.fetchNewEvents();
                 startService(new Intent(this, CalendarLoaderService.class));
                 return true;
             }
@@ -77,21 +87,17 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    private void removePreview() {
-        findViewById(R.id.events_placeholder).setVisibility(View.GONE);
-    }
-
-    private void addPreview() {
-        fetchNewEvents();
-        findViewById(R.id.events_placeholder).setVisibility(View.VISIBLE);
-        if (recyclerView == null) {
-            recyclerView = new RecyclerView(this);
-            EventsAdapter eventsAdapter = new EventsAdapter(events, this);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_main_coordinator_layout);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(eventsAdapter);
-            ((FrameLayout) findViewById(R.id.events_placeholder)).addView(recyclerView);
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        for (int keyId : Event.EVENT_CHANGING_KEY_IDS) {
+            if (key.equals(getString(keyId))) {
+                //reload events for lockscreen
+                startService(new Intent(this, CalendarLoaderService.class));
+                //reload events on preview
+                if (previewOn) {
+                    eventGismo.fetchNewEvents();
+                }
+            }
         }
     }
 
@@ -141,37 +147,5 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 })
                 .setNegativeButton(R.string.ignore, null)
                 .show();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-    }
-
-    protected void onDestroy() {
-        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
-        super.onDestroy();
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        for (int keyId : Event.EVENT_CHANGING_KEY_IDS) {
-            if (key.equals(getString(keyId))) {
-                //reload events for lockscreen
-                startService(new Intent(this, CalendarLoaderService.class));
-                //reload events on preview
-                if (previewOn) {
-                    fetchNewEvents();
-                }
-            }
-        }
-    }
-
-    private void fetchNewEvents() {
-        CalendarLoaderAndFetcher calendarloaderAndFetcher = new CalendarLoaderAndFetcher(this);
-        if (calendarloaderAndFetcher.fetch()) {
-            events = calendarloaderAndFetcher.events;
-        }
     }
 }

@@ -1,6 +1,7 @@
-package com.gobbledygook.theawless.eventlock.lockscreen;
+package com.gobbledygook.theawless.eventlock.api;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -11,41 +12,46 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import java.util.ArrayList;
 
-class LockscreenAdapter extends RecyclerView.Adapter<LockscreenAdapter.ViewHolder> {
-    JSONArray titles;
-    JSONArray times;
-    JSONArray colors;
-    JSONArray descriptions;
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
+    public ArrayList<Event> events;
+    public int currentEventIndex;
+    private Context appContext;
+    private SharedPreferences preferences;
+
+
+    public EventsAdapter(Context appContext, SharedPreferences preferences) {
+        this.appContext = appContext;
+        this.preferences = preferences;
+    }
 
     private static int dpToPixel(Context context, int dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density);
     }
 
     @Override
-    public LockscreenAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        TextView titleTextView = new TextView(context);
-        TextView timeTextView = new TextView(context);
-        ImageView colorImageView = new ImageView(context);
+    public EventsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context gismoContext = parent.getContext();
+        TextView titleTextView = new TextView(gismoContext);
+        TextView timeTextView = new TextView(gismoContext);
+        ImageView colorImageView = new ImageView(gismoContext);
 
         ShapeDrawable oval = new ShapeDrawable(new OvalShape());
-        oval.setIntrinsicHeight(dpToPixel(context, 10));
-        oval.setIntrinsicWidth(dpToPixel(context, 10));
+        oval.setIntrinsicHeight(dpToPixel(gismoContext, 10));
+        oval.setIntrinsicWidth(dpToPixel(gismoContext, 10));
         oval.getPaint().setColor(Color.TRANSPARENT);
         colorImageView.setBackground(oval);
 
-        RelativeLayout relativeLayout = new RelativeLayout(context);
+        RelativeLayout relativeLayout = new RelativeLayout(gismoContext);
         relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-        relativeLayout.setPadding(dpToPixel(context, 24), dpToPixel(context, 24), dpToPixel(context, 24), 0);
+        relativeLayout.setPadding(dpToPixel(gismoContext, 24), dpToPixel(gismoContext, 24), dpToPixel(gismoContext, 24), 0);
         relativeLayout.addView(timeTextView);
         relativeLayout.addView(titleTextView);
         relativeLayout.addView(colorImageView);
 
         titleTextView.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        titleTextView.getLayoutParams().width = RelativeLayout.LayoutParams.MATCH_PARENT;
+        titleTextView.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
         titleTextView.setId(View.generateViewId());
 
         timeTextView.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
@@ -56,26 +62,21 @@ class LockscreenAdapter extends RecyclerView.Adapter<LockscreenAdapter.ViewHolde
         colorImageView.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
         colorImageView.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
         ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-//        ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.LEFT_OF, timeTextView.getId());
+//        ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
 
         return new ViewHolder(relativeLayout, titleTextView, timeTextView, colorImageView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        try {
-            holder.titleTextView.setText(titles.getString(position));
-            holder.timeTextView.setText(times.getString(position));
-
-            ((ShapeDrawable) holder.colorImageView.getBackground()).getPaint().setColor(Integer.parseInt(colors.getString(position)));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        holder.titleTextView.setText(events.get(position).getFormattedTitle(appContext));
+        holder.timeTextView.setText(events.get(position).getFormattedTime(appContext));
+        ((ShapeDrawable) holder.colorImageView.getBackground()).getPaint().setColor(Integer.parseInt(events.get(position).color));
     }
 
     @Override
     public int getItemCount() {
-        return titles.length();
+        return events.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
