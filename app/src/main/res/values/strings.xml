@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- Mostly for internal use, shown in app data -->
     <string name="application_name">EventLock</string>
     <string name="calendar_loader_service_name">EventLockCalendarLoaderService</string>
     <string name="current_event_updater_service_name">EventLockCurrentEventUpdaterService</string>
@@ -6,20 +8,41 @@
     <string name="current_event_updater_alarm_name">EventLockCurrentEventUpdaterAlarm</string>
     <string name="common_receiver_alarm_name">EventLockCommonReceiverAlarm</string>
 
-
+    <!-- Shown in dialogs, warnings -->
     <string name="xposed_not_installed">Xposed framework is not installed</string>
     <string name="enable_xposed_module_title">Enable this module</string>
     <string name="enable_xposed_module_message">For EventLock to function correctly, you must enable the Xposed Module</string>
     <string name="enable">Enable</string>
     <string name="report_bug">Report bug</string>
     <string name="ignore">Ignore</string>
-
     <string name="module_outdated_title">Xposed module updated</string>
     <string name="module_outdated_message">Please reboot your device for changes to take effect</string>
     <string name="reboot">Reboot</string>
-
     <string name="read_permission_error">Calendar read permission is required. Exiting!</string>
+
+    <!-- Shown in time -->
+    <string name="tomorrow">tomorrow</string>
+    <string name="day_after_tomorrow">day after tomorrow</string>
+    <string name="days">days</string>
+    <string name="after">after</string>
+    <string name="all_day">All day</string>
+    <string name="at">at</string>
+    <string name="comma">,</string>
+
+    <!-- Shown in version toasts -->
+    <string name="version_title">Version</string>
+    <string name="version_number">2.0.5</string>
+    <string name="version_count_three">What? I thought no one clicked this</string>
+    <string name="version_count_six">Nothing interesting ahead…</string>
+    <string name="version_count_twelve">Still???</string>
+    <string name="version_count_eighteen">The answer is 42.</string>
+
+    <!-- Shown in action bar -->
+    <string name="action_preview_title">Preview</string>
+    <string name="action_refresh_title">Refresh Title</string>
     <string name="projectgithub_title">View project on Github</string>
+
+    <!-- Shown in settings -->
 
     <string name="selected_calendars_summary">These calendar will be used to show the events</string>
     <string name="selected_calendars_title">Selected calendars</string>
@@ -28,33 +51,80 @@
     <string name="free_text_summary">Shown when no more events in the range are found</string>
     <string name="free_text_title">Free text</string>
 
-    <string name="time_font_size_summary">The display size of event time text</string>
-    <string name="time_font_size_title">Time font size</string>
-    <string name="time_font_orientation_summary">The display orientation of event title text</string>
-    <string name="time_font_orientation_title">Time font orientation</string>
+    <string name="time_font_size_summary">The display size of time</string>
+    <string name="time_font_size_title">Font size</string>
+    <string name="time_font_orientation_summary">The display orientation of time</string>
+    <string name="time_font_orientation_title">Orientation</string>
+    <string name="time_padding_above_summary">Time\'s padding from above in the lock screen</string>
+    <string name="time_padding_above_title">Padding from above</string>
+    <string name="time_padding_below_summary">Time\'s padding from below in the lock screen</string>
+    <string name="time_padding_below_title">Padding from below</string>
+    <string name="time_padding_right_summary">Time\'s padding from right in the lock screen</string>
+    <string name="time_padding_right_title">Padding from right</string>
+    <string name="time_padding_left_summary">Time\'s padding from left in the lock screen</string>
+    <string name="time_padding_left_title">Padding from left</string>
+    <string name="time_format_summary">Time format of the lockscreen</string>
+    <string name="time_format_title">Format</string>
 
-    <string name="title_font_size_summary">The display size of event title text</string>
-    <string name="title_font_size_title">Title font size</string>
-    <string name="title_font_orientation_summary">The display orientation of event title text</string>
-    <string name="title_font_orientation_title">Title font orientation</string>
+    <string name="title_font_size_summary">The display size of title</string>
+    <string name="title_font_size_title">Font size</string>
+    <string name="title_font_orientation_summary">The display orientation of title</string>
+    <string name="title_font_orientation_title">Orientation</string>
+    <string name="title_padding_above_summary">Title\'s padding from above in the lock screen</string>
+    <string name="title_padding_above_title">Padding from above</string>
+    <string name="title_padding_below_summary">Title\'s padding from below in the lock screen</string>
+    <string name="title_padding_below_title">Padding from below</string>
+    <string name="title_padding_right_summary">Title\'s padding from right in the lock screen</string>
+    <string name="title_padding_right_title">Padding from right</string>
+    <string name="title_padding_left_summary">Title\'s padding from left in the lock screen</string>
+    <string name="title_padding_left_title">Padding from left</string>
 
-    <string name="padding_from_above_summary">Padding from above in the lock screen</string>
-    <string name="padding_from_above_title">Padding from above</string>
-    <string name="show_color_summary">Show events color on the lock screen</string>
+    <string name="number_of_events_summary">Number of events on the same page</string>
+    <string name="number_of_events_title">Number of events</string>
+    <string name="padding_between_events_summary">Padding between events on the same page</string>
+    <string name="padding_between_events_title">Padding between events</string>
+    <string name="padding_above_summary">Padding from above in the lock screen</string>
+    <string name="padding_above_title">Padding from above</string>
+    <string name="padding_below_summary">Padding from below in the lock screen</string>
+    <string name="padding_below_title">Padding from below</string>
+    <string name="padding_right_summary">Padding from right in the lock screen</string>
+    <string name="padding_right_title">Padding right above</string>
+    <string name="padding_left_summary">Padding from left in the lock screen</string>
+    <string name="padding_left_title">Padding from left</string>
+
+    <string name="color_alignment_summary">Various alignment of color with respect to text</string>
+    <string name="color_alignment_title">Color alignment</string>
+    <string name="show_color_summary">Show event color on the lock screen</string>
     <string name="show_color_title">Show event color</string>
+    <string name="color_type_summary">Block Type</string>
+    <string name="color_type_title">Color block type on the lockscreen</string>
+    <string name="color_radius_summary">The radius of the color circle</string>
+    <string name="color_radius_title">Radius</string>
+    <string name="color_height_summary">The height of the color rectangle</string>
+    <string name="color_height_title">Height</string>
+    <string name="color_width_summary">The width of the color rectangle</string>
+    <string name="color_width_title">Width</string>
+    <string name="color_padding_above_summary">Padding from above in the lock screen</string>
+    <string name="color_padding_above_title">Padding from above</string>
+    <string name="color_padding_below_summary">Padding from below in the lock screen</string>
+    <string name="color_padding_below_title">Padding from below</string>
+    <string name="color_padding_right_summary">Padding from right in the lock screen</string>
+    <string name="color_padding_right_title">Padding from right</string>
+    <string name="color_padding_left_summary">Padding from left in the lock screen</string>
+    <string name="color_padding_left_title">Padding from left</string>
 
-    <string name="tomorrow">tomorrow</string>
-    <string name="day_after_tomorrow">day after tomorrow</string>
-    <string name="days">days</string>
-    <string name="after">after</string>
-    <string name="all_day">All day</string>
-    <string name="at">at</string>
-
-    <string name="version_title">Version</string>
-    <string name="version_number">2.0.5</string>
-    <string name="version_count_three">What? I thought no one clicked this</string>
-    <string name="version_count_six">Nothing interesting ahead…</string>
-    <string name="version_count_twelve">Still???</string>
-    <string name="version_count_eighteen">The answer is 42.</string>
-    <string name="comma">,</string>
+    <!-- options for various settings -->
+    <string-array name="time_format_entvals">
+        <item>24hr</item>
+        <item>12hr</item>
+    </string-array>
+    <string-array name="orientation_entvals">
+        <item>left</item>
+        <item>center</item>
+        <item>right</item>
+    </string-array>
+    <string-array name="color_type_entvals">
+        <item>oval</item>
+        <item>rectangle</item>
+    </string-array>
 </resources>

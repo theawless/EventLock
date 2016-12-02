@@ -1,30 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="preferences">event_lock_preferences</string>
-    <string name="authority">com.gobbledygook.theawless.eventlock.preferences</string>
 
-    <string name="selected_calendars_key">selected_calendars_preference_key</string>
-    <string name="days_till_key">days_till_preference_key</string>
-    <string name="time_font_size_key">time_font_size_preference_key</string>
-    <string name="title_font_size_key">title_font_size_preference_key</string>
-    <string name="time_font_orientation_key">time_font_orientation_preference_key</string>
-    <string name="title_font_orientation_key">title_font_orientation_preference_key</string>
-    <string name="free_text_key">free_text_preference_key</string>
+    <!-- preference keys -->
 
-    <string name="event_to_display_key">event_to_display_preference_key</string>
-    <string name="event_titles_key">event_titles_preference_key</string>
-    <string name="event_times_key">event_times_preference_key</string>
-    <string name="event_colors_key">event_colors_preference_key</string>
-    <string name="event_long_end_times_key">event_long_end_times_preference_key</string>
-    <string name="event_descriptions_key">event_descriptions_preference_key</string>
+    <string name="selected_calendars_key">selected_calendars</string>
+    <string name="days_till_key">days_till</string>
+    <string name="free_text_key">free_text</string>
 
-    <string name="event_to_display_default">0</string>
+    <string name="time_font_orientation_key">time_font_orientation</string>
+    <string name="time_font_size_key">time_font_size</string>
+    <string name="time_padding_above_key">time_padding_above</string>
+    <string name="time_padding_below_key">time_padding_below</string>
+    <string name="time_padding_left_key">time_padding_left</string>
+    <string name="time_padding_right_key">time_padding_right</string>
+
+    <string name="title_font_orientation_key">title_font_orientation</string>
+    <string name="title_font_size_key">title_font_size</string>
+    <string name="title_padding_above_key">title_padding_above</string>
+    <string name="title_padding_below_key">title_padding_below</string>
+    <string name="title_padding_left_key">title_padding_left</string>
+    <string name="title_padding_right_key">title_padding_right</string>
+
+    <string name="number_of_events_key">number_of_events</string>
+    <string name="padding_between_events_key">padding_between_events</string>
+    <string name="padding_above_key">padding_above</string>
+    <string name="padding_below_key">padding_below</string>
+    <string name="padding_left_key">padding_left</string>
+    <string name="padding_right_key">padding_right</string>
+
+    <string name="color_alignment_key">color_alignment</string>
+    <string name="show_color_key">show_color</string>
+    <string name="color_type_key">color_type</string>
+    <string name="color_radius_key">color_radius</string>
+    <string name="color_height_key">color_height</string>
+    <string name="color_width_key">color_width</string>
+    <string name="color_padding_above_key">color_padding_above</string>
+    <string name="color_padding_below_key">color_padding_below</string>
+    <string name="color_padding_left_key">color_padding_left</string>
+    <string name="color_padding_right_key">color_padding_right</string>
+
+    <!-- preference defaults -->
+
+    <string-array name="selected_calendars_default">
+        <item>1</item>
+    </string-array>
     <string name="days_till_default">3</string>
-    <string name="time_font_size_default">14</string>
-    <string name="title_font_size_default">14</string>
-    <string name="time_font_orientation_default">left</string>
-    <string name="title_font_orientation_default">left</string>
     <string name="free_text_default">No more events</string>
-    <string name="padding_from_above_default">24</string>
+
+    <string name="time_font_size_default">14</string>
+    <string name="time_font_orientation_default">left</string>
+    <string name="time_padding_above_default">0</string>
+    <string name="time_padding_below_default">0</string>
+    <string name="time_padding_left_default">0</string>
+    <string name="time_padding_right_default">0</string>
+    <string name="time_format_default">12hr</string>
+
+    <string name="title_font_size_default">16</string>
+    <string name="title_font_orientation_default">left</string>
+    <string name="title_padding_above_default">0</string>
+    <string name="title_padding_below_default">0</string>
+    <string name="title_padding_left_default">0</string>
+    <string name="title_padding_right_default">0</string>
+
+    <string name="number_of_events_default">1</string>
+    <string name="padding_between_events_default">2</string>
+    <string name="padding_above_default">24</string>
+    <string name="padding_below_default">24</string>
+    <string name="padding_left_default">24</string>
+    <string name="padding_right_default">24</string>
+
+    <string name="color_alignment_default">color on right</string>
     <string name="show_color_default">true</string>
+    <string name="color_type_default">oval</string>
+    <string name="color_radius_default">10</string>
+    <string name="color_height_default">10</string>
+    <string name="color_width_default">2</string>
+    <string name="color_padding_above_default">0</string>
+    <string name="color_padding_below_default">0</string>
+    <string name="color_padding_left_default">0</string>
+    <string name="color_padding_right_default">0</string>
+
 </resources>
