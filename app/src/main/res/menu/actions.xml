@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_preview"
+        android:icon="@drawable/action_preview_on_icon"
+        android:title="@string/action_preview_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/action_refresh_icon"
+        android:title="@string/action_refresh_title"
+        app:showAsAction="ifRoom" />
+</menu>
