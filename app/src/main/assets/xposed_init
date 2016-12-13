@@ -1,2 +1,2 @@
-com.gobbledygook.theawless.eventlock.xposed.XposedUtilsHook
-com.gobbledygook.theawless.eventlock.lockscreen.LockscreenHook
+com.gobbledygook.theawless.eventlock.hooks.XposedUtilsHook
+com.gobbledygook.theawless.eventlock.hooks.LockscreenHook

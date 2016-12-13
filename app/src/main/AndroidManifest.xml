@@ -11,11 +11,6 @@
         android:label="@string/application_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <provider
-            android:name=".background.PreferenceProvider"
-            android:authorities="@string/authority"
-            android:exported="true" />
-
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
@@ -37,20 +32,24 @@
         </activity>
 
         <service
-            android:name=".background.CalendarLoaderService"
+            android:name=".services.CalendarLoaderService"
+            android:enabled="true"
             android:label="@string/calendar_loader_service_name" />
         <service
-            android:name=".background.CurrentEventUpdaterService"
+            android:name=".services.CurrentEventUpdaterService"
+            android:enabled="true"
             android:label="@string/current_event_updater_service_name" />
 
         <receiver
-            android:name=".background.CurrentEventUpdaterAlarm"
+            android:name=".receivers.alarms.CurrentEventUpdaterAlarm"
+            android:enabled="true"
             android:label="@string/current_event_updater_alarm_name" />
         <receiver
-            android:name=".background.CalendarLoaderAlarm"
+            android:name=".receivers.alarms.CalendarLoaderAlarm"
+            android:enabled="true"
             android:label="@string/calendar_loader_alarm_name" />
         <receiver
-            android:name=".background.CommonReceiver"
+            android:name=".receivers.CommonReceiver"
             android:enabled="true"
             android:label="@string/common_receiver_alarm_name">
             <intent-filter>

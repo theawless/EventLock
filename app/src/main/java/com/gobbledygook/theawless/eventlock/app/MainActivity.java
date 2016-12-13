@@ -3,7 +3,7 @@ package com.gobbledygook.theawless.eventlock.app;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,19 +12,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.gobbledygook.theawless.eventlock.R;
-import com.gobbledygook.theawless.eventlock.api.Event;
-import com.gobbledygook.theawless.eventlock.api.EventsGismo;
-import com.gobbledygook.theawless.eventlock.background.CalendarLoaderService;
-import com.gobbledygook.theawless.eventlock.xposed.XposedUtils;
+import com.gobbledygook.theawless.eventlock.events.EventsGismo;
+import com.gobbledygook.theawless.eventlock.helper.XposedUtils;
+import com.gobbledygook.theawless.eventlock.receivers.UpdateReceiver;
+import com.gobbledygook.theawless.eventlock.services.CalendarLoaderService;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity {
     private boolean previewOn = false;
-    private boolean previewLoaded = false;
-    private EventsGismo eventGismo = new EventsGismo(this);
+    private EventsGismo eventGismo = null;
+    private UpdateReceiver updateReceiver = new UpdateReceiver() {
+        @Override
+        protected EventsGismo getGismo(String action) {
+            return eventGismo;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +48,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onStart() {
         super.onStart();
-        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("EventUpdate");
+        intentFilter.addAction("CurrentEventUpdate");
+        intentFilter.addAction("LooksUpdate");
+        registerReceiver(updateReceiver, intentFilter);
     }
 
     protected void onDestroy() {
-        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        unregisterReceiver(updateReceiver);
+        handleRefresh();
         super.onDestroy();
     }
 
@@ -61,24 +71,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_preview: {
-                if (!previewLoaded) {
-                    ((FrameLayout) findViewById(R.id.events_placeholder)).addView(eventGismo.getRecyclerView());
-                    previewLoaded = true;
-                }
-                if (!previewOn) {
-                    eventGismo.fetchNewEvents();
-                    findViewById(R.id.events_placeholder).setVisibility(View.VISIBLE);
-                    item.setIcon(getDrawable(R.drawable.action_preview_off_icon));
-                } else {
-                    findViewById(R.id.events_placeholder).setVisibility(View.GONE);
-                    item.setIcon(getDrawable(R.drawable.action_preview_on_icon));
-                }
-                previewOn = !previewOn;
+                handlePreview(item);
                 return true;
             }
             case R.id.action_refresh: {
-                eventGismo.fetchNewEvents();
-                startService(new Intent(this, CalendarLoaderService.class));
+                handleRefresh();
                 return true;
             }
             default: {
@@ -87,18 +84,25 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        for (int keyId : Event.EVENT_CHANGING_KEY_IDS) {
-            if (key.equals(getString(keyId))) {
-                //reload events for lockscreen
-                startService(new Intent(this, CalendarLoaderService.class));
-                //reload events on preview
-                if (previewOn) {
-                    eventGismo.fetchNewEvents();
-                }
-            }
+    private void handlePreview(MenuItem item) {
+        if (eventGismo == null) {
+            eventGismo = new EventsGismo(PreferenceManager.getDefaultSharedPreferences(this));
+            ((GridLayout) findViewById(R.id.events_placeholder)).addView(eventGismo.getRecyclerView(this));
+            startService(new Intent(this, CalendarLoaderService.class));
         }
+        if (!previewOn) {
+            findViewById(R.id.events_placeholder).setVisibility(View.VISIBLE);
+            item.setIcon(getDrawable(R.drawable.action_preview_off_icon));
+        } else {
+            findViewById(R.id.events_placeholder).setVisibility(View.GONE);
+            item.setIcon(getDrawable(R.drawable.action_preview_on_icon));
+        }
+        previewOn = !previewOn;
+    }
+
+    private void handleRefresh() {
+        sendBroadcast(new Intent("LooksUpdate"));
+        startService(new Intent(this, CalendarLoaderService.class));
     }
 
     private void startXposedActivity(String section) {
@@ -139,7 +143,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .setTitle(R.string.module_outdated_title)
                 .setMessage(R.string.module_outdated_message)
                 .setIcon(R.drawable.warning_icon)
-                .setPositiveButton(R.string.reboot, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.clear_data, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                .addCategory(Intent.CATEGORY_DEFAULT)
+                                .setData(Uri.parse("package:" + getPackageName()))
+                        );
+                    }
+                })
+                .setNeutralButton(R.string.reboot, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startXposedActivity(XposedUtils.XPOSED_SECTION_INSTALL);

@@ -27,10 +27,14 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
-        <FrameLayout
+        <GridLayout
             android:id="@+id/events_placeholder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp"
+            android:visibility="gone" />
+
+        <View style="@style/Divider" />
 
         <include layout="@layout/content_main" />
     </LinearLayout>

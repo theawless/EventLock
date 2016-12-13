@@ -13,139 +13,197 @@
             android:numeric="integer"
             android:summary="@string/days_till_summary"
             android:title="@string/days_till_title" />
-        <EditTextPreference
-            android:defaultValue="@string/free_text_default"
-            android:key="@string/free_text_key"
-            android:summary="@string/free_text_summary"
-            android:title="@string/free_text_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Customisation">
+        <PreferenceScreen android:title="Presets">
+            <PreferenceCategory android:title="Presets">
+                <Preference
+                    android:icon="@drawable/preset1"
+                    android:layout="@layout/preset_layout"
+                    android:summary="@string/preset1_summary"
+                    android:title="@string/preset1_title" />
+                <Preference
+                    android:icon="@drawable/preset2"
+                    android:layout="@layout/preset_layout"
+                    android:summary="@string/preset2_summary"
+                    android:title="@string/preset2_title" />
+                <Preference
+                    android:icon="@drawable/preset3"
+                    android:layout="@layout/preset_layout"
+                    android:summary="@string/preset3_summary"
+                    android:title="@string/preset3_title" />
+            </PreferenceCategory>
+        </PreferenceScreen>
         <PreferenceScreen android:title="Gismo">
             <PreferenceCategory android:title="Gismo">
                 <EditTextPreference
-                    android:defaultValue="@string/number_of_events_default"
-                    android:inputType="number"
-                    android:key="@string/number_of_events_key"
-                    android:numeric="integer"
-                    android:summary="@string/number_of_events_summary"
-                    android:title="@string/number_of_events_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/padding_between_events_default"
-                    android:inputType="number"
-                    android:key="@string/padding_between_events_key"
-                    android:numeric="integer"
-                    android:summary="@string/padding_between_events_summary"
-                    android:title="@string/padding_between_events_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/padding_above_default"
-                    android:inputType="number"
-                    android:key="@string/padding_above_key"
-                    android:numeric="integer"
-                    android:summary="@string/padding_above_summary"
-                    android:title="@string/padding_above_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/padding_below_default"
-                    android:inputType="number"
-                    android:key="@string/padding_below_key"
-                    android:numeric="integer"
-                    android:summary="@string/padding_below_summary"
-                    android:title="@string/padding_below_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/padding_left_default"
-                    android:inputType="number"
-                    android:key="@string/padding_left_key"
-                    android:numeric="integer"
-                    android:summary="@string/padding_left_summary"
-                    android:title="@string/padding_left_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/padding_right_default"
-                    android:inputType="number"
-                    android:key="@string/padding_right_key"
-                    android:numeric="integer"
-                    android:summary="@string/padding_right_summary"
-                    android:title="@string/padding_right_title" />
+                    android:defaultValue="@string/free_text_default"
+                    android:key="@string/free_text_key"
+                    android:summary="@string/free_text_summary"
+                    android:title="@string/free_text_title" />
+                <PreferenceScreen android:title="Padding">
+                    <PreferenceCategory android:title="Gismo Padding">
+                        <EditTextPreference
+                            android:defaultValue="@string/padding_above_default"
+                            android:inputType="number"
+                            android:key="@string/padding_above_key"
+                            android:numeric="integer"
+                            android:summary="@string/padding_above_summary"
+                            android:title="@string/padding_above_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/padding_below_default"
+                            android:inputType="number"
+                            android:key="@string/padding_below_key"
+                            android:numeric="integer"
+                            android:summary="@string/padding_below_summary"
+                            android:title="@string/padding_below_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/padding_left_default"
+                            android:inputType="number"
+                            android:key="@string/padding_left_key"
+                            android:numeric="integer"
+                            android:summary="@string/padding_left_summary"
+                            android:title="@string/padding_left_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/padding_right_default"
+                            android:inputType="number"
+                            android:key="@string/padding_right_key"
+                            android:numeric="integer"
+                            android:summary="@string/padding_right_summary"
+                            android:title="@string/padding_right_title" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+            </PreferenceCategory>
+            <PreferenceCategory android:title="Current event highlight">
+                <SwitchPreference
+                    android:defaultValue="@string/current_title_bold_default"
+                    android:key="@string/current_title_bold_key"
+                    android:summary="@string/current_title_bold_summary"
+                    android:title="@string/current_title_bold_title" />
+                <SwitchPreference
+                    android:defaultValue="@string/current_time_bold_default"
+                    android:key="@string/current_time_bold_key"
+                    android:summary="@string/current_time_bold_summary"
+                    android:title="@string/current_time_bold_title" />
+                <SwitchPreference
+                    android:defaultValue="@string/current_color_outline_default"
+                    android:key="@string/current_color_outline_key"
+                    android:summary="@string/current_color_outline_summary"
+                    android:title="@string/current_color_outline_title" />
             </PreferenceCategory>
         </PreferenceScreen>
-        <PreferenceScreen android:title="Time">
+        <PreferenceScreen android:title="Title &amp; Time">
+            <PreferenceCategory android:title="Container">
+                <ListPreference
+                    android:defaultValue="@string/text_position_default"
+                    android:entries="@array/lrc_entvals"
+                    android:entryValues="@array/lrc_entvals"
+                    android:key="@string/text_position_key"
+                    android:summary="@string/text_position_summary"
+                    android:title="@string/text_position_title" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="Title">
+                <EditTextPreference
+                    android:defaultValue="@string/title_font_size_default"
+                    android:inputType="number"
+                    android:key="@string/title_font_size_key"
+                    android:numeric="integer"
+                    android:summary="@string/title_font_size_summary"
+                    android:title="@string/title_font_size_title" />
+                <ListPreference
+                    android:defaultValue="@string/title_alignment_default"
+                    android:entries="@array/lr_entvals"
+                    android:entryValues="@array/lr_entvals"
+                    android:key="@string/title_alignment_key"
+                    android:summary="@string/title_alignment_summary"
+                    android:title="@string/title_alignment_title" />
+                <PreferenceScreen android:title="Padding">
+                    <PreferenceCategory android:title="Title padding">
+                        <EditTextPreference
+                            android:defaultValue="@string/title_padding_above_default"
+                            android:inputType="number"
+                            android:key="@string/title_padding_above_key"
+                            android:numeric="integer"
+                            android:summary="@string/title_padding_above_summary"
+                            android:title="@string/title_padding_above_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/title_padding_below_default"
+                            android:inputType="number"
+                            android:key="@string/title_padding_below_key"
+                            android:numeric="integer"
+                            android:summary="@string/title_padding_below_summary"
+                            android:title="@string/title_padding_below_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/title_padding_left_default"
+                            android:inputType="number"
+                            android:key="@string/title_padding_left_key"
+                            android:numeric="integer"
+                            android:summary="@string/title_padding_left_summary"
+                            android:title="@string/title_padding_left_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/title_padding_right_default"
+                            android:inputType="number"
+                            android:key="@string/title_padding_right_key"
+                            android:numeric="integer"
+                            android:summary="@string/title_padding_right_summary"
+                            android:title="@string/title_padding_right_title" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+            </PreferenceCategory>
             <PreferenceCategory android:title="Time">
+                <EditTextPreference
+                    android:defaultValue="@string/time_font_size_default"
+                    android:inputType="number"
+                    android:key="@string/time_font_size_key"
+                    android:numeric="integer"
+                    android:summary="@string/time_font_size_summary"
+                    android:title="@string/time_font_size_title" />
                 <ListPreference
                     android:defaultValue="@string/time_format_default"
                     android:entries="@array/time_format_entvals"
                     android:entryValues="@array/time_format_entvals"
+                    android:key="@string/time_format_key"
                     android:summary="@string/time_format_summary"
                     android:title="@string/time_format_title" />
                 <ListPreference
-                    android:defaultValue="@string/time_font_orientation_default"
-                    android:entries="@array/orientation_entvals"
-                    android:entryValues="@array/orientation_entvals"
-                    android:summary="@string/time_font_orientation_summary"
-                    android:title="@string/time_font_orientation_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/time_padding_above_default"
-                    android:inputType="number"
-                    android:key="@string/time_padding_above_key"
-                    android:numeric="integer"
-                    android:summary="@string/time_padding_above_summary"
-                    android:title="@string/time_padding_above_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/time_padding_below_default"
-                    android:inputType="number"
-                    android:key="@string/time_padding_below_key"
-                    android:numeric="integer"
-                    android:summary="@string/time_padding_below_summary"
-                    android:title="@string/time_padding_below_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/time_padding_left_default"
-                    android:inputType="number"
-                    android:key="@string/time_padding_left_key"
-                    android:numeric="integer"
-                    android:summary="@string/time_padding_left_summary"
-                    android:title="@string/time_padding_left_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/time_padding_right_default"
-                    android:inputType="number"
-                    android:key="@string/time_padding_right_key"
-                    android:numeric="integer"
-                    android:summary="@string/time_padding_right_summary"
-                    android:title="@string/time_padding_right_title" />
-            </PreferenceCategory>
-        </PreferenceScreen>
-        <PreferenceScreen android:title="Title">
-            <PreferenceCategory android:title="Title">
-                <ListPreference
-                    android:defaultValue="@string/title_font_orientation_default"
-                    android:entries="@array/orientation_entvals"
-                    android:entryValues="@array/orientation_entvals"
-                    android:summary="@string/title_font_orientation_summary"
-                    android:title="@string/title_font_orientation_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/title_padding_above_default"
-                    android:inputType="number"
-                    android:key="@string/title_padding_above_key"
-                    android:numeric="integer"
-                    android:summary="@string/title_padding_above_summary"
-                    android:title="@string/title_padding_above_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/title_padding_below_default"
-                    android:inputType="number"
-                    android:key="@string/title_padding_below_key"
-                    android:numeric="integer"
-                    android:summary="@string/title_padding_below_summary"
-                    android:title="@string/title_padding_below_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/title_padding_left_default"
-                    android:inputType="number"
-                    android:key="@string/title_padding_left_key"
-                    android:numeric="integer"
-                    android:summary="@string/title_padding_left_summary"
-                    android:title="@string/title_padding_left_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/title_padding_right_default"
-                    android:inputType="number"
-                    android:key="@string/title_padding_right_key"
-                    android:numeric="integer"
-                    android:summary="@string/title_padding_right_summary"
-                    android:title="@string/title_padding_right_title" />
+                    android:defaultValue="@string/time_alignment_default"
+                    android:entries="@array/lr_entvals"
+                    android:entryValues="@array/lr_entvals"
+                    android:key="@string/time_alignment_key"
+                    android:summary="@string/time_alignment_summary"
+                    android:title="@string/time_alignment_title" />
+                <PreferenceScreen android:title="Padding">
+                    <PreferenceCategory android:title="Time padding">
+                        <EditTextPreference
+                            android:defaultValue="@string/time_padding_above_default"
+                            android:inputType="number"
+                            android:key="@string/time_padding_above_key"
+                            android:numeric="integer"
+                            android:summary="@string/time_padding_above_summary"
+                            android:title="@string/time_padding_above_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/time_padding_below_default"
+                            android:inputType="number"
+                            android:key="@string/time_padding_below_key"
+                            android:numeric="integer"
+                            android:summary="@string/time_padding_below_summary"
+                            android:title="@string/time_padding_below_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/time_padding_left_default"
+                            android:inputType="number"
+                            android:key="@string/time_padding_left_key"
+                            android:numeric="integer"
+                            android:summary="@string/time_padding_left_summary"
+                            android:title="@string/time_padding_left_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/time_padding_right_default"
+                            android:inputType="number"
+                            android:key="@string/time_padding_right_key"
+                            android:numeric="integer"
+                            android:summary="@string/time_padding_right_summary"
+                            android:title="@string/time_padding_right_title" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
             </PreferenceCategory>
         </PreferenceScreen>
         <PreferenceScreen android:title="Color">
@@ -156,13 +214,19 @@
                     android:summary="@string/show_color_summary"
                     android:title="@string/show_color_title" />
                 <ListPreference
-                    android:defaultValue="@string/color_alignment_default"
+                    android:defaultValue="@string/color_position_default"
                     android:dependency="@string/show_color_key"
-                    android:entries="@array/orientation_entvals"
-                    android:entryValues="@array/orientation_entvals"
-                    android:key="@string/color_alignment_key"
-                    android:summary="@string/color_alignment_summary"
-                    android:title="@string/color_alignment_title" />
+                    android:entries="@array/lr_entvals"
+                    android:entryValues="@array/lr_entvals"
+                    android:key="@string/color_position_key"
+                    android:summary="@string/color_position_summary"
+                    android:title="@string/color_position_title" />
+                <SwitchPreference
+                    android:defaultValue="@string/color_stick_default"
+                    android:dependency="@string/show_color_key"
+                    android:key="@string/color_stick_key"
+                    android:summary="@string/color_stick_summary"
+                    android:title="@string/color_stick_title" />
                 <ListPreference
                     android:defaultValue="@string/color_type_default"
                     android:dependency="@string/show_color_key"
@@ -171,14 +235,6 @@
                     android:key="@string/color_type_key"
                     android:summary="@string/color_type_summary"
                     android:title="@string/color_type_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/color_radius_default"
-                    android:dependency="@string/show_color_key"
-                    android:inputType="number"
-                    android:key="@string/color_radius_key"
-                    android:numeric="integer"
-                    android:summary="@string/color_radius_summary"
-                    android:title="@string/color_radius_title" />
                 <EditTextPreference
                     android:defaultValue="@string/color_height_default"
                     android:dependency="@string/show_color_key"
@@ -195,42 +251,49 @@
                     android:numeric="integer"
                     android:summary="@string/color_width_summary"
                     android:title="@string/color_width_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/color_padding_above_default"
-                    android:dependency="@string/show_color_key"
-                    android:inputType="number"
-                    android:key="@string/color_padding_above_key"
-                    android:numeric="integer"
-                    android:summary="@string/color_padding_above_summary"
-                    android:title="@string/color_padding_above_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/color_padding_below_default"
-                    android:dependency="@string/show_color_key"
-                    android:inputType="number"
-                    android:key="@string/color_padding_below_key"
-                    android:numeric="integer"
-                    android:summary="@string/color_padding_below_summary"
-                    android:title="@string/color_padding_below_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/color_padding_left_default"
-                    android:dependency="@string/show_color_key"
-                    android:inputType="number"
-                    android:key="@string/color_padding_left_key"
-                    android:numeric="integer"
-                    android:summary="@string/color_padding_left_summary"
-                    android:title="@string/color_padding_left_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/color_padding_right_default"
-                    android:dependency="@string/show_color_key"
-                    android:inputType="number"
-                    android:key="@string/color_padding_right_key"
-                    android:numeric="integer"
-                    android:summary="@string/color_padding_right_summary"
-                    android:title="@string/color_padding_right_title" />
+                <PreferenceScreen android:title="Padding">
+                    <PreferenceCategory android:title="Color padding">
+                        <EditTextPreference
+                            android:defaultValue="@string/color_padding_above_default"
+                            android:dependency="@string/show_color_key"
+                            android:inputType="number"
+                            android:key="@string/color_padding_above_key"
+                            android:numeric="integer"
+                            android:summary="@string/color_padding_above_summary"
+                            android:title="@string/color_padding_above_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/color_padding_below_default"
+                            android:dependency="@string/show_color_key"
+                            android:inputType="number"
+                            android:key="@string/color_padding_below_key"
+                            android:numeric="integer"
+                            android:summary="@string/color_padding_below_summary"
+                            android:title="@string/color_padding_below_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/color_padding_left_default"
+                            android:dependency="@string/show_color_key"
+                            android:inputType="number"
+                            android:key="@string/color_padding_left_key"
+                            android:numeric="integer"
+                            android:summary="@string/color_padding_left_summary"
+                            android:title="@string/color_padding_left_title" />
+                        <EditTextPreference
+                            android:defaultValue="@string/color_padding_right_default"
+                            android:dependency="@string/show_color_key"
+                            android:inputType="number"
+                            android:key="@string/color_padding_right_key"
+                            android:numeric="integer"
+                            android:summary="@string/color_padding_right_summary"
+                            android:title="@string/color_padding_right_title" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
             </PreferenceCategory>
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory android:title="About">
+        <Preference
+            android:summary="@string/help_summary"
+            android:title="@string/help_title" />
         <Preference
             android:summary="@string/github_url"
             android:title="@string/projectgithub_title">

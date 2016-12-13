@@ -7,14 +7,17 @@
     <string name="days_till_key">days_till</string>
     <string name="free_text_key">free_text</string>
 
-    <string name="time_font_orientation_key">time_font_orientation</string>
+    <string name="text_position_key">text_position</string>
+
+    <string name="time_alignment_key">time_alignment</string>
     <string name="time_font_size_key">time_font_size</string>
     <string name="time_padding_above_key">time_padding_above</string>
     <string name="time_padding_below_key">time_padding_below</string>
     <string name="time_padding_left_key">time_padding_left</string>
     <string name="time_padding_right_key">time_padding_right</string>
+    <string name="time_format_key">time_format</string>
 
-    <string name="title_font_orientation_key">title_font_orientation</string>
+    <string name="title_alignment_key">title_alignment</string>
     <string name="title_font_size_key">title_font_size</string>
     <string name="title_padding_above_key">title_padding_above</string>
     <string name="title_padding_below_key">title_padding_below</string>
@@ -28,16 +31,20 @@
     <string name="padding_left_key">padding_left</string>
     <string name="padding_right_key">padding_right</string>
 
-    <string name="color_alignment_key">color_alignment</string>
+    <string name="color_position_key">color_position</string>
     <string name="show_color_key">show_color</string>
+    <string name="color_stick_key">color_stick</string>
     <string name="color_type_key">color_type</string>
-    <string name="color_radius_key">color_radius</string>
     <string name="color_height_key">color_height</string>
     <string name="color_width_key">color_width</string>
     <string name="color_padding_above_key">color_padding_above</string>
     <string name="color_padding_below_key">color_padding_below</string>
     <string name="color_padding_left_key">color_padding_left</string>
     <string name="color_padding_right_key">color_padding_right</string>
+
+    <string name="current_title_bold_key">current_title_bold</string>
+    <string name="current_time_bold_key">current_time_bold</string>
+    <string name="current_color_outline_key">current_color_outline</string>
 
     <!-- preference defaults -->
 
@@ -47,16 +54,18 @@
     <string name="days_till_default">3</string>
     <string name="free_text_default">No more events</string>
 
+    <string name="text_position_default">left</string>
+
     <string name="time_font_size_default">14</string>
-    <string name="time_font_orientation_default">left</string>
+    <string name="time_alignment_default">left</string>
     <string name="time_padding_above_default">0</string>
     <string name="time_padding_below_default">0</string>
     <string name="time_padding_left_default">0</string>
     <string name="time_padding_right_default">0</string>
-    <string name="time_format_default">12hr</string>
+    <string name="time_format_default">auto</string>
 
     <string name="title_font_size_default">16</string>
-    <string name="title_font_orientation_default">left</string>
+    <string name="title_alignment_default">left</string>
     <string name="title_padding_above_default">0</string>
     <string name="title_padding_below_default">0</string>
     <string name="title_padding_left_default">0</string>
@@ -64,20 +73,59 @@
 
     <string name="number_of_events_default">1</string>
     <string name="padding_between_events_default">2</string>
-    <string name="padding_above_default">24</string>
-    <string name="padding_below_default">24</string>
+    <string name="padding_above_default">6</string>
+    <string name="padding_below_default">0</string>
     <string name="padding_left_default">24</string>
     <string name="padding_right_default">24</string>
 
-    <string name="color_alignment_default">color on right</string>
+    <string name="color_position_default">left</string>
     <string name="show_color_default">true</string>
-    <string name="color_type_default">oval</string>
-    <string name="color_radius_default">10</string>
-    <string name="color_height_default">10</string>
-    <string name="color_width_default">2</string>
+    <string name="color_stick_default">true</string>
+    <string name="color_type_default">rectangle</string>
+    <string name="color_height_default">35</string>
+    <string name="color_width_default">3</string>
     <string name="color_padding_above_default">0</string>
     <string name="color_padding_below_default">0</string>
     <string name="color_padding_left_default">0</string>
-    <string name="color_padding_right_default">0</string>
+    <string name="color_padding_right_default">8</string>
 
+    <string name="current_title_bold_default">true</string>
+    <string name="current_time_bold_default">false</string>
+    <string name="current_color_outline_default">true</string>
+
+    <!-- circle
+    Gismo
+     6,0,24,24
+     bold T,F,T
+    Time & Title
+     left position
+     16-14 size
+     l,l alignment
+     0,0,0,0
+     0,0,0,0
+    Color
+     true
+     right
+     stick false
+     16,16
+     0,0,0,0
+    -->
+    <!-- rectangle
+    Gismo
+     6,0,24,24
+     bold T,F,T
+    Time & Title
+     left position
+     16-14 size
+     l,l alignment
+     0,0,0,0
+     0,0,0,0
+    Color
+     true
+     left
+     stick true
+     35
+     3
+     0,0,0,8
+    -->
 </resources>

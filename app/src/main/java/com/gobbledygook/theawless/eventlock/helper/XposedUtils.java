@@ -1,4 +1,4 @@
-package com.gobbledygook.theawless.eventlock.xposed;
+package com.gobbledygook.theawless.eventlock.helper;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.gobbledygook.theawless.eventlock.BuildConfig;
 
-public final class XposedUtils {
+public class XposedUtils {
     public static final String XPOSED_SECTION_MODULES = "modules";
     public static final String XPOSED_SECTION_INSTALL = "install";
     private static final int MODULE_VERSION = BuildConfig.MODULE_VERSION;
