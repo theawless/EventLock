@@ -18,8 +18,8 @@ An Xposed module to show your calendar events on the lockscreen.
 
 ### Screenshots
 
-<img src="/images/mainscreen_preview.jpg" width="256" height="495"/>
-<img src="/images/lockscreen2.jpg" width="256" height="495"/>
+<img src="/images/mainscreen_preview.jpg" width="256" height="455"/>
+<img src="/images/lockscreen2.jpg" width="256" height="455"/>
 
 ### Requirements
 
