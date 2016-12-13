@@ -11,8 +11,9 @@ import com.gobbledygook.theawless.eventlock.events.EventsBuildDirector;
 import com.gobbledygook.theawless.eventlock.helper.Enums;
 import com.gobbledygook.theawless.eventlock.receivers.alarms.CalendarLoaderAlarm;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 
 //sets CalendarLoaderAlarm to receive at midnights, or when refresh is called
 public class CalendarLoaderService extends IntentService {
@@ -53,11 +54,7 @@ public class CalendarLoaderService extends IntentService {
     }
 
     private void setAlarm() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.SECOND, 59);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        new CalendarLoaderAlarm().setAlarm(this, calendar.getTimeInMillis());
+        new CalendarLoaderAlarm().setAlarm(this, new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis());
     }
 
     private void startCurrentEventUpdater(ArrayList<Long> beginTimes, ArrayList<Long> endTimes) {

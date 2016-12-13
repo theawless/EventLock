@@ -7,7 +7,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -85,7 +84,6 @@ class EventViewBuilder {
         timeTextView.setPadding(left, above, right, below);
         timeTextView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
         timeTextView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-        Log.v("VIEW", alignment);
         switch (alignment) {
             case "left": {
                 timeTextView.setGravity(Gravity.LEFT);

@@ -17,7 +17,7 @@ public class CurrentEventUpdaterAlarm extends Alarm {
     }
 
     public void setAlarm(Context context, long setTimeMillis, long[] beginTimes, long[] endTimes) {
-        Log.v("Asdf", "alarm at" + setTimeMillis + new DateTime(setTimeMillis).toString("dd/MM/YYYY HH:mm:ss"));
+        Log.v(getClass().getSimpleName(), "Alarm at" + setTimeMillis + " " + new DateTime(setTimeMillis).toString("dd/MM/YYYY HH:mm:ss"));
         alarmIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, getClass()).putExtra("beginTimes", beginTimes).putExtra("endTimes", endTimes), 0);
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, setTimeMillis, alarmIntent);

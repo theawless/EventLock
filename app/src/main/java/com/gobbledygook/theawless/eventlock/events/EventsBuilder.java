@@ -43,12 +43,20 @@ class EventsBuilder {
 
     void build(String timeFormat) {
         while (cursor != null && cursor.moveToNext()) {
-            long beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).getMillis();
-            long endTime = new DateTime(cursor.getLong(3), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).getMillis();
+            int allDay = cursor.getInt(4);
+            long beginTime, endTime;
+            if (allDay == 1) {
+                beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).withTimeAtStartOfDay().getMillis();
+                //to prevent multiple alarms at midnight. Even if current event says alarm at midnight, we anyway have loader alarm
+                endTime = Long.MAX_VALUE;
+            } else {
+                beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).getMillis();
+                endTime = new DateTime(cursor.getLong(3), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).getMillis();
+            }
             int dayDiff = Days.daysBetween(new DateTime().withTimeAtStartOfDay().toLocalDate(), new DateTime(beginTime).toLocalDate()).getDays();
             if (dayDiff >= 0) {
                 events[Enums.EventInfo.Title.ordinal()].add(getFormattedTitle(cursor.getString(0), cursor.getString(1)));
-                events[Enums.EventInfo.Time.ordinal()].add(getFormattedTime(beginTime, endTime, cursor.getInt(4), dayDiff, timeFormat));
+                events[Enums.EventInfo.Time.ordinal()].add(getFormattedTime(beginTime, endTime, allDay, dayDiff, timeFormat));
                 events[Enums.EventInfo.Color.ordinal()].add(cursor.getString(5));
                 times[Enums.TimesInfo.Begin.ordinal()].add(beginTime);
                 times[Enums.TimesInfo.End.ordinal()].add(endTime);

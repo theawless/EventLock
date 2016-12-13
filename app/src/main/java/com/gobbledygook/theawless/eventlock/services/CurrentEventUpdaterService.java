@@ -13,6 +13,7 @@ public class CurrentEventUpdaterService extends IntentService {
     private static final String TAG = CurrentEventUpdaterService.class.getSimpleName();
 
     private int eventToDisplay;
+    private int currentEventUpdaterIndex = -1;
     private long currentEventUpdaterTime = Long.MAX_VALUE;
 
     public CurrentEventUpdaterService() {
@@ -29,31 +30,44 @@ public class CurrentEventUpdaterService extends IntentService {
         }
         decideEvents(beginTimes, endTimes);
         sendBroadcast(new Intent().setAction("CurrentEventUpdate").putExtra("currentEvent", eventToDisplay));
-        new CurrentEventUpdaterAlarm().setAlarm(this, currentEventUpdaterTime, beginTimes, endTimes);
-        Log.v(TAG, "event to display" + eventToDisplay);
+        Log.v(TAG, "Event to display" + eventToDisplay);
+        if (currentEventUpdaterIndex != -1 && endTimes[currentEventUpdaterIndex] != Long.MAX_VALUE) {
+            new CurrentEventUpdaterAlarm().setAlarm(this, currentEventUpdaterTime, beginTimes, endTimes);
+        } else {
+            Log.v(TAG, "Prevented repeat alarm!");
+        }
         CurrentEventUpdaterAlarm.completeWakefulIntent(intent);
     }
 
     private void decideEvents(long[] beginTimes, long[] endTimes) {
         long timeNow = new DateTime().getMillis(), runningEventSmallestBeginTime = Long.MAX_VALUE,
                 smallestBeginTime = Long.MAX_VALUE, smallestEndTime = Long.MAX_VALUE;
-        int eventIndex, closestBeginEvent = -1, runningEvent = -1;
+        int eventIndex, closestBeginEvent = -1, runningEvent = -1,
+                smallestBeginTimeIndex = -1, smallestEndTimeIndex = -1;
         for (eventIndex = 0; eventIndex < beginTimes.length; eventIndex++) {
             long beginTime = beginTimes[eventIndex];
             long endTime = endTimes[eventIndex];
             if (beginTime > timeNow && beginTime < smallestBeginTime) {
                 smallestBeginTime = beginTime;
                 closestBeginEvent = eventIndex;
+                smallestBeginTimeIndex = eventIndex;
             }
             if (endTime > timeNow && endTime < smallestEndTime) {
                 smallestEndTime = endTime;
+                smallestEndTimeIndex = eventIndex;
             }
             if ((beginTime < timeNow && timeNow < endTime) && beginTime < runningEventSmallestBeginTime) {
                 runningEventSmallestBeginTime = beginTime;
                 runningEvent = eventIndex;
             }
         }
-        currentEventUpdaterTime = Math.min(smallestBeginTime, smallestEndTime);
+        if (smallestBeginTime < smallestEndTime) {
+            currentEventUpdaterTime = smallestBeginTime;
+            currentEventUpdaterIndex = smallestBeginTimeIndex;
+        } else {
+            currentEventUpdaterTime = smallestEndTime;
+            currentEventUpdaterIndex = smallestEndTimeIndex;
+        }
         if (runningEvent != -1) {
             eventToDisplay = runningEvent;
         } else if (closestBeginEvent != -1) {
