@@ -6,9 +6,14 @@ An Xposed module to show your calendar events on the lockscreen.
 * After Kitkat, the lockscreen widgets were disabled and so calendar widget can't be put on the lockscreen.
 * AOSP lockscreen for lolipop/marshmallow does not show calendar events on lockscreen either.
 
+### Features
+
+* See multiple events by scrolling
+* Lots of customisations
+
 ### Screenshots
-<img src="/images/1.jpg" width="256" height="495"/>]
-<img src="/images/2.jpg" width="256" height="495"/>]
+<img src="/images/mainscreen.jpg" width="256" height="495"/>
+<img src="/images/preset2.jpg" width="256" height="495"/>
 
 ### Requirements
 
@@ -18,14 +23,3 @@ An Xposed module to show your calendar events on the lockscreen.
 
 ### License
 The code is released under The MIT License (MIT).
-
-### Attributions
-* [QuoteLock](https://github.com/apsun/QuoteLock)
-
-  Shows quotes on your lockscreen and I highly recommend it.  
-  EventLock's code was inspired from QuoteLock.
-  Distributed under MIT License.
-  
-* [RemotePreferences](https://github.com/apsun/RemotePreferences)
-
-  Distributed under MIT License.
