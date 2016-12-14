@@ -31,15 +31,23 @@ public class CurrentEventUpdaterService extends IntentService {
         }
         decideEvents(beginTimes, endTimes);
         sendBroadcast(new Intent().setAction(Constants.current_event_update).putExtra(Constants.current_event, eventToDisplay));
-        Log.v(TAG, "Event to display" + eventToDisplay);
+        //currentEventUpdaterIndex value ranges from 0 to beginTimes.length
+        //for all day times, we had set end time =  max value. hence we know it is all day event, can ignore this alarm because loader will run at midnight anyway
         if (currentEventUpdaterIndex != -1 && endTimes[currentEventUpdaterIndex] != Long.MAX_VALUE) {
-            new CurrentEventUpdaterAlarm().setAlarm(this, currentEventUpdaterTime, beginTimes, endTimes);
+            //add a padding of 1 second
+            new CurrentEventUpdaterAlarm().setAlarm(this, currentEventUpdaterTime + 1000, beginTimes, endTimes);
         } else {
             Log.v(TAG, "Prevented repeat alarm!");
         }
         CurrentEventUpdaterAlarm.completeWakefulIntent(intent);
     }
 
+    //if there is a running event, show it first
+    //if there are multiple running events, show the last one
+    //else
+    //if there is a closest event, which is the smallest end/begin time, show it
+    //else
+    //show last index, which the gismo will show as no more events
     private void decideEvents(long[] beginTimes, long[] endTimes) {
         long timeNow = new DateTime().getMillis(), runningEventLargestBeginTime = -1,
                 smallestBeginTime = Long.MAX_VALUE, smallestEndTime = Long.MAX_VALUE;
@@ -71,10 +79,13 @@ public class CurrentEventUpdaterService extends IntentService {
         }
         if (runningEvent != -1) {
             eventToDisplay = runningEvent;
+            Log.v(TAG, eventToDisplay + " runningEvent");
         } else if (closestBeginEvent != -1) {
             eventToDisplay = closestBeginEvent;
+            Log.v(TAG, eventToDisplay + " closestEvent");
         } else {
             eventToDisplay = eventIndex;
+            Log.v(TAG, eventToDisplay + " noEvent");
         }
     }
 }
