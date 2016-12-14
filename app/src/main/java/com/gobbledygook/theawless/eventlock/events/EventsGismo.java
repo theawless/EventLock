@@ -22,12 +22,7 @@ public class EventsGismo {
     public EventsGismo(SharedPreferences preferences) {
         this.preferences = preferences;
         eventsAdapter = new EventsAdapter(preferences);
-        //cache these because they will be used in onBind on recycler view
-        eventsAdapter.currentHighlight = new boolean[]{
-                preferences.getBoolean(Constants.current_title_bold_key, Boolean.parseBoolean(Constants.current_title_bold_default)),
-                preferences.getBoolean(Constants.current_time_bold_key, Boolean.parseBoolean(Constants.current_time_bold_default)),
-                preferences.getBoolean(Constants.current_color_outline_key, Boolean.parseBoolean(Constants.current_color_outline_default)),
-        };
+        updateCurrentHighlightCache();
     }
 
     public RecyclerView getRecyclerView(Context gismoContext) {
@@ -73,6 +68,11 @@ public class EventsGismo {
     public void notifyUpdatedPreferences() {
         recyclerView.setAdapter(null);
         recyclerView.setAdapter(eventsAdapter);
+        updateCurrentHighlightCache();
+    }
+
+    private void updateCurrentHighlightCache() {
+        //cache these because they will be used in onBind on recycler view
         eventsAdapter.currentHighlight = new boolean[]{
                 preferences.getBoolean(Constants.current_title_bold_key, Boolean.parseBoolean(Constants.current_title_bold_default)),
                 preferences.getBoolean(Constants.current_time_bold_key, Boolean.parseBoolean(Constants.current_time_bold_default)),

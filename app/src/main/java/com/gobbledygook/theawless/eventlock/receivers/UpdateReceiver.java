@@ -14,7 +14,7 @@ public abstract class UpdateReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         EventsGismo eventsGismo = getGismo(action);
-        if (eventsGismo == null) {
+        if (eventsGismo == null || action == null) {
             return;
         }
         Bundle bundle = intent.getExtras();
