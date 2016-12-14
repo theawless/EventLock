@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.gobbledygook.theawless.eventlock.helper.Constants;
 import com.gobbledygook.theawless.eventlock.receivers.alarms.CurrentEventUpdaterAlarm;
 
 import org.joda.time.DateTime;
@@ -23,13 +24,13 @@ public class CurrentEventUpdaterService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
-        long[] beginTimes = bundle.getLongArray("beginTimes");
-        long[] endTimes = bundle.getLongArray("endTimes");
+        long[] beginTimes = bundle.getLongArray(Constants.begin_times);
+        long[] endTimes = bundle.getLongArray(Constants.end_times);
         if (beginTimes == null || beginTimes.length == 0) {
             return;
         }
         decideEvents(beginTimes, endTimes);
-        sendBroadcast(new Intent().setAction("CurrentEventUpdate").putExtra("currentEvent", eventToDisplay));
+        sendBroadcast(new Intent().setAction(Constants.current_event_update).putExtra(Constants.current_event, eventToDisplay));
         Log.v(TAG, "Event to display" + eventToDisplay);
         if (currentEventUpdaterIndex != -1 && endTimes[currentEventUpdaterIndex] != Long.MAX_VALUE) {
             new CurrentEventUpdaterAlarm().setAlarm(this, currentEventUpdaterTime, beginTimes, endTimes);

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import com.gobbledygook.theawless.eventlock.events.EventsBuildDirector;
+import com.gobbledygook.theawless.eventlock.helper.Constants;
 import com.gobbledygook.theawless.eventlock.helper.Enums;
 import com.gobbledygook.theawless.eventlock.receivers.alarms.CalendarLoaderAlarm;
 
@@ -41,10 +42,10 @@ public class CalendarLoaderService extends IntentService {
             eventsBuildDirector.construct();
             ArrayList<String>[] events = eventsBuildDirector.getEvents();
             sendBroadcast(new Intent()
-                    .setAction("EventUpdate")
-                    .putStringArrayListExtra("formattedTitles", events[Enums.EventInfo.Title.ordinal()])
-                    .putStringArrayListExtra("formattedTimes", events[Enums.EventInfo.Time.ordinal()])
-                    .putStringArrayListExtra("colors", events[Enums.EventInfo.Color.ordinal()])
+                    .setAction(Constants.events_update)
+                    .putStringArrayListExtra(Constants.formatted_titles, events[Enums.EventInfo.Title.ordinal()])
+                    .putStringArrayListExtra(Constants.formatted_times, events[Enums.EventInfo.Time.ordinal()])
+                    .putStringArrayListExtra(Constants.colors, events[Enums.EventInfo.Color.ordinal()])
             );
             ArrayList<Long>[] times = eventsBuildDirector.getTimes();
             startCurrentEventUpdater(times[Enums.TimesInfo.Begin.ordinal()], times[Enums.TimesInfo.End.ordinal()]);
@@ -59,8 +60,8 @@ public class CalendarLoaderService extends IntentService {
 
     private void startCurrentEventUpdater(ArrayList<Long> beginTimes, ArrayList<Long> endTimes) {
         startService(new Intent(this, CurrentEventUpdaterService.class)
-                .putExtra("beginTimes", longArrayListToPrimitive(beginTimes))
-                .putExtra("endTimes", longArrayListToPrimitive(endTimes))
+                .putExtra(Constants.begin_times, longArrayListToPrimitive(beginTimes))
+                .putExtra(Constants.end_times, longArrayListToPrimitive(endTimes))
         );
     }
 }

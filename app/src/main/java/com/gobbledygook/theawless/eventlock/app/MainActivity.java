@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.gobbledygook.theawless.eventlock.R;
 import com.gobbledygook.theawless.eventlock.events.EventsGismo;
+import com.gobbledygook.theawless.eventlock.helper.Constants;
 import com.gobbledygook.theawless.eventlock.helper.XposedUtils;
 import com.gobbledygook.theawless.eventlock.receivers.UpdateReceiver;
 import com.gobbledygook.theawless.eventlock.services.CalendarLoaderService;
@@ -49,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("EventUpdate");
-        intentFilter.addAction("CurrentEventUpdate");
-        intentFilter.addAction("LooksUpdate");
+        intentFilter.addAction(Constants.events_update);
+        intentFilter.addAction(Constants.current_event_update);
+        intentFilter.addAction(Constants.looks_update);
         registerReceiver(updateReceiver, intentFilter);
     }
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleRefresh() {
-        sendBroadcast(new Intent("LooksUpdate"));
+        sendBroadcast(new Intent(Constants.looks_update));
         startService(new Intent(this, CalendarLoaderService.class));
     }
 

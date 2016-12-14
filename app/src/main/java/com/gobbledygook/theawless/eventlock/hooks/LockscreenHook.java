@@ -7,6 +7,7 @@ import android.widget.GridLayout;
 
 import com.gobbledygook.theawless.eventlock.BuildConfig;
 import com.gobbledygook.theawless.eventlock.events.EventsGismo;
+import com.gobbledygook.theawless.eventlock.helper.Constants;
 import com.gobbledygook.theawless.eventlock.receivers.UpdateReceiver;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -27,7 +28,7 @@ public class LockscreenHook implements IXposedHookLoadPackage {
     private final UpdateReceiver updateReceiver = new UpdateReceiver() {
         @Override
         protected EventsGismo getGismo(String action) {
-            log(action);
+            log("got action " + action);
             return eventsGismo;
         }
     };
@@ -50,9 +51,9 @@ public class LockscreenHook implements IXposedHookLoadPackage {
             ((GridLayout) param.thisObject).addView(eventsGismo.getRecyclerView(context));
             log("Added view to lockscreen");
             IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction("EventUpdate");
-            intentFilter.addAction("CurrentEventUpdate");
-            intentFilter.addAction("LooksUpdate");
+            intentFilter.addAction(Constants.events_update);
+            intentFilter.addAction(Constants.current_event_update);
+            intentFilter.addAction(Constants.looks_update);
             intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
             context.registerReceiver(updateReceiver, intentFilter);
         }

@@ -1,12 +1,27 @@
 package com.gobbledygook.theawless.eventlock.helper;
 
+import com.gobbledygook.theawless.eventlock.BuildConfig;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-//used when R is not available, like when running xposed hooks
 public class Constants {
 
+    //intent filters
+    public static final String events_update = BuildConfig.APPLICATION_ID + "." + "EventsUpdate";
+    public static final String current_event_update = BuildConfig.APPLICATION_ID + "." + "CurrentEventUpdate";
+    public static final String looks_update = BuildConfig.APPLICATION_ID + "." + "LooksUpdate";
+
+    //intent extras
+    public static final String formatted_titles = "formattedTitles";
+    public static final String formatted_times = "formattedTimes";
+    public static final String colors = "colors";
+    public static final String begin_times = "beginTimes";
+    public static final String end_times = "endTimes";
+    public static final String current_event = "currentEvent";
+
+    //keys
     public static final String selected_calendars_key = "selected_calendars";
     public static final String days_till_key = "days_till";
     public static final String free_text_key = "free_text";
@@ -50,7 +65,7 @@ public class Constants {
     public static final String current_time_bold_key = "current_time_bold";
     public static final String current_color_outline_key = "current_color_outline";
 
-
+    //defaults
     public static final Set<String> selected_calendars_default = new HashSet<>(Collections.singletonList("1"));
 
     public static final String days_till_default = "3";

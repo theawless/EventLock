@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.gobbledygook.theawless.eventlock.events.EventsGismo;
+import com.gobbledygook.theawless.eventlock.helper.Constants;
 
 
 public abstract class UpdateReceiver extends BroadcastReceiver {
@@ -18,17 +19,17 @@ public abstract class UpdateReceiver extends BroadcastReceiver {
         }
         Bundle bundle = intent.getExtras();
         switch (action) {
-            case "EventUpdate":
+            case Constants.events_update:
                 eventsGismo.deliverNewEvents(
-                        bundle.getStringArrayList("formattedTitles"),
-                        bundle.getStringArrayList("formattedTimes"),
-                        bundle.getStringArrayList("colors")
+                        bundle.getStringArrayList(Constants.formatted_titles),
+                        bundle.getStringArrayList(Constants.formatted_times),
+                        bundle.getStringArrayList(Constants.colors)
                 );
                 break;
-            case "CurrentEventUpdate":
-                eventsGismo.deliverNewCurrentEvent(bundle.getInt("currentEvent"));
+            case Constants.current_event_update:
+                eventsGismo.deliverNewCurrentEvent(bundle.getInt(Constants.current_event));
                 break;
-            case "LooksUpdate":
+            case Constants.looks_update:
                 eventsGismo.notifyUpdatedPreferences();
                 break;
             case Intent.ACTION_SCREEN_OFF: {
