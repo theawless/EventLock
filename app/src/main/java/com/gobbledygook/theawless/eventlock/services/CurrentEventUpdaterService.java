@@ -41,7 +41,7 @@ public class CurrentEventUpdaterService extends IntentService {
     }
 
     private void decideEvents(long[] beginTimes, long[] endTimes) {
-        long timeNow = new DateTime().getMillis(), runningEventSmallestBeginTime = Long.MAX_VALUE,
+        long timeNow = new DateTime().getMillis(), runningEventLargestBeginTime = -1,
                 smallestBeginTime = Long.MAX_VALUE, smallestEndTime = Long.MAX_VALUE;
         int eventIndex, closestBeginEvent = -1, runningEvent = -1,
                 smallestBeginTimeIndex = -1, smallestEndTimeIndex = -1;
@@ -57,8 +57,8 @@ public class CurrentEventUpdaterService extends IntentService {
                 smallestEndTime = endTime;
                 smallestEndTimeIndex = eventIndex;
             }
-            if ((beginTime < timeNow && timeNow < endTime) && beginTime < runningEventSmallestBeginTime) {
-                runningEventSmallestBeginTime = beginTime;
+            if ((beginTime < timeNow && timeNow < endTime) && beginTime > runningEventLargestBeginTime) {
+                runningEventLargestBeginTime = beginTime;
                 runningEvent = eventIndex;
             }
         }

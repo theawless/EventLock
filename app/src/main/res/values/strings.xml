@@ -39,7 +39,7 @@
 
     <!-- Shown in version toasts -->
     <string name="version_title">Version</string>
-    <string name="version_number">2.0.5</string>
+    <string name="version_number">2.0.6</string>
     <string name="version_count_1">What? I thought no one clicked this</string>
     <string name="version_count_6">Nothing interesting ahead…</string>
     <string name="version_count_12">Still???</string>
