@@ -20,9 +20,9 @@ public abstract class Alarm extends WakefulBroadcastReceiver {
         startWakefulService(context, new Intent(context, getServiceClass()).putExtras(intent));
     }
 
-    public void setAlarm(Context context, long setTimeMillis) {
+    public void setAlarm(Context context, long setTimeMillis, Intent intent) {
         Log.v(getClass().getSimpleName(), "Alarm at" + setTimeMillis + " " + new DateTime(setTimeMillis).toString("dd/MM/YYYY HH:mm:ss"));
-        alarmIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, getClass()), 0);
+        alarmIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, getClass()).putExtras(intent), 0);
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, setTimeMillis, alarmIntent);
     }

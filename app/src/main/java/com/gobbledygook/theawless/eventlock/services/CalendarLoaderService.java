@@ -55,7 +55,7 @@ public class CalendarLoaderService extends IntentService {
     }
 
     private void setAlarm() {
-        new CalendarLoaderAlarm().setAlarm(this, new DateTime().plusDays(1).withTimeAtStartOfDay().plusSeconds(1).getMillis());
+        new CalendarLoaderAlarm().setAlarm(this, new DateTime().plusDays(1).withTimeAtStartOfDay().plusSeconds(1).getMillis(), new Intent());
     }
 
     private void startCurrentEventUpdater(ArrayList<Long> beginTimes, ArrayList<Long> endTimes) {

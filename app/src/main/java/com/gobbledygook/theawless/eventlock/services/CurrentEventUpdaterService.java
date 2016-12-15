@@ -35,7 +35,7 @@ public class CurrentEventUpdaterService extends IntentService {
         //for all day times, we had set end time =  max value. hence we know it is all day event, can ignore this alarm because loader will run at midnight anyway
         if (currentEventUpdaterIndex != -1 && endTimes[currentEventUpdaterIndex] != Long.MAX_VALUE) {
             //add a padding of 1 second
-            new CurrentEventUpdaterAlarm().setAlarm(this, currentEventUpdaterTime + 1000, beginTimes, endTimes);
+            new CurrentEventUpdaterAlarm().setAlarm(this, currentEventUpdaterTime + 1000, new Intent().putExtra("beginTimes", beginTimes).putExtra("endTimes", endTimes));
         } else {
             Log.v(TAG, "Prevented repeat alarm!");
         }
