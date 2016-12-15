@@ -7,6 +7,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -59,38 +60,33 @@ class EventViewBuilder {
     void setUpTitleTextView(int left, int above, int right, int below, int size, String alignment) {
         TextView titleTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(titleTextView);
+        setUpCommonTextView(titleTextView, left, above, right, below, size, alignment);
         titleTextView.setTag(EventViewBuildDirector.ItemTag.Title);
-        titleTextView.setTextSize(size);
-        titleTextView.setPadding(left, above, right, below);
-        titleTextView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        titleTextView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-        switch (alignment) {
-            case "left": {
-                titleTextView.setGravity(Gravity.LEFT);
-                break;
-            }
-            case "right": {
-                titleTextView.setGravity(Gravity.RIGHT);
-                break;
-            }
-        }
     }
 
     void setUpTimeTextView(int left, int above, int right, int below, int size, String alignment) {
         TextView timeTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(timeTextView);
+        setUpCommonTextView(timeTextView, left, above, right, below, size, alignment);
         timeTextView.setTag(EventViewBuildDirector.ItemTag.Time);
-        timeTextView.setTextSize(size);
-        timeTextView.setPadding(left, above, right, below);
-        timeTextView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        timeTextView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
+    }
+
+    private void setUpCommonTextView(TextView textView, int left, int above, int right, int below, int size, String alignment) {
+        textView.setMaxLines(1);
+        textView.setHorizontallyScrolling(true);
+        textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        textView.setSelected(true);
+        textView.setTextSize(size);
+        textView.setPadding(left, above, right, below);
+        textView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
         switch (alignment) {
             case "left": {
-                timeTextView.setGravity(Gravity.LEFT);
+                textView.setGravity(Gravity.LEFT);
                 break;
             }
             case "right": {
-                timeTextView.setGravity(Gravity.RIGHT);
+                textView.setGravity(Gravity.RIGHT);
                 break;
             }
         }
