@@ -4,12 +4,12 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
     defaultConfig {
-        buildConfigField("int", "MODULE_VERSION", "8")
+        buildConfigField("int", "MODULE_VERSION", "10")
         minSdkVersion 21
         targetSdkVersion 24
         applicationId "com.gobbledygook.theawless.eventlock"
-        versionCode 8
-        versionName "2.1"
+        versionCode 10
+        versionName "2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
