@@ -16,22 +16,20 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="Customisation">
         <PreferenceScreen android:title="Presets">
-            <PreferenceCategory android:title="Presets">
-                <Preference
-                    android:icon="@drawable/preset1"
-                    android:layout="@layout/preset_layout"
+            <PreferenceCategory xmlns:customNS="http://schemas.android.com/apk/res/com.gobbledygook.theawless.eventlock"
+                android:title="Presets">
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:summary="@string/preset1_summary"
-                    android:title="@string/preset1_title" />
-                <Preference
-                    android:icon="@drawable/preset2"
-                    android:layout="@layout/preset_layout"
+                    android:title="@string/preset1_title"
+                    customNS:preset_image="@drawable/preset1" />
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:summary="@string/preset2_summary"
-                    android:title="@string/preset2_title" />
-                <Preference
-                    android:icon="@drawable/preset3"
-                    android:layout="@layout/preset_layout"
+                    android:title="@string/preset2_title"
+                    customNS:preset_image="@drawable/preset2" />
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:summary="@string/preset3_summary"
-                    android:title="@string/preset3_title" />
+                    android:title="@string/preset3_title"
+                    customNS:preset_image="@drawable/preset3" />
             </PreferenceCategory>
         </PreferenceScreen>
         <PreferenceScreen android:title="Gismo">
