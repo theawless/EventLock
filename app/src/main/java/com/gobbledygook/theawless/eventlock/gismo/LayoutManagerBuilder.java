@@ -72,14 +72,16 @@ class LayoutManagerBuilder {
         frameLayout.addView(eventView);
         eventView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
         eventView.measure(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        frameLayout.measure(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.WRAP_CONTENT);
         if (gridLayoutManager.getOrientation() == GridLayoutManager.VERTICAL) {
-            recyclerViewHeight = eventView.getMeasuredHeight() * factor;
+            recyclerViewHeight = frameLayout.getMeasuredHeight() * factor;
         } else {
             eventViewWidth =
                     (gridLayout.getWidth()
                             - dpToPixel(gismoContext, preferences.getString(Constants.gismo_padding_left_key, Constants.gismo_padding_left_default))
                             - dpToPixel(gismoContext, preferences.getString(Constants.gismo_padding_right_key, Constants.gismo_padding_right_default))
                     ) / factor;
+            eventViewWidth += (eventViewWidth % 2 != 0) ? 1 : 0;
         }
         gridLayout.removeView(frameLayout);
     }

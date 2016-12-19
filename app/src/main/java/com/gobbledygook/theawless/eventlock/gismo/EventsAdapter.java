@@ -51,7 +51,7 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
         if (position == currentEventIndex) {
             if (currentHighlight[Enums.EventInfo.Title.ordinal()])
                 holder.getTitleTextView().setTypeface(holder.getTitleTextView().getTypeface(), Typeface.BOLD);
-            if (currentHighlight[Enums.EventInfo.Title.ordinal()])
+            if (currentHighlight[Enums.EventInfo.Time.ordinal()])
                 holder.getTimeTextView().setTypeface(holder.getTimeTextView().getTypeface(), Typeface.BOLD);
             if (currentHighlight[Enums.EventInfo.Color.ordinal()] && holder.getColorImageView() != null && Integer.parseInt(events[Enums.EventInfo.Color.ordinal()].get(position)) != Color.TRANSPARENT) {
                 ((GradientDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(1)).setStroke(2, Color.WHITE);
