@@ -1,4 +1,4 @@
-package com.gobbledygook.theawless.eventlock.events;
+package com.gobbledygook.theawless.eventlock.gismo;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -19,19 +19,29 @@ import java.util.ArrayList;
 class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     private final SharedPreferences preferences;
+    private final int eventViewWidth;
+
     ArrayList<String>[] events;
     int currentEventIndex;
     boolean currentHighlight[];
 
-    EventsAdapter(SharedPreferences preferences) {
+    EventsAdapter(SharedPreferences preferences, int eventViewWidth) {
         this.preferences = preferences;
+        this.eventViewWidth = eventViewWidth;
+    }
+
+    boolean inRange() {
+        return 0 <= currentEventIndex && currentEventIndex < getItemCount();
     }
 
     @Override
     public EventsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new EventsAdapter.ViewHolder(new EventViewBuildDirector(parent.getContext(), preferences).getEventView());
+        return new EventsAdapter.ViewHolder(
+                new EventViewBuildDirector(parent.getContext(), preferences)
+                        .setEventViewWidth(eventViewWidth)
+                        .getEventView()
+        );
     }
-
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -72,23 +82,20 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        View view;
-
         ViewHolder(View view) {
             super(view);
-            this.view = view;
         }
 
         TextView getTitleTextView() {
-            return (TextView) view.findViewWithTag(EventViewBuildDirector.ItemTag.Title);
+            return (TextView) itemView.findViewWithTag(Enums.ItemTag.Title);
         }
 
         TextView getTimeTextView() {
-            return (TextView) view.findViewWithTag(EventViewBuildDirector.ItemTag.Time);
+            return (TextView) itemView.findViewWithTag(Enums.ItemTag.Time);
         }
 
         ImageView getColorImageView() {
-            return (ImageView) view.findViewWithTag(EventViewBuildDirector.ItemTag.Image);
+            return (ImageView) itemView.findViewWithTag(Enums.ItemTag.Image);
         }
     }
 }

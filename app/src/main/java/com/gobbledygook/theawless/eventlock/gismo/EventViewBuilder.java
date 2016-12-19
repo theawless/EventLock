@@ -1,4 +1,4 @@
-package com.gobbledygook.theawless.eventlock.events;
+package com.gobbledygook.theawless.eventlock.gismo;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,6 +7,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
+import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gobbledygook.theawless.eventlock.helper.Enums;
+
 class EventViewBuilder {
     private final Context gismoContext;
     RelativeLayout fullContainerRelativeLayout;
@@ -26,12 +29,9 @@ class EventViewBuilder {
         this.gismoContext = gismoContext;
     }
 
-    void setUpFullContainerRelativeLayout(int left, int above, int right, int below) {
+    void setUpFullContainerRelativeLayout(int eventViewWidth) {
         fullContainerRelativeLayout = new RelativeLayout(gismoContext);
-        fullContainerRelativeLayout.setLayoutParams(new GridLayout.LayoutParams());
-        fullContainerRelativeLayout.getLayoutParams().width = GridLayout.LayoutParams.MATCH_PARENT;
-        fullContainerRelativeLayout.getLayoutParams().height = GridLayout.LayoutParams.WRAP_CONTENT;
-        ((GridLayout.LayoutParams) fullContainerRelativeLayout.getLayoutParams()).setMargins(left, above, right, below);
+        fullContainerRelativeLayout.setLayoutParams(new GridLayoutManager.LayoutParams(eventViewWidth, GridLayout.LayoutParams.WRAP_CONTENT));
     }
 
     void setUpTextContainerRelativeLayout(String position) {
@@ -61,20 +61,21 @@ class EventViewBuilder {
         TextView titleTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(titleTextView);
         setUpCommonTextView(titleTextView, left, above, right, below, size, alignment);
-        titleTextView.setTag(EventViewBuildDirector.ItemTag.Title);
+        titleTextView.setTag(Enums.ItemTag.Title);
     }
 
     void setUpTimeTextView(int left, int above, int right, int below, int size, String alignment) {
         TextView timeTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(timeTextView);
         setUpCommonTextView(timeTextView, left, above, right, below, size, alignment);
-        timeTextView.setTag(EventViewBuildDirector.ItemTag.Time);
+        timeTextView.setTag(Enums.ItemTag.Time);
     }
 
     private void setUpCommonTextView(TextView textView, int left, int above, int right, int below, int size, String alignment) {
         textView.setMaxLines(1);
         textView.setHorizontallyScrolling(true);
         textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        textView.setMarqueeRepeatLimit(-1);
         textView.setSelected(true);
         textView.setTextSize(size);
         textView.setPadding(left, above, right, below);
@@ -95,7 +96,7 @@ class EventViewBuilder {
     void setUpColorImageView(int left, int above, int right, int below, String type, int height, int width, String alignment, boolean stick) {
         ImageView colorImageView = new ImageView(gismoContext);
         fullContainerRelativeLayout.addView(colorImageView);
-        colorImageView.setTag(EventViewBuildDirector.ItemTag.Image);
+        colorImageView.setTag(Enums.ItemTag.Image);
         GradientDrawable outlineDrawable = new GradientDrawable();
         ShapeDrawable shapeDrawable = new ShapeDrawable();
         if (type.equals("oval")) {

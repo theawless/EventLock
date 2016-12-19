@@ -4,10 +4,10 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
     defaultConfig {
-        applicationId "com.gobbledygook.theawless.eventlock"
         buildConfigField("int", "MODULE_VERSION", "8")
         minSdkVersion 21
         targetSdkVersion 24
+        applicationId "com.gobbledygook.theawless.eventlock"
         versionCode 8
         versionName "2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,8 +32,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'joda-time:joda-time:2.9.6'
-    testCompile 'junit:junit:4.12'
     provided "de.robv.android.xposed:api:53"
 }

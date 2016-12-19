@@ -75,8 +75,6 @@
     <string name="selected_calendars_title">Selected calendars</string>
     <string name="days_till_summary">How many days after today should we look for events</string>
     <string name="days_till_title">Days till</string>
-    <string name="free_text_summary">Shown when no more events in the range are found</string>
-    <string name="free_text_title">Free text</string>
 
     <string name="text_position_summary">Where should the text be placed on the lockscreen</string>
     <string name="text_position_title">Text position</string>
@@ -109,18 +107,27 @@
     <string name="title_padding_left_summary">Title\'s padding from left in the lock screen</string>
     <string name="title_padding_left_title">Left</string>
 
+    <string name="free_text_summary">Shown when no more events in the range are found</string>
+    <string name="free_text_title">Free text</string>
+    <string name="show_free_text_summary">Should a last free event be added to the list</string>
+    <string name="show_free_text_title">Show free text</string>
+
     <string name="number_of_events_summary">Number of events on the same page</string>
     <string name="number_of_events_title">Number of events</string>
-    <string name="padding_between_events_summary">Padding between events on the same page</string>
-    <string name="padding_between_events_title">Padding between events</string>
-    <string name="padding_above_summary">Gismo\'s padding from above in the lock screen</string>
-    <string name="padding_above_title">Above</string>
-    <string name="padding_below_summary">Gismo\'s padding from below in the lock screen</string>
-    <string name="padding_below_title">Below</string>
-    <string name="padding_right_summary">Gismo\'s padding from right in the lock screen</string>
-    <string name="padding_right_title">Right</string>
-    <string name="padding_left_summary">Gismo\'s padding from left in the lock screen</string>
-    <string name="padding_left_title">Left</string>
+
+    <string name="gismo_scroll_direction_summary">Gismo\'s scrolling direction</string>
+    <string name="gismo_scroll_direction_title">Scroll direction</string>
+    <string name="gismo_layout_direction_summary">Gismo\'s layout direction</string>
+    <string name="gismo_layout_direction_title">Layout direction</string>
+
+    <string name="gismo_padding_above_summary">Gismo\'s padding from above in the lock screen</string>
+    <string name="gismo_padding_above_title">Above</string>
+    <string name="gismo_padding_below_summary">Gismo\'s padding from below in the lock screen</string>
+    <string name="gismo_padding_below_title">Below</string>
+    <string name="gismo_padding_right_summary">Gismo\'s padding from right in the lock screen</string>
+    <string name="gismo_padding_right_title">Right</string>
+    <string name="gismo_padding_left_summary">Gismo\'s padding from left in the lock screen</string>
+    <string name="gismo_padding_left_title">Left</string>
 
     <string name="color_position_summary">How color block should be placed</string>
     <string name="color_position_title">Color position</string>
@@ -168,5 +175,9 @@
     <string-array name="color_type_entvals">
         <item>oval</item>
         <item>rectangle</item>
+    </string-array>
+    <string-array name="directions_entvals">
+        <item>horizontal</item>
+        <item>vertical</item>
     </string-array>
 </resources>

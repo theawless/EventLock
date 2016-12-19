@@ -36,41 +36,68 @@
         </PreferenceScreen>
         <PreferenceScreen android:title="Gismo">
             <PreferenceCategory android:title="Gismo">
+                <SwitchPreference
+                    android:defaultValue="@string/show_free_text_default"
+                    android:key="@string/show_free_text_key"
+                    android:summary="@string/show_free_text_summary"
+                    android:title="@string/show_free_text_title" />
                 <EditTextPreference
                     android:defaultValue="@string/free_text_default"
+                    android:dependency="@string/show_free_text_key"
                     android:key="@string/free_text_key"
                     android:summary="@string/free_text_summary"
                     android:title="@string/free_text_title" />
+                <ListPreference
+                    android:defaultValue="@string/gismo_scroll_direction_default"
+                    android:entries="@array/directions_entvals"
+                    android:entryValues="@array/directions_entvals"
+                    android:key="@string/gismo_scroll_direction_key"
+                    android:summary="@string/gismo_scroll_direction_summary"
+                    android:title="@string/gismo_scroll_direction_title" />
+                <ListPreference
+                    android:defaultValue="@string/gismo_layout_direction_default"
+                    android:entries="@array/directions_entvals"
+                    android:entryValues="@array/directions_entvals"
+                    android:key="@string/gismo_layout_direction_key"
+                    android:summary="@string/gismo_layout_direction_summary"
+                    android:title="@string/gismo_layout_direction_title" />
+                <EditTextPreference
+                    android:defaultValue="@string/number_of_events_default"
+                    android:inputType="number"
+                    android:key="@string/number_of_events_key"
+                    android:numeric="integer"
+                    android:summary="@string/number_of_events_summary"
+                    android:title="@string/number_of_events_title" />
                 <PreferenceScreen android:title="Padding">
                     <PreferenceCategory android:title="Gismo Padding">
                         <EditTextPreference
-                            android:defaultValue="@string/padding_above_default"
+                            android:defaultValue="@string/gismo_padding_above_default"
                             android:inputType="number"
-                            android:key="@string/padding_above_key"
+                            android:key="@string/gismo_padding_above_key"
                             android:numeric="integer"
-                            android:summary="@string/padding_above_summary"
-                            android:title="@string/padding_above_title" />
+                            android:summary="@string/gismo_padding_above_summary"
+                            android:title="@string/gismo_padding_above_title" />
                         <EditTextPreference
-                            android:defaultValue="@string/padding_below_default"
+                            android:defaultValue="@string/gismo_padding_below_default"
                             android:inputType="number"
-                            android:key="@string/padding_below_key"
+                            android:key="@string/gismo_padding_below_key"
                             android:numeric="integer"
-                            android:summary="@string/padding_below_summary"
-                            android:title="@string/padding_below_title" />
+                            android:summary="@string/gismo_padding_below_summary"
+                            android:title="@string/gismo_padding_below_title" />
                         <EditTextPreference
-                            android:defaultValue="@string/padding_left_default"
+                            android:defaultValue="@string/gismo_padding_left_default"
                             android:inputType="number"
-                            android:key="@string/padding_left_key"
+                            android:key="@string/gismo_padding_left_key"
                             android:numeric="integer"
-                            android:summary="@string/padding_left_summary"
-                            android:title="@string/padding_left_title" />
+                            android:summary="@string/gismo_padding_left_summary"
+                            android:title="@string/gismo_padding_left_title" />
                         <EditTextPreference
-                            android:defaultValue="@string/padding_right_default"
+                            android:defaultValue="@string/gismo_padding_right_default"
                             android:inputType="number"
-                            android:key="@string/padding_right_key"
+                            android:key="@string/gismo_padding_right_key"
                             android:numeric="integer"
-                            android:summary="@string/padding_right_summary"
-                            android:title="@string/padding_right_title" />
+                            android:summary="@string/gismo_padding_right_summary"
+                            android:title="@string/gismo_padding_right_title" />
                     </PreferenceCategory>
                 </PreferenceScreen>
             </PreferenceCategory>
@@ -251,7 +278,9 @@
                     android:numeric="integer"
                     android:summary="@string/color_width_summary"
                     android:title="@string/color_width_title" />
-                <PreferenceScreen android:title="Padding">
+                <PreferenceScreen
+                    android:dependency="@string/show_color_key"
+                    android:title="Padding">
                     <PreferenceCategory android:title="Color padding">
                         <EditTextPreference
                             android:defaultValue="@string/color_padding_above_default"

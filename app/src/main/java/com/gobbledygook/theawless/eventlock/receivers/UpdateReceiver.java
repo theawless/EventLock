@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.gobbledygook.theawless.eventlock.events.EventsGismo;
+import com.gobbledygook.theawless.eventlock.gismo.EventsGismo;
 import com.gobbledygook.theawless.eventlock.helper.Constants;
 
 
@@ -14,7 +14,7 @@ public abstract class UpdateReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         EventsGismo eventsGismo = getGismo(action);
-        if (eventsGismo == null || action == null) {
+        if (action == null || eventsGismo == null || !eventsGismo.isReady()) {
             return;
         }
         Bundle bundle = intent.getExtras();

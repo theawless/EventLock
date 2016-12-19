@@ -9,11 +9,13 @@ import java.util.Set;
 public class Constants {
 
     //intent filters
+
     public static final String events_update = BuildConfig.APPLICATION_ID + "." + "EventsUpdate";
     public static final String current_event_update = BuildConfig.APPLICATION_ID + "." + "CurrentEventUpdate";
     public static final String looks_update = BuildConfig.APPLICATION_ID + "." + "LooksUpdate";
 
     //intent extras
+
     public static final String formatted_titles = "formattedTitles";
     public static final String formatted_times = "formattedTimes";
     public static final String colors = "colors";
@@ -22,9 +24,9 @@ public class Constants {
     public static final String current_event = "currentEvent";
 
     //keys
+
     public static final String selected_calendars_key = "selected_calendars";
     public static final String days_till_key = "days_till";
-    public static final String free_text_key = "free_text";
 
     public static final String text_position_key = "text_position";
 
@@ -43,12 +45,15 @@ public class Constants {
     public static final String title_padding_left_key = "title_padding_left";
     public static final String title_padding_right_key = "title_padding_right";
 
+    public static final String free_text_key = "free_text";
+    public static final String show_free_text_key = "show_free_text";
     public static final String number_of_events_key = "number_of_events";
-    public static final String padding_between_events_key = "padding_between_events";
-    public static final String padding_above_key = "padding_above";
-    public static final String padding_below_key = "padding_below";
-    public static final String padding_left_key = "padding_left";
-    public static final String padding_right_key = "padding_right";
+    public static final String gismo_scroll_direction_key = "gismo_scroll";
+    public static final String gismo_layout_direction_key = "gismo_layout";
+    public static final String gismo_padding_above_key = "gismo_padding_above";
+    public static final String gismo_padding_below_key = "gismo_padding_below";
+    public static final String gismo_padding_left_key = "gismo_padding_left";
+    public static final String gismo_padding_right_key = "gismo_padding_right";
 
     public static final String color_position_key = "color_position";
     public static final String show_color_key = "show_color";
@@ -69,7 +74,6 @@ public class Constants {
     public static final Set<String> selected_calendars_default = new HashSet<>(Collections.singletonList("1"));
 
     public static final String days_till_default = "3";
-    public static final String free_text_default = "No more events";
 
     public static final String text_position_default = "left";
 
@@ -88,12 +92,16 @@ public class Constants {
     public static final String title_padding_left_default = "0";
     public static final String title_padding_right_default = "0";
 
-    public static final String number_of_events_default = "1";
-    public static final String padding_between_events_default = "2";
-    public static final String padding_above_default = "6";
-    public static final String padding_below_default = "0";
-    public static final String padding_left_default = "24";
-    public static final String padding_right_default = "24";
+    public static final String free_text_default = "No more events";
+    public static final String show_free_text_default = "true";
+
+    public static final String number_of_events_default = "2";
+    public static final String gismo_scroll_direction_default = "horizontal";
+    public static final String gismo_layout_direction_default = "horizontal";
+    public static final String gismo_padding_above_default = "6";
+    public static final String gismo_padding_below_default = "0";
+    public static final String gismo_padding_left_default = "24";
+    public static final String gismo_padding_right_default = "24";
 
     public static final String color_position_default = "left";
     public static final String show_color_default = "true";
