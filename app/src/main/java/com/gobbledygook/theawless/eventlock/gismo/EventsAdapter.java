@@ -49,11 +49,11 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
             ((ShapeDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(0)).getPaint().setColor(Integer.parseInt(events[Enums.EventInfo.Color.ordinal()].get(position)));
         }
         if (position == currentEventIndex) {
-            if (currentHighlight[0])
+            if (currentHighlight[Enums.EventInfo.Title.ordinal()])
                 holder.getTitleTextView().setTypeface(holder.getTitleTextView().getTypeface(), Typeface.BOLD);
-            if (currentHighlight[1])
+            if (currentHighlight[Enums.EventInfo.Title.ordinal()])
                 holder.getTimeTextView().setTypeface(holder.getTimeTextView().getTypeface(), Typeface.BOLD);
-            if (currentHighlight[2] && holder.getColorImageView() != null && Integer.parseInt(events[Enums.EventInfo.Color.ordinal()].get(position)) != Color.TRANSPARENT) {
+            if (currentHighlight[Enums.EventInfo.Color.ordinal()] && holder.getColorImageView() != null && Integer.parseInt(events[Enums.EventInfo.Color.ordinal()].get(position)) != Color.TRANSPARENT) {
                 ((GradientDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(1)).setStroke(2, Color.WHITE);
             }
         }
@@ -63,11 +63,11 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     @Override
     public void onViewRecycled(ViewHolder holder) {
-        if (currentHighlight[0])
+        if (currentHighlight[Enums.EventInfo.Title.ordinal()])
             holder.getTitleTextView().setTypeface(Typeface.create(holder.getTitleTextView().getTypeface(), Typeface.NORMAL));
-        if (currentHighlight[1])
+        if (currentHighlight[Enums.EventInfo.Time.ordinal()])
             holder.getTimeTextView().setTypeface(Typeface.create(holder.getTimeTextView().getTypeface(), Typeface.NORMAL));
-        if (currentHighlight[2] && holder.getColorImageView() != null) {
+        if (currentHighlight[Enums.EventInfo.Color.ordinal()] && holder.getColorImageView() != null) {
             ((GradientDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(1)).setStroke(2, Color.TRANSPARENT);
         }
         super.onViewRecycled(holder);

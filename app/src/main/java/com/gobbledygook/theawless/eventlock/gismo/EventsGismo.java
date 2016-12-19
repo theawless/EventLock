@@ -12,6 +12,7 @@ import com.gobbledygook.theawless.eventlock.helper.Enums;
 import java.util.ArrayList;
 
 import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
+import static com.gobbledygook.theawless.eventlock.helper.Utils.preventParentTouchTheft;
 
 
 public class EventsGismo {
@@ -21,12 +22,11 @@ public class EventsGismo {
     private RecyclerView recyclerView = null;
     private EventsAdapter eventsAdapter = null;
     private boolean ready = false;
-    private DivisionLinearSnapHelper linearSnapHelper = new DivisionLinearSnapHelper();
+    private DivisionLinearSnapHelper snapHelper = new DivisionLinearSnapHelper();
 
     public EventsGismo(GridLayout gridLayout, SharedPreferences preferences) {
         this.preferences = preferences;
         this.gridLayout = gridLayout;
-        gridLayout.setNestedScrollingEnabled(true);
     }
 
     public boolean isReady() {
@@ -46,7 +46,7 @@ public class EventsGismo {
         );
         setupRecyclerView();
         gridLayout.addView(recyclerView);
-        linearSnapHelper.attachToRecyclerView(recyclerView);
+        snapHelper.attachToRecyclerView(recyclerView);
         ready = true;
     }
 
@@ -57,9 +57,10 @@ public class EventsGismo {
         recyclerView.getLayoutParams().height = layoutManagerBuildDirector.getRecyclerViewHeight();
         recyclerView.getLayoutParams().width = GridLayout.LayoutParams.MATCH_PARENT;
         eventsAdapter = new EventsAdapter(preferences, layoutManagerBuildDirector.getEventViewWidth());
-        linearSnapHelper.setDivisionFactor(layoutManagerBuildDirector.getDivisionFactor());
+        snapHelper.setDivisionFactor(layoutManagerBuildDirector.getDivisionFactor());
         updateCurrentHighlightCache();
         recyclerView.setAdapter(eventsAdapter);
+        preventParentTouchTheft(recyclerView);
     }
 
     public void scrollToCurrentEvent() {
