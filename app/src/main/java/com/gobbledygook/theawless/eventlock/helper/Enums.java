@@ -11,4 +11,10 @@ public class Enums {
         Begin,
         End,
     }
+
+    public enum ItemTag {
+        Title,
+        Time,
+        Image,
+    }
 }

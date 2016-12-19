@@ -1,4 +1,4 @@
-package com.gobbledygook.theawless.eventlock.events;
+package com.gobbledygook.theawless.eventlock.gismo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,27 +6,27 @@ import android.view.View;
 
 import com.gobbledygook.theawless.eventlock.helper.Constants;
 
+import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
+
 class EventViewBuildDirector {
     private final Context gismoContext;
     private final SharedPreferences preferences;
+
+    private int eventViewWidth;
 
     EventViewBuildDirector(Context gismoContext, SharedPreferences preferences) {
         this.gismoContext = gismoContext;
         this.preferences = preferences;
     }
 
-    private static int dpToPixel(Context context, String dp) {
-        return (int) (Integer.parseInt(dp) * context.getResources().getDisplayMetrics().density);
+    EventViewBuildDirector setEventViewWidth(int eventViewWidth) {
+        this.eventViewWidth = eventViewWidth;
+        return this;
     }
 
     View getEventView() {
         EventViewBuilder builder = new EventViewBuilder(gismoContext);
-        builder.setUpFullContainerRelativeLayout(
-                dpToPixel(gismoContext, preferences.getString(Constants.padding_left_key, Constants.padding_left_default)),
-                dpToPixel(gismoContext, preferences.getString(Constants.padding_above_key, Constants.padding_above_default)),
-                dpToPixel(gismoContext, preferences.getString(Constants.padding_right_key, Constants.padding_right_default)),
-                dpToPixel(gismoContext, preferences.getString(Constants.padding_below_key, Constants.padding_below_default))
-        );
+        builder.setUpFullContainerRelativeLayout(eventViewWidth);
         builder.setUpTextContainerRelativeLayout(preferences.getString(Constants.text_position_key, Constants.text_position_default));
         builder.setUpTitleTextView(
                 dpToPixel(gismoContext, preferences.getString(Constants.title_padding_left_key, Constants.title_padding_left_default)),
@@ -58,12 +58,6 @@ class EventViewBuildDirector {
             );
         }
         return builder.fullContainerRelativeLayout;
-    }
-
-    enum ItemTag {
-        Title,
-        Time,
-        Image,
     }
 }
 

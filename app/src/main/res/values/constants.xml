@@ -5,10 +5,8 @@
 
     <string name="selected_calendars_key">selected_calendars</string>
     <string name="days_till_key">days_till</string>
-    <string name="free_text_key">free_text</string>
 
     <string name="text_position_key">text_position</string>
-
     <string name="time_alignment_key">time_alignment</string>
     <string name="time_font_size_key">time_font_size</string>
     <string name="time_padding_above_key">time_padding_above</string>
@@ -24,12 +22,16 @@
     <string name="title_padding_left_key">title_padding_left</string>
     <string name="title_padding_right_key">title_padding_right</string>
 
+    <string name="show_free_text_key">show_free_text</string>
+    <string name="free_text_key">free_text</string>
+
     <string name="number_of_events_key">number_of_events</string>
-    <string name="padding_between_events_key">padding_between_events</string>
-    <string name="padding_above_key">padding_above</string>
-    <string name="padding_below_key">padding_below</string>
-    <string name="padding_left_key">padding_left</string>
-    <string name="padding_right_key">padding_right</string>
+    <string name="gismo_scroll_direction_key">gismo_scroll</string>
+    <string name="gismo_layout_direction_key">gismo_layout</string>
+    <string name="gismo_padding_above_key">gismo_padding_above</string>
+    <string name="gismo_padding_below_key">gismo_padding_below</string>
+    <string name="gismo_padding_left_key">gismo_padding_left</string>
+    <string name="gismo_padding_right_key">gismo_padding_right</string>
 
     <string name="color_position_key">color_position</string>
     <string name="show_color_key">show_color</string>
@@ -52,7 +54,6 @@
         <item>1</item>
     </string-array>
     <string name="days_till_default">3</string>
-    <string name="free_text_default">No more events</string>
 
     <string name="text_position_default">left</string>
 
@@ -71,12 +72,15 @@
     <string name="title_padding_left_default">0</string>
     <string name="title_padding_right_default">0</string>
 
-    <string name="number_of_events_default">1</string>
-    <string name="padding_between_events_default">2</string>
-    <string name="padding_above_default">6</string>
-    <string name="padding_below_default">0</string>
-    <string name="padding_left_default">24</string>
-    <string name="padding_right_default">24</string>
+    <string name="free_text_default">No more events</string>
+    <string name="show_free_text_default">true</string>
+    <string name="number_of_events_default">2</string>
+    <string name="gismo_scroll_direction_default">horizontal</string>
+    <string name="gismo_layout_direction_default">horizontal</string>
+    <string name="gismo_padding_above_default">6</string>
+    <string name="gismo_padding_below_default">0</string>
+    <string name="gismo_padding_left_default">24</string>
+    <string name="gismo_padding_right_default">24</string>
 
     <string name="color_position_default">left</string>
     <string name="show_color_default">true</string>
@@ -92,40 +96,4 @@
     <string name="current_title_bold_default">true</string>
     <string name="current_time_bold_default">false</string>
     <string name="current_color_outline_default">true</string>
-
-    <!-- circle
-    Gismo
-     6,0,24,24
-     bold T,F,T
-    Time & Title
-     left position
-     16-14 size
-     l,l alignment
-     0,0,0,0
-     0,0,0,0
-    Color
-     true
-     right
-     stick false
-     16,16
-     0,0,0,0
-    -->
-    <!-- rectangle
-    Gismo
-     6,0,24,24
-     bold T,F,T
-    Time & Title
-     left position
-     16-14 size
-     l,l alignment
-     0,0,0,0
-     0,0,0,0
-    Color
-     true
-     left
-     stick true
-     35
-     3
-     0,0,0,8
-    -->
 </resources>

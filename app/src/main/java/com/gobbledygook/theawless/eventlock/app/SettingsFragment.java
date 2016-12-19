@@ -30,12 +30,12 @@ import java.util.Set;
 public class SettingsFragment extends PreferenceFragment {
     private static final int CALENDAR_READ_REQUEST_CODE = 0;
     private static final int nonEmptyPreferences[] = new int[]{
-            R.string.padding_above_key, R.string.padding_below_key, R.string.padding_left_key, R.string.padding_right_key,
+            R.string.gismo_padding_above_key, R.string.gismo_padding_below_key, R.string.gismo_padding_left_key, R.string.gismo_padding_right_key,
             R.string.title_padding_above_key, R.string.title_padding_below_key, R.string.title_padding_left_key, R.string.title_padding_right_key,
             R.string.time_padding_above_key, R.string.time_padding_below_key, R.string.time_padding_left_key, R.string.time_padding_right_key,
             R.string.color_padding_above_key, R.string.color_padding_below_key, R.string.color_padding_left_key, R.string.color_padding_right_key,
             R.string.color_height_key, R.string.color_width_key, R.string.days_till_key,
-            //R.string.number_of_events_key,
+            R.string.number_of_events_key,
     };
     //reasons to fucking hate java
     //no initialisers for map or even arraylist wtf bro

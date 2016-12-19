@@ -16,7 +16,7 @@ import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.gobbledygook.theawless.eventlock.R;
-import com.gobbledygook.theawless.eventlock.events.EventsGismo;
+import com.gobbledygook.theawless.eventlock.gismo.EventsGismo;
 import com.gobbledygook.theawless.eventlock.helper.Constants;
 import com.gobbledygook.theawless.eventlock.helper.XposedUtils;
 import com.gobbledygook.theawless.eventlock.receivers.UpdateReceiver;
@@ -87,9 +87,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void handlePreview(MenuItem item) {
         if (eventGismo == null) {
-            eventGismo = new EventsGismo(PreferenceManager.getDefaultSharedPreferences(this));
-            ((GridLayout) findViewById(R.id.events_placeholder)).addView(eventGismo.getRecyclerView(this));
-            startService(new Intent(this, CalendarLoaderService.class));
+            GridLayout gridLayout = (GridLayout) findViewById(R.id.events_placeholder);
+            eventGismo = new EventsGismo(gridLayout, PreferenceManager.getDefaultSharedPreferences(this));
+            eventGismo.addRecyclerView();
+            handleRefresh();
         }
         if (!previewOn) {
             findViewById(R.id.events_placeholder).setVisibility(View.VISIBLE);
