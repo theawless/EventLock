@@ -2,20 +2,13 @@ package com.gobbledygook.theawless.eventlock.app;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
@@ -24,8 +17,6 @@ import com.gobbledygook.theawless.eventlock.helper.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
 public class SettingsFragment extends PreferenceFragment {
     private static final int CALENDAR_READ_REQUEST_CODE = 0;
@@ -49,9 +40,14 @@ public class SettingsFragment extends PreferenceFragment {
             R.string.version_count_100,
     };
     private int versionClickCount = 0;
-    //stored in weakhash map; hence must store them to prevent garbage collection
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-    private ArrayList<Preference.OnPreferenceChangeListener> preferenceListeners = new ArrayList<>();
+    //stored in weakhash map; hence must store it to prevent garbage collection
+    private Preference.OnPreferenceChangeListener preferenceListener = new Preference.OnPreferenceChangeListener() {
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            return !newValue.toString().trim().isEmpty();
+        }
+    };
+    private PresetHandler presetHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +55,7 @@ public class SettingsFragment extends PreferenceFragment {
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
         addPreferencesFromResource(R.xml.preferences);
         setUpPreferenceCleaners();
+        presetHandler = new PresetHandler(getActivity());
     }
 
     @Override
@@ -83,17 +80,14 @@ public class SettingsFragment extends PreferenceFragment {
         }
     }
 
+    private void createCalendarList() {
+        ((CalendarPreference) findPreference(Constants.selected_calendars_key)).getCalendarIds();
+    }
+
     private void setUpPreferenceCleaners() {
         for (int keyId : nonEmptyPreferences) {
             Preference preference = getPreferenceManager().findPreference(getString(keyId));
-            Preference.OnPreferenceChangeListener listener = new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    return !newValue.toString().trim().isEmpty();
-                }
-            };
-            preference.setOnPreferenceChangeListener(listener);
-            preferenceListeners.add(listener);
+            preference.setOnPreferenceChangeListener(preferenceListener);
         }
     }
 
@@ -116,67 +110,64 @@ public class SettingsFragment extends PreferenceFragment {
                         .show();
                 return true;
             }
-            case R.string.preset1_title: {
-                resetPreferences();
-                getPreferenceManager().getSharedPreferences().edit()
-                        .putString(Constants.color_position_key, "right")
-                        .putString(Constants.color_type_key, "oval")
-                        .putString(Constants.color_padding_right_key, "0")
-                        .putBoolean(Constants.color_stick_key, false)
-                        .putString(Constants.color_height_key, "16")
-                        .putString(Constants.color_width_key, "16")
-                        .commit();
+            case R.string.multiple_preset1_title: {
+                presetHandler.resetPreferences();
+                presetHandler.lineLeft();
                 return true;
             }
-            case R.string.preset2_title: {
-                resetPreferences();
+            case R.string.multiple_preset2_title: {
+                presetHandler.resetPreferences();
+                presetHandler.circleBelow();
+                presetHandler.centerText();
+                presetHandler.setOrientations("horizontal", "horizontal");
                 return true;
             }
-            case R.string.preset3_title: {
-                resetPreferences();
-                getPreferenceManager().getSharedPreferences().edit()
-                        .putBoolean(Constants.show_color_key, false)
-                        .commit();
+            case R.string.multiple_preset3_title: {
+                presetHandler.resetPreferences();
+                presetHandler.lineLeft();
+                presetHandler.setOrientations("horizontal", "horizontal");
+                return true;
+            }
+            case R.string.multiple_preset4_title: {
+                presetHandler.resetPreferences();
+                presetHandler.circleRight();
+                return true;
+            }
+            case R.string.multiple_preset5_title: {
+                presetHandler.resetPreferences();
+                presetHandler.lineAbove();
+                presetHandler.setOrientations("horizontal", "horizontal");
+                return true;
+            }
+            case R.string.multiple_preset6_title: {
+                presetHandler.resetPreferences();
+                presetHandler.eclipseAbove();
+                presetHandler.centerText();
+                return true;
+            }
+            case R.string.single_preset1_title: {
+                presetHandler.resetPreferences();
+                presetHandler.circleRight();
+                presetHandler.setOrientations("horizontal", "horizontal");
+                presetHandler.setMultipleEvents(1);
+                return true;
+            }
+            case R.string.single_preset2_title: {
+                presetHandler.resetPreferences();
+                presetHandler.setOrientations("horizontal", "horizontal");
+                presetHandler.setMultipleEvents(1);
+                return true;
+            }
+            case R.string.single_preset3_title: {
+                presetHandler.resetPreferences();
+                presetHandler.noColor();
+                presetHandler.setOrientations("horizontal", "horizontal");
+                presetHandler.setMultipleEvents(1);
                 return true;
             }
             default: {
                 return super.onPreferenceTreeClick(preferenceScreen, preference);
             }
-        }
-    }
-
-    private void resetPreferences() {
-        SharedPreferences preferences = getPreferenceManager().getSharedPreferences();
-        Set<String> savedSelectedCalendarCalendars = preferences.getStringSet(Constants.selected_calendars_key, Constants.selected_calendars_default);
-        String savedDaysTill = preferences.getString(Constants.days_till_key, Constants.days_till_default);
-        String saveFreeText = preferences.getString(Constants.free_text_key, Constants.free_text_default);
-        preferences.edit().clear().commit();
-        PreferenceManager.setDefaultValues(getActivity(), R.xml.preferences, true);
-        preferences.edit()
-                .putStringSet(Constants.selected_calendars_key, savedSelectedCalendarCalendars)
-                .putString(Constants.days_till_key, savedDaysTill)
-                .putString(Constants.free_text_key, saveFreeText)
-                .commit();
-        Toast.makeText(getActivity(), R.string.preset_set, Toast.LENGTH_SHORT).show();
-    }
-
-    @SuppressWarnings("MissingPermission")
-    public void createCalendarList() {
-        ContentResolver resolver = getActivity().getContentResolver();
-        Uri calendarUri = CalendarContract.Calendars.CONTENT_URI;
-        String[] projection = new String[]{CalendarContract.Calendars._ID, CalendarContract.Calendars.CALENDAR_DISPLAY_NAME};
-        Cursor cursor = resolver.query(calendarUri, projection, null, null, null);
-        List<String> calendarNames = new ArrayList<>();
-        List<String> calendarIds = new ArrayList<>();
-        while (cursor != null && cursor.moveToNext()) {
-            calendarNames.add(cursor.getString(1));
-            calendarIds.add(Integer.valueOf(cursor.getInt(0)).toString());
-        }
-        if (cursor != null) {
-            cursor.close();
-            MultiSelectListPreference selectedCalendarPref = (MultiSelectListPreference) findPreference(Constants.selected_calendars_key);
-            selectedCalendarPref.setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
-            selectedCalendarPref.setEntryValues(calendarIds.toArray(new CharSequence[calendarNames.size()]));
         }
     }
 }
