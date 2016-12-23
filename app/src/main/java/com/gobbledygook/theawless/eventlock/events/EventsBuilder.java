@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 class EventsBuilder {
     private final Context context;
-    ArrayList<String>[] events = (ArrayList<String>[]) new ArrayList[3];
-    ArrayList<Long>[] times = (ArrayList<Long>[]) new ArrayList[2];
+    ArrayList<String>[] events = (ArrayList<String>[]) new ArrayList[Enums.EventInfo.values().length];
+    ArrayList<Long>[] times = (ArrayList<Long>[]) new ArrayList[Enums.TimesInfo.values().length];
     private Cursor cursor;
 
     EventsBuilder(Context context) {
