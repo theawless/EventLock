@@ -16,18 +16,21 @@ import com.gobbledygook.theawless.eventlock.helper.Enums;
 
 import java.util.ArrayList;
 
+
 class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     private final SharedPreferences preferences;
-    private final int eventViewWidth;
-
     ArrayList<String>[] events;
     int currentEventIndex;
     boolean currentHighlight[];
+    private int[][] innerDimensions = new int[][]{};
 
-    EventsAdapter(SharedPreferences preferences, int eventViewWidth) {
+    EventsAdapter(SharedPreferences preferences) {
         this.preferences = preferences;
-        this.eventViewWidth = eventViewWidth;
+    }
+
+    void setupInnerDimensions(int[][] innerDimensions) {
+        this.innerDimensions = innerDimensions;
     }
 
     boolean inRange() {
@@ -36,11 +39,7 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     @Override
     public EventsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new EventsAdapter.ViewHolder(
-                new EventViewBuildDirector(parent.getContext(), preferences)
-                        .setEventViewWidth(eventViewWidth)
-                        .getEventView()
-        );
+        return new EventsAdapter.ViewHolder(new EventViewBuildDirector(parent.getContext(), preferences).setBuilder(new EventViewBuilder(parent.getContext())).setInnerDimensions(innerDimensions).getEventView());
     }
 
     @Override
@@ -59,6 +58,7 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
         }
         holder.getTitleTextView().setText(events[Enums.EventInfo.Title.ordinal()].get(position));
         holder.getTimeTextView().setText(events[Enums.EventInfo.Time.ordinal()].get(position));
+        holder.getTitleTextView().setSelected(true);
     }
 
     @Override

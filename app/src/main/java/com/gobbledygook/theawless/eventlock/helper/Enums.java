@@ -17,4 +17,10 @@ public class Enums {
         Time,
         Image,
     }
+
+    public enum Dimensions {
+        ColorImageView,
+        EventView,
+        RecyclerView,
+    }
 }

@@ -21,50 +21,61 @@ public class EventsGismo {
 
     private RecyclerView recyclerView = null;
     private EventsAdapter eventsAdapter = null;
-    private boolean ready = false;
-    private DivisionLinearSnapHelper snapHelper = new DivisionLinearSnapHelper();
+    private DivisionLinearSnapHelper snapHelper;
+    private LayoutManagerHandler layoutManagerHandler;
 
     public EventsGismo(GridLayout gridLayout, SharedPreferences preferences) {
         this.preferences = preferences;
         this.gridLayout = gridLayout;
-    }
-
-    public boolean isReady() {
-        return ready;
+        recyclerView = new RecyclerView(gridLayout.getContext());
+        snapHelper = new DivisionLinearSnapHelper();
+        layoutManagerHandler = new LayoutManagerHandler(gridLayout, preferences);
+        eventsAdapter = new EventsAdapter(preferences);
+        eventsAdapter.setupInnerDimensions(layoutManagerHandler.getInnerDimensions());
     }
 
     public void addRecyclerView() {
+        gridLayout.addView(recyclerView);
+        setupRecyclerView();
+        recyclerView.setAdapter(eventsAdapter);
+        snapHelper.attachToRecyclerView(recyclerView);
+        preventParentTouchTheft(recyclerView);
+    }
+
+    private void setupRecyclerView() {
+        updateCache();
         Context gismoContext = gridLayout.getContext();
-        recyclerView = new RecyclerView(gismoContext);
-        recyclerView.setLayoutParams(new GridLayout.LayoutParams());
-        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setPadding(
                 dpToPixel(gismoContext, preferences.getString(Constants.gismo_padding_left_key, Constants.gismo_padding_left_default)),
                 dpToPixel(gismoContext, preferences.getString(Constants.gismo_padding_above_key, Constants.gismo_padding_above_default)),
                 dpToPixel(gismoContext, preferences.getString(Constants.gismo_padding_right_key, Constants.gismo_padding_right_default)),
                 dpToPixel(gismoContext, preferences.getString(Constants.gismo_padding_below_key, Constants.gismo_padding_below_default))
         );
-        setupRecyclerView();
-        gridLayout.addView(recyclerView);
-        snapHelper.attachToRecyclerView(recyclerView);
-        ready = true;
+        layoutManagerHandler.decideLayoutManager();
+        snapHelper.setDivisionFactor(layoutManagerHandler.getDivisionFactor());
+        recyclerView.setLayoutManager(layoutManagerHandler.getGridLayoutManager());
+        layoutManagerHandler.construct(new Runnable() {
+            @Override
+            public void run() {
+                layoutManagerHandler.doAfterPost();
+                doAfterPost();
+            }
+        });
     }
 
-    private void setupRecyclerView() {
-        LayoutManagerBuildDirector layoutManagerBuildDirector = new LayoutManagerBuildDirector(gridLayout, preferences);
-        layoutManagerBuildDirector.construct();
-        recyclerView.setLayoutManager(layoutManagerBuildDirector.getLayoutManager());
-        recyclerView.getLayoutParams().height = layoutManagerBuildDirector.getRecyclerViewHeight();
-        recyclerView.getLayoutParams().width = GridLayout.LayoutParams.MATCH_PARENT;
-        eventsAdapter = new EventsAdapter(preferences, layoutManagerBuildDirector.getEventViewWidth());
-        snapHelper.setDivisionFactor(layoutManagerBuildDirector.getDivisionFactor());
-        updateCurrentHighlightCache();
+    private void doAfterPost() {
+        eventsAdapter.setupInnerDimensions(layoutManagerHandler.getInnerDimensions());
+        int[] recyclerViewDimensions = layoutManagerHandler.getOuterDimensions();
+        recyclerView.getLayoutParams().width = recyclerViewDimensions[0];
+        recyclerView.getLayoutParams().height = recyclerViewDimensions[1];
         recyclerView.setAdapter(eventsAdapter);
-        preventParentTouchTheft(recyclerView);
     }
 
+    //--------------------------------------------------------------------------------------------//
+
+    //when screen gets off
     public void scrollToCurrentEvent() {
-        if (eventsAdapter.inRange()) {
+        if (eventsAdapter.inRange() && recyclerView.getAdapter() != null) {
             recyclerView.scrollToPosition(eventsAdapter.currentEventIndex);
         }
     }
@@ -103,7 +114,7 @@ public class EventsGismo {
     }
 
     //cache these because they will be used in onBind on recycler view
-    private void updateCurrentHighlightCache() {
+    private void updateCache() {
         eventsAdapter.currentHighlight = new boolean[]{
                 preferences.getBoolean(Constants.current_title_bold_key, Boolean.parseBoolean(Constants.current_title_bold_default)),
                 preferences.getBoolean(Constants.current_time_bold_key, Boolean.parseBoolean(Constants.current_time_bold_default)),
