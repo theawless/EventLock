@@ -93,7 +93,7 @@ class EventViewBuilder {
             outlineDrawable.setShape(GradientDrawable.RECTANGLE);
         }
         shapeDrawable.setIntrinsicWidth(isManualDimensions[0] ? manualDimensions[0] : autoDimensions[0]);
-        shapeDrawable.setIntrinsicHeight(isManualDimensions[1] ? manualDimensions[0] : autoDimensions[1]);
+        shapeDrawable.setIntrinsicHeight(isManualDimensions[1] ? manualDimensions[1] : autoDimensions[1]);
         colorImageView.setImageDrawable(new LayerDrawable(new Drawable[]{shapeDrawable, outlineDrawable}));
         colorImageView.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
         colorImageView.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
@@ -237,12 +237,12 @@ class EventViewBuilder {
                     ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
                     break;
                 }
-                if (textPosition.equals("center")) {
-                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.LEFT_OF, textContainerLinearLayout.getId());
-                } else {
+                if (textPosition.equals("left")) {
                     ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                     ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
                     ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.RIGHT_OF, colorImageView.getId());
+                } else {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.LEFT_OF, textContainerLinearLayout.getId());
                 }
                 ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
                 break;
@@ -253,12 +253,12 @@ class EventViewBuilder {
                     ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
                     break;
                 }
-                if (textPosition.equals("center")) {
-                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.RIGHT_OF, textContainerLinearLayout.getId());
-                } else {
+                if (textPosition.equals("right")) {
                     ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                     ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                     ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.LEFT_OF, colorImageView.getId());
+                } else {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.RIGHT_OF, textContainerLinearLayout.getId());
                 }
                 ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
                 break;
