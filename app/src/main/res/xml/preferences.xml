@@ -46,19 +46,19 @@
                     android:summary="@string/free_text_summary"
                     android:title="@string/free_text_title" />
                 <ListPreference
-                    android:defaultValue="@string/gismo_scroll_direction_default"
-                    android:entries="@array/directions_entvals"
-                    android:entryValues="@array/directions_entvals"
-                    android:key="@string/gismo_scroll_direction_key"
-                    android:summary="@string/gismo_scroll_direction_summary"
-                    android:title="@string/gismo_scroll_direction_title" />
-                <ListPreference
                     android:defaultValue="@string/gismo_layout_direction_default"
                     android:entries="@array/directions_entvals"
                     android:entryValues="@array/directions_entvals"
                     android:key="@string/gismo_layout_direction_key"
                     android:summary="@string/gismo_layout_direction_summary"
                     android:title="@string/gismo_layout_direction_title" />
+                <ListPreference
+                    android:defaultValue="@string/gismo_scroll_direction_default"
+                    android:entries="@array/directions_entvals"
+                    android:entryValues="@array/directions_entvals"
+                    android:key="@string/gismo_scroll_direction_key"
+                    android:summary="@string/gismo_scroll_direction_summary"
+                    android:title="@string/gismo_scroll_direction_title" />
                 <EditTextPreference
                     android:defaultValue="@string/number_of_events_default"
                     android:inputType="number"
@@ -137,8 +137,8 @@
                     android:title="@string/title_font_size_title" />
                 <ListPreference
                     android:defaultValue="@string/title_alignment_default"
-                    android:entries="@array/lr_entvals"
-                    android:entryValues="@array/lr_entvals"
+                    android:entries="@array/lrc_entvals"
+                    android:entryValues="@array/lrc_entvals"
                     android:key="@string/title_alignment_key"
                     android:summary="@string/title_alignment_summary"
                     android:title="@string/title_alignment_title" />
@@ -192,8 +192,8 @@
                     android:title="@string/time_format_title" />
                 <ListPreference
                     android:defaultValue="@string/time_alignment_default"
-                    android:entries="@array/lr_entvals"
-                    android:entryValues="@array/lr_entvals"
+                    android:entries="@array/lrc_entvals"
+                    android:entryValues="@array/lrc_entvals"
                     android:key="@string/time_alignment_key"
                     android:summary="@string/time_alignment_summary"
                     android:title="@string/time_alignment_title" />
@@ -241,8 +241,8 @@
                 <ListPreference
                     android:defaultValue="@string/color_position_default"
                     android:dependency="@string/show_color_key"
-                    android:entries="@array/lr_entvals"
-                    android:entryValues="@array/lr_entvals"
+                    android:entries="@array/lrud_entvals"
+                    android:entryValues="@array/lrud_entvals"
                     android:key="@string/color_position_key"
                     android:summary="@string/color_position_summary"
                     android:title="@string/color_position_title" />
@@ -260,9 +260,21 @@
                     android:key="@string/color_type_key"
                     android:summary="@string/color_type_summary"
                     android:title="@string/color_type_title" />
+                <SwitchPreference
+                    android:defaultValue="@string/color_anti_snap_height_default"
+                    android:dependency="@string/show_color_key"
+                    android:key="@string/color_anti_snap_height_key"
+                    android:summary="@string/color_anti_snap_height_summary"
+                    android:title="@string/color_anti_snap_height_title" />
+                <SwitchPreference
+                    android:defaultValue="@string/color_anti_snap_width_default"
+                    android:dependency="@string/show_color_key"
+                    android:key="@string/color_anti_snap_width_key"
+                    android:summary="@string/color_anti_snap_width_summary"
+                    android:title="@string/color_anti_snap_width_title" />
                 <EditTextPreference
                     android:defaultValue="@string/color_height_default"
-                    android:dependency="@string/show_color_key"
+                    android:dependency="@string/color_anti_snap_height_key"
                     android:inputType="number"
                     android:key="@string/color_height_key"
                     android:numeric="integer"
@@ -270,7 +282,7 @@
                     android:title="@string/color_height_title" />
                 <EditTextPreference
                     android:defaultValue="@string/color_width_default"
-                    android:dependency="@string/show_color_key"
+                    android:dependency="@string/color_anti_snap_width_key"
                     android:inputType="number"
                     android:key="@string/color_width_key"
                     android:numeric="integer"

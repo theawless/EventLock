@@ -37,6 +37,8 @@
     <string name="show_color_key">show_color</string>
     <string name="color_stick_key">color_stick</string>
     <string name="color_type_key">color_type</string>
+    <string name="color_anti_snap_height_key">color_snap_height</string>
+    <string name="color_anti_snap_width_key">color_snap_width</string>
     <string name="color_height_key">color_height</string>
     <string name="color_width_key">color_width</string>
     <string name="color_padding_above_key">color_padding_above</string>
@@ -86,6 +88,8 @@
     <string name="show_color_default">true</string>
     <string name="color_stick_default">true</string>
     <string name="color_type_default">rectangle</string>
+    <string name="color_anti_snap_height_default">true</string>
+    <string name="color_anti_snap_width_default">false</string>
     <string name="color_height_default">35</string>
     <string name="color_width_default">3</string>
     <string name="color_padding_above_default">0</string>

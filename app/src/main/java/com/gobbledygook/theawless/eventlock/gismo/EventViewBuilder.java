@@ -9,10 +9,7 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,77 +21,66 @@ class EventViewBuilder {
     private final Context gismoContext;
     RelativeLayout fullContainerRelativeLayout;
     private LinearLayout textContainerLinearLayout;
+    private ImageView colorImageView;
 
     EventViewBuilder(Context gismoContext) {
         this.gismoContext = gismoContext;
     }
 
-    void setUpFullContainerRelativeLayout(int eventViewWidth) {
+    void setupFullContainerRelativeLayout(int[] eventViewDimensions) {
         fullContainerRelativeLayout = new RelativeLayout(gismoContext);
-        fullContainerRelativeLayout.setLayoutParams(new GridLayoutManager.LayoutParams(eventViewWidth, GridLayout.LayoutParams.WRAP_CONTENT));
+        fullContainerRelativeLayout.setLayoutParams(new GridLayoutManager.LayoutParams(eventViewDimensions[0], eventViewDimensions[1]));
     }
 
-    void setUpTextContainerRelativeLayout(String position) {
+    void setupTextContainerLinearLayout() {
         textContainerLinearLayout = new LinearLayout(gismoContext);
         textContainerLinearLayout.setOrientation(LinearLayout.VERTICAL);
         fullContainerRelativeLayout.addView(textContainerLinearLayout);
         textContainerLinearLayout.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
         textContainerLinearLayout.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
-        switch (position) {
-            case "left": {
-                ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                break;
-            }
-            case "center": {
-                ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.CENTER_HORIZONTAL);
-                break;
-            }
-            case "right": {
-                ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                break;
-            }
-        }
     }
 
-    void setUpTitleTextView(int left, int above, int right, int below, int size, String alignment) {
+    void setupTitleTextView(int padding[], int size, String alignment) {
         TextView titleTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(titleTextView);
-        setUpCommonTextView(titleTextView, left, above, right, below, size, alignment);
+        setupCommonTextView(titleTextView, padding, size, alignment);
         titleTextView.setTag(Enums.ItemTag.Title);
     }
 
-    void setUpTimeTextView(int left, int above, int right, int below, int size, String alignment) {
+    void setupTimeTextView(int padding[], int size, String alignment) {
         TextView timeTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(timeTextView);
-        setUpCommonTextView(timeTextView, left, above, right, below, size, alignment);
+        setupCommonTextView(timeTextView, padding, size, alignment);
         timeTextView.setTag(Enums.ItemTag.Time);
     }
 
-    private void setUpCommonTextView(TextView textView, int left, int above, int right, int below, int size, String alignment) {
+    private void setupCommonTextView(TextView textView, int[] padding, int size, String alignment) {
         textView.setMaxLines(1);
         textView.setHorizontallyScrolling(true);
         textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         textView.setMarqueeRepeatLimit(-1);
         textView.setSelected(true);
         textView.setTextSize(size);
-        textView.setPadding(left, above, right, below);
+        textView.setPadding(padding[0], padding[1], padding[2], padding[3]);
         textView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
         textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
         switch (alignment) {
             case "left": {
-                textView.setGravity(Gravity.LEFT);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
                 break;
             }
             case "right": {
-                textView.setGravity(Gravity.RIGHT);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
                 break;
+            }
+            case "center": {
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             }
         }
     }
 
-    void setUpColorImageView(int left, int above, int right, int below, String type, int height, int width, String alignment, boolean stick) {
-        ImageView colorImageView = new ImageView(gismoContext);
+    void setupColorImageView(int[] padding, String type, int[] manualDimensions, boolean[] isManualDimensions, int[] autoDimensions) {
+        colorImageView = new ImageView(gismoContext);
         fullContainerRelativeLayout.addView(colorImageView);
         colorImageView.setTag(Enums.ItemTag.Image);
         GradientDrawable outlineDrawable = new GradientDrawable();
@@ -106,39 +92,193 @@ class EventViewBuilder {
             shapeDrawable.setShape(new RectShape());
             outlineDrawable.setShape(GradientDrawable.RECTANGLE);
         }
-        shapeDrawable.setIntrinsicHeight(height);
-        shapeDrawable.setIntrinsicWidth(width);
+        shapeDrawable.setIntrinsicWidth(isManualDimensions[0] ? manualDimensions[0] : autoDimensions[0]);
+        shapeDrawable.setIntrinsicHeight(isManualDimensions[1] ? manualDimensions[0] : autoDimensions[1]);
         colorImageView.setImageDrawable(new LayerDrawable(new Drawable[]{shapeDrawable, outlineDrawable}));
-        colorImageView.getLayoutParams().height = FrameLayout.LayoutParams.WRAP_CONTENT;
-        colorImageView.getLayoutParams().width = FrameLayout.LayoutParams.WRAP_CONTENT;
-        colorImageView.setPadding(left, above, right, below);
-        ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
-        if (!stick) {
-            switch (alignment) {
-                case "left": {
-                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                    break;
-                }
-                case "right": {
-                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                    break;
-                }
+        colorImageView.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        colorImageView.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        colorImageView.setPadding(padding[0], padding[1], padding[2], padding[3]);
+        colorImageView.setAdjustViewBounds(true);
+    }
+
+    /*
+    -----------------------------------------------------------------------------------------------------------
+    Text Position       Color Position      Stick Color         Status(T for text, C for color, OO for overlap)
+    -----------------------------------------------------------------------------------------------------------
+
+    left                left                true                |             |
+                                                                |CT           |
+                                                                |             |
+
+                                            false               |             |
+                                                                |OO           |
+                                                                |             |
+
+                        right               true                |             |
+                                                                |TC           |
+                                                                |             |
+
+                                            false               |             |
+                                                                |T           C|
+                                                                |             |
+
+                        up                  true                |C            |
+                                                                |T            |
+                                                                |             |
+
+                                            false               |      C      |
+                                                                |T            |
+                                                                |             |
+
+                        down                true                |             |
+                                                                |T            |
+                                                                |C            |
+
+                                            false               |             |
+                                                                |T            |
+                                                                |      C      |
+
+    right               left                true                |             |
+                                                                |           CT|
+                                                                |             |
+
+                                            false               |             |
+                                                                |C           T|
+                                                                |             |
+
+                        right               true                |             |
+                                                                |           TC|
+                                                                |             |
+
+                                            false               |             |
+                                                                |           OO|
+                                                                |             |
+
+                        up                  true                |            C|
+                                                                |            T|
+                                                                |             |
+
+                                            false               |      C      |
+                                                                |            T|
+                                                                |             |
+
+                        down                true                |             |
+                                                                |            T|
+                                                                |            C|
+
+                                            false               |             |
+                                                                |            T|
+                                                                |      C      |
+
+    center              left                true                |             |
+                                                                |     CT      |
+                                                                |             |
+
+                                            false               |             |
+                                                                |C     T      |
+                                                                |             |
+
+                        right               true                |             |
+                                                                |      TC     |
+                                                                |             |
+
+                                            false               |             |
+                                                                |      T     C|
+                                                                |             |
+
+                        up                  true                |      C      |
+                                                                |      T      |
+                                                                |             |
+
+                                            false               |      C      |
+                                                                |      T      |
+                                                                |             |
+
+                        down                true                |             |
+                                                                |      T      |
+                                                                |      C      |
+
+                                            false               |             |
+                                                                |      T      |
+                                                                |      C      |
+
+    -----------------------------------------------------------------------------------------------------------
+     */
+
+
+    // never look at this code. not even god knows what I wrote.
+    void setupPositions(String textPosition, String colorPosition, boolean stickColor) {
+        int textPositionRule;
+        switch (textPosition) {
+            case "left": {
+                textPositionRule = RelativeLayout.ALIGN_PARENT_LEFT;
+                break;
             }
-        } else {
-            ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            colorImageView.setId(View.generateViewId());
-            switch (alignment) {
-                case "left": {
+            case "center": {
+                textPositionRule = RelativeLayout.CENTER_HORIZONTAL;
+                break;
+            }
+            case "right":
+            default: {
+                textPositionRule = RelativeLayout.ALIGN_PARENT_RIGHT;
+            }
+        }
+        ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(textPositionRule);
+        ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
+        if (colorImageView == null) {
+            return;
+        }
+        textContainerLinearLayout.setId(View.generateViewId());
+        colorImageView.setId(View.generateViewId());
+        switch (colorPosition) {
+            case "left": {
+                if (!stickColor) {
                     ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
+                    break;
+                }
+                if (textPosition.equals("center")) {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.LEFT_OF, textContainerLinearLayout.getId());
+                } else {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
                     ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.RIGHT_OF, colorImageView.getId());
-                    break;
                 }
-                case "right": {
+                ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
+                break;
+            }
+            case "right": {
+                if (!stickColor) {
                     ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                    ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.LEFT_OF, colorImageView.getId());
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
                     break;
                 }
+                if (textPosition.equals("center")) {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.RIGHT_OF, textContainerLinearLayout.getId());
+                } else {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.LEFT_OF, colorImageView.getId());
+                }
+                ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.CENTER_VERTICAL);
+                break;
+            }
+            case "up": {
+                if (stickColor) {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(textPositionRule);
+                }
+                ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.BELOW, colorImageView.getId());
+                break;
+            }
+            case "down": {
+                if (stickColor) {
+                    ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(textPositionRule);
+                }
+                ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).removeRule(RelativeLayout.CENTER_VERTICAL);
+                ((RelativeLayout.LayoutParams) textContainerLinearLayout.getLayoutParams()).addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                ((RelativeLayout.LayoutParams) colorImageView.getLayoutParams()).addRule(RelativeLayout.BELOW, textContainerLinearLayout.getId());
+                break;
             }
         }
     }

@@ -137,9 +137,13 @@
     <string name="color_stick_title">Stick to text</string>
     <string name="color_type_summary">Block Type</string>
     <string name="color_type_title">Color block type on the lockscreen</string>
-    <string name="color_height_summary">The height of the color rectangle</string>
+    <string name="color_anti_snap_height_summary">Disable setting color height based on text size</string>
+    <string name="color_anti_snap_height_title">Manual Height</string>
+    <string name="color_anti_snap_width_summary">Disable setting color width based on text size</string>
+    <string name="color_anti_snap_width_title">Manual width</string>
+    <string name="color_height_summary">The height of the color block</string>
     <string name="color_height_title">Height</string>
-    <string name="color_width_summary">The width of the color rectangle</string>
+    <string name="color_width_summary">The width of the color block</string>
     <string name="color_width_title">Width</string>
     <string name="color_padding_above_summary">Color\'s padding from above in the lock screen</string>
     <string name="color_padding_above_title">Above</string>
@@ -163,9 +167,11 @@
         <item>24hr</item>
         <item>12hr</item>
     </string-array>
-    <string-array name="lr_entvals">
+    <string-array name="lrud_entvals">
         <item>left</item>
         <item>right</item>
+        <item>up</item>
+        <item>down</item>
     </string-array>
     <string-array name="lrc_entvals">
         <item>left</item>

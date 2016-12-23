@@ -59,6 +59,8 @@ public class Constants {
     public static final String show_color_key = "show_color";
     public static final String color_stick_key = "color_stick";
     public static final String color_type_key = "color_type";
+    public static final String color_anti_snap_height_key = "color_snap_height";
+    public static final String color_anti_snap_width_key = "color_snap_width";
     public static final String color_height_key = "color_height";
     public static final String color_width_key = "color_width";
     public static final String color_padding_above_key = "color_padding_above";
@@ -107,6 +109,8 @@ public class Constants {
     public static final String show_color_default = "true";
     public static final String color_stick_default = "true";
     public static final String color_type_default = "rectangle";
+    public static final String color_anti_snap_height_default = "true";
+    public static final String color_anti_width_default = "false";
     public static final String color_height_default = "35";
     public static final String color_width_default = "3";
     public static final String color_padding_above_default = "0";
