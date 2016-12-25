@@ -57,14 +57,18 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
-        refreshUI();
-        setUpPreferenceCleaners();
+        addPreferencesFromResource(R.xml.preferences);
         presetMaker = new PresetMaker(getActivity(), this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        setUpPreferenceCleaners();
+        permissionCheck();
+    }
+
+    private void permissionCheck() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getActivity().checkSelfPermission(Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_CALENDAR}, CALENDAR_READ_REQUEST_CODE);
         } else {
@@ -76,6 +80,8 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
     public void refreshUI() {
         setPreferenceScreen(null);
         addPreferencesFromResource(R.xml.preferences);
+        permissionCheck();
+        setUpPreferenceCleaners();
     }
 
     @Override
