@@ -12,14 +12,16 @@ An Xposed module to show your calendar events on the lockscreen.
 * See multiple events by scrolling
 * Lots of customisations
 
-<img src="/images/preset1.jpg" width="256" height="35"/>
-<img src="/images/preset2.jpg" width="256" height="35"/>
-<img src="/images/preset3.jpg" width="256" height="35"/>
+<img src="/images/multiple_preset1.jpg" width="256" height="35"/>
+<img src="/images/multiple_preset2.jpg" width="256" height="35"/>
+<img src="/images/multiple_preset3.jpg" width="256" height="35"/>
+<img src="/images/multiple_preset5.jpg" width="256" height="35"/>
 
 ### Screenshots
 
-<img src="/images/mainscreen_preview.jpg" width="256" height="455"/>
-<img src="/images/lockscreen2.jpg" width="256" height="455"/>
+<img src="/images/mainscreen.jpg" width="256" height="455"/>
+<img src="/images/lockscreen.jpg" width="256" height="455"/>
+<img src="/images/presets.jpg" width="256" height="455"/>
 
 ### Requirements
 
