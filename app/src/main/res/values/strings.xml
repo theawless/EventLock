@@ -64,12 +64,16 @@
 
     <!-- Shown in settings -->
 
-    <string name="preset1_summary">Circular color to the right edge</string>
-    <string name="preset1_title">Preset 1</string>
-    <string name="preset2_summary">Line color to the left edge</string>
-    <string name="preset2_title">Preset 2</string>
-    <string name="preset3_summary">Old eventlock style</string>
-    <string name="preset3_title">Preset 3</string>
+    <string name="multiple_preset1_title">Preset 1</string>
+    <string name="multiple_preset2_title">Preset 2</string>
+    <string name="multiple_preset3_title">Preset 3</string>
+    <string name="multiple_preset4_title">Preset 4</string>
+    <string name="multiple_preset5_title">Preset 5</string>
+    <string name="multiple_preset6_title">Preset 6</string>
+
+    <string name="single_preset1_title">Preset 1</string>
+    <string name="single_preset2_title">Preset 2</string>
+    <string name="single_preset3_title">Preset 3</string>
 
     <string name="selected_calendars_summary">These calendar will be used to show the events</string>
     <string name="selected_calendars_title">Selected calendars</string>

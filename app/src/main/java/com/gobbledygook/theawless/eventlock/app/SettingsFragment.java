@@ -18,7 +18,11 @@ import com.gobbledygook.theawless.eventlock.helper.Constants;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SettingsFragment extends PreferenceFragment {
+interface SettingsRefreshable {
+    void refreshUI();
+}
+
+public class SettingsFragment extends PreferenceFragment implements SettingsRefreshable {
     private static final int CALENDAR_READ_REQUEST_CODE = 0;
     private static final int nonEmptyPreferences[] = new int[]{
             R.string.gismo_padding_above_key, R.string.gismo_padding_below_key, R.string.gismo_padding_left_key, R.string.gismo_padding_right_key,
@@ -47,15 +51,15 @@ public class SettingsFragment extends PreferenceFragment {
             return !newValue.toString().trim().isEmpty();
         }
     };
-    private PresetHandler presetHandler;
+    private PresetMaker presetMaker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
-        addPreferencesFromResource(R.xml.preferences);
+        refreshUI();
         setUpPreferenceCleaners();
-        presetHandler = new PresetHandler(getActivity());
+        presetMaker = new PresetMaker(getActivity(), this);
     }
 
     @Override
@@ -66,6 +70,12 @@ public class SettingsFragment extends PreferenceFragment {
         } else {
             createCalendarList();
         }
+    }
+
+    @Override
+    public void refreshUI() {
+        setPreferenceScreen(null);
+        addPreferencesFromResource(R.xml.preferences);
     }
 
     @Override
@@ -111,58 +121,72 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
             case R.string.multiple_preset1_title: {
-                presetHandler.resetPreferences();
-                presetHandler.lineLeft();
+                presetMaker.begin()
+                        .lineLeft()
+                        .makeTextSpaceVertically()
+                        .setOrientations("vertical", "vertical")
+                        .end();
                 return true;
             }
             case R.string.multiple_preset2_title: {
-                presetHandler.resetPreferences();
-                presetHandler.circleBelow();
-                presetHandler.centerText();
-                presetHandler.setOrientations("horizontal", "horizontal");
+                presetMaker.begin()
+                        .circleBelow()
+                        .makeColorSpaceVertically()
+                        .centerText()
+                        .end();
                 return true;
             }
             case R.string.multiple_preset3_title: {
-                presetHandler.resetPreferences();
-                presetHandler.lineLeft();
-                presetHandler.setOrientations("horizontal", "horizontal");
+                presetMaker.begin()
+                        .lineLeft()
+                        .end();
                 return true;
             }
             case R.string.multiple_preset4_title: {
-                presetHandler.resetPreferences();
-                presetHandler.circleRight();
+                presetMaker.begin()
+                        .circleRight()
+                        .makeTextSpaceVertically()
+                        .makeColorSpaceVertically()
+                        .setOrientations("vertical", "vertical")
+                        .end();
                 return true;
             }
             case R.string.multiple_preset5_title: {
-                presetHandler.resetPreferences();
-                presetHandler.lineAbove();
-                presetHandler.setOrientations("horizontal", "horizontal");
+                presetMaker.begin()
+                        .lineAbove()
+                        .end();
                 return true;
             }
             case R.string.multiple_preset6_title: {
-                presetHandler.resetPreferences();
-                presetHandler.eclipseAbove();
-                presetHandler.centerText();
+                presetMaker.begin()
+                        .eclipseAbove()
+                        .setOrientations("vertical", "vertical")
+                        .centerText()
+                        .makeTextSpaceVertically()
+                        .end();
                 return true;
             }
             case R.string.single_preset1_title: {
-                presetHandler.resetPreferences();
-                presetHandler.circleRight();
-                presetHandler.setOrientations("horizontal", "horizontal");
-                presetHandler.setMultipleEvents(1);
+                presetMaker.begin()
+                        .circleRight()
+                        .setMultipleEvents(1)
+                        .makeTextBig()
+                        .end();
                 return true;
             }
             case R.string.single_preset2_title: {
-                presetHandler.resetPreferences();
-                presetHandler.setOrientations("horizontal", "horizontal");
-                presetHandler.setMultipleEvents(1);
+                presetMaker.begin()
+                        .setMultipleEvents(1)
+                        .makeTextBig()
+                        .end();
                 return true;
             }
             case R.string.single_preset3_title: {
-                presetHandler.resetPreferences();
-                presetHandler.noColor();
-                presetHandler.setOrientations("horizontal", "horizontal");
-                presetHandler.setMultipleEvents(1);
+                presetMaker.begin()
+                        .noColor()
+                        .setMultipleEvents(1)
+                        .makeTextBig()
+                        .end();
                 return true;
             }
             default: {

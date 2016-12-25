@@ -59,15 +59,15 @@
 
     <string name="text_position_default">left</string>
 
-    <string name="time_font_size_default">14</string>
+    <string name="time_font_size_default">12</string>
     <string name="time_alignment_default">left</string>
     <string name="time_padding_above_default">0</string>
-    <string name="time_padding_below_default">0</string>
+    <string name="time_padding_below_default">3</string>
     <string name="time_padding_left_default">0</string>
     <string name="time_padding_right_default">0</string>
     <string name="time_format_default">auto</string>
 
-    <string name="title_font_size_default">16</string>
+    <string name="title_font_size_default">14</string>
     <string name="title_alignment_default">left</string>
     <string name="title_padding_above_default">0</string>
     <string name="title_padding_below_default">0</string>
@@ -75,10 +75,10 @@
     <string name="title_padding_right_default">0</string>
 
     <string name="free_text_default">No more events</string>
-    <string name="show_free_text_default">true</string>
+    <string name="show_free_text_default">false</string>
     <string name="number_of_events_default">2</string>
-    <string name="gismo_scroll_direction_default">horizontal</string>
-    <string name="gismo_layout_direction_default">horizontal</string>
+    <string name="gismo_scroll_direction_default">vertical</string>
+    <string name="gismo_layout_direction_default">vertical</string>
     <string name="gismo_padding_above_default">6</string>
     <string name="gismo_padding_below_default">0</string>
     <string name="gismo_padding_left_default">24</string>
@@ -88,9 +88,9 @@
     <string name="show_color_default">true</string>
     <string name="color_stick_default">true</string>
     <string name="color_type_default">rectangle</string>
-    <string name="color_anti_snap_height_default">true</string>
-    <string name="color_anti_snap_width_default">false</string>
-    <string name="color_height_default">35</string>
+    <string name="color_anti_snap_height_default">false</string>
+    <string name="color_anti_snap_width_default">true</string>
+    <string name="color_height_default">3</string>
     <string name="color_width_default">3</string>
     <string name="color_padding_above_default">0</string>
     <string name="color_padding_below_default">0</string>

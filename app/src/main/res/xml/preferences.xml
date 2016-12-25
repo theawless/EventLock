@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Settings">
-        <MultiSelectListPreference
+        <com.gobbledygook.theawless.eventlock.app.CalendarPreference
             android:defaultValue="@array/selected_calendars_default"
             android:key="@string/selected_calendars_key"
             android:summary="@string/selected_calendars_summary"
@@ -15,21 +15,38 @@
             android:title="@string/days_till_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Customisation">
-        <PreferenceScreen android:title="Presets">
-            <PreferenceCategory xmlns:customNS="http://schemas.android.com/apk/res/com.gobbledygook.theawless.eventlock"
-                android:title="Presets">
+        <PreferenceScreen xmlns:customNS="http://schemas.android.com/apk/res/com.gobbledygook.theawless.eventlock"
+            android:title="Presets">
+            <PreferenceCategory android:title="Multiple">
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
-                    android:summary="@string/preset1_summary"
-                    android:title="@string/preset1_title"
-                    customNS:preset_image="@drawable/preset1" />
+                    android:title="@string/multiple_preset1_title"
+                    customNS:preset_image="@drawable/multiple_preset1" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
-                    android:summary="@string/preset2_summary"
-                    android:title="@string/preset2_title"
-                    customNS:preset_image="@drawable/preset2" />
+                    android:title="@string/multiple_preset2_title"
+                    customNS:preset_image="@drawable/multiple_preset2" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
-                    android:summary="@string/preset3_summary"
-                    android:title="@string/preset3_title"
-                    customNS:preset_image="@drawable/preset3" />
+                    android:title="@string/multiple_preset3_title"
+                    customNS:preset_image="@drawable/multiple_preset3" />
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
+                    android:title="@string/multiple_preset4_title"
+                    customNS:preset_image="@drawable/multiple_preset4" />
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
+                    android:title="@string/multiple_preset5_title"
+                    customNS:preset_image="@drawable/multiple_preset5" />
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
+                    android:title="@string/multiple_preset6_title"
+                    customNS:preset_image="@drawable/multiple_preset6" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="Single">
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
+                    android:title="@string/single_preset1_title"
+                    customNS:preset_image="@drawable/single_preset1" />
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
+                    android:title="@string/single_preset2_title"
+                    customNS:preset_image="@drawable/single_preset2" />
+                <com.gobbledygook.theawless.eventlock.app.PresetPreference
+                    android:title="@string/single_preset3_title"
+                    customNS:preset_image="@drawable/single_preset3" />
             </PreferenceCategory>
         </PreferenceScreen>
         <PreferenceScreen android:title="Gismo">

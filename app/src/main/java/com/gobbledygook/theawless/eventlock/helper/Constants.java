@@ -79,15 +79,15 @@ public class Constants {
 
     public static final String text_position_default = "left";
 
-    public static final String time_font_size_default = "14";
+    public static final String time_font_size_default = "12";
     public static final String time_alignment_default = "left";
     public static final String time_padding_above_default = "0";
-    public static final String time_padding_below_default = "0";
+    public static final String time_padding_below_default = "3";
     public static final String time_padding_left_default = "0";
     public static final String time_padding_right_default = "0";
     public static final String time_format_default = "auto";
 
-    public static final String title_font_size_default = "16";
+    public static final String title_font_size_default = "14";
     public static final String title_alignment_default = "left";
     public static final String title_padding_above_default = "0";
     public static final String title_padding_below_default = "0";
@@ -95,11 +95,11 @@ public class Constants {
     public static final String title_padding_right_default = "0";
 
     public static final String free_text_default = "No more events";
-    public static final String show_free_text_default = "true";
+    public static final String show_free_text_default = "false";
 
     public static final String number_of_events_default = "2";
-    public static final String gismo_scroll_direction_default = "horizontal";
-    public static final String gismo_layout_direction_default = "horizontal";
+    public static final String gismo_scroll_direction_default = "vertical";
+    public static final String gismo_layout_direction_default = "vertical";
     public static final String gismo_padding_above_default = "6";
     public static final String gismo_padding_below_default = "0";
     public static final String gismo_padding_left_default = "24";
@@ -109,9 +109,9 @@ public class Constants {
     public static final String show_color_default = "true";
     public static final String color_stick_default = "true";
     public static final String color_type_default = "rectangle";
-    public static final String color_anti_snap_height_default = "true";
-    public static final String color_anti_width_default = "false";
-    public static final String color_height_default = "35";
+    public static final String color_anti_snap_height_default = "false";
+    public static final String color_anti_width_default = "true";
+    public static final String color_height_default = "3";
     public static final String color_width_default = "3";
     public static final String color_padding_above_default = "0";
     public static final String color_padding_below_default = "0";

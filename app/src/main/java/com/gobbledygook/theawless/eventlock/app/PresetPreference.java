@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.gobbledygook.theawless.eventlock.R;
 
-public class PresetPreference extends Preference {
+class PresetPreference extends Preference {
     private int image_res;
 
     public PresetPreference(Context context, AttributeSet attrs) {
