@@ -58,7 +58,6 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
         }
         holder.getTitleTextView().setText(events[Enums.EventInfo.Title.ordinal()].get(position));
         holder.getTimeTextView().setText(events[Enums.EventInfo.Time.ordinal()].get(position));
-        holder.getTitleTextView().setSelected(true);
     }
 
     @Override
