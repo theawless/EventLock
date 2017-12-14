@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mostly for internal use, shown in app data -->
+    <string name="application_name">EventLock</string>
+    <string name="calendar_loader_service_name">EventLockCalendarLoaderService</string>
+    <string name="current_event_updater_service_name">EventLockCurrentEventUpdaterService</string>
+    <string name="calendar_loader_alarm_name">EventLockCalendarLoaderAlarm</string>
+    <string name="current_event_updater_alarm_name">EventLockCurrentEventUpdaterAlarm</string>
+    <string name="common_receiver_alarm_name">EventLockCommonReceiverAlarm</string>
+
+    <!-- Shown in version toasts -->
+    <string name="version_title">Version</string>
+    <string name="version_count_1">What? I thought no one clicked this</string>
+    <string name="version_count_6">Nothing interesting ahead…</string>
+    <string name="version_count_12">Still???</string>
+    <string name="version_count_18">The answer is 42.</string>
+    <string name="version_count_25">I already told you answer!</string>
+    <string name="version_count_30">You are one stubborn fellow</string>
+    <string name="version_count_40">If you do this a few more times, your phone will blast :-)</string>
+    <string name="version_count_50">Just kidding, but I\'ve got your credit card details now.</string>
+    <string name="version_count_60">Support the developer, please he is poor af.</string>
+    <string name="version_count_70">Poor, not with money but with likes on his github :\'(</string>
+    <string name="version_count_80">Help him get more likes, he\'s an attention seeker!</string>
+    <string name="version_count_90">Don\'t you have any work to do?</string>
+    <string name="version_count_100">WOW! You\'ve just wasted 100 clicks of your life!</string>
+</resources>
+

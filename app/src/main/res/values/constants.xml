@@ -49,6 +49,14 @@
     <string name="current_time_bold_key">current_time_bold</string>
     <string name="current_color_outline_key">current_color_outline</string>
 
+    <string name="tomorrow_key">tomorrow</string>
+    <string name="day_after_tomorrow_key">day_after_tomorrow</string>
+    <string name="days_key">days</string>
+    <string name="after_key">after</string>
+    <string name="all_day_key">all_day</string>
+    <string name="at_key">at</string>
+    <string name="separator_key">separator</string>
+
     <!-- preference defaults -->
 
     <string-array name="selected_calendars_default">
@@ -99,4 +107,7 @@
     <string name="current_title_bold_default">true</string>
     <string name="current_time_bold_default">false</string>
     <string name="current_color_outline_default">true</string>
+
+    <!-- the time string are present in strings.xml because their defaults can be translated -->
+
 </resources>

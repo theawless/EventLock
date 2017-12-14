@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
-import com.gobbledygook.theawless.eventlock.R;
 import com.gobbledygook.theawless.eventlock.helper.Enums;
 
 import org.joda.time.DateTime;
@@ -22,7 +21,7 @@ class EventsBuilder {
     final ArrayList<Long>[] times = (ArrayList<Long>[]) new ArrayList[Enums.TimesInfo.values().length];
     private final Context context;
     private Cursor cursor;
-
+    private EventFormatter eventFormatter;
     EventsBuilder(Context context) {
         this.context = context;
         events[Enums.EventInfo.Title.ordinal()] = new ArrayList<>();
@@ -30,6 +29,10 @@ class EventsBuilder {
         events[Enums.EventInfo.Color.ordinal()] = new ArrayList<>();
         times[Enums.TimesInfo.Begin.ordinal()] = new ArrayList<>();
         times[Enums.TimesInfo.End.ordinal()] = new ArrayList<>();
+    }
+
+    void setEventFormatter(EventFormatter eventFormatter) {
+        this.eventFormatter = eventFormatter;
     }
 
     void setUpCursor(int daysTill, String[] eventProjection, String selection, String[] selectionArgs) {
@@ -41,7 +44,7 @@ class EventsBuilder {
         cursor = context.getContentResolver().query(eventsUriBuilder.build(), eventProjection, selection, selectionArgs, CalendarContract.Instances.BEGIN + " ASC");
     }
 
-    void build(String timeFormat) {
+    void build() {
         while (cursor != null && cursor.moveToNext()) {
             int allDay = cursor.getInt(4);
             long beginTime, endTime;
@@ -56,7 +59,7 @@ class EventsBuilder {
             int dayDiff = Days.daysBetween(new DateTime().withTimeAtStartOfDay().toLocalDate(), new DateTime(beginTime).toLocalDate()).getDays();
             if (dayDiff >= 0) {
                 events[Enums.EventInfo.Title.ordinal()].add(getFormattedTitle(cursor.getString(0), cursor.getString(1)));
-                events[Enums.EventInfo.Time.ordinal()].add(getFormattedTime(beginTime, endTime, allDay, dayDiff, timeFormat));
+                events[Enums.EventInfo.Time.ordinal()].add(getFormattedTime(beginTime, endTime, allDay, dayDiff));
                 events[Enums.EventInfo.Color.ordinal()].add(cursor.getString(5));
                 times[Enums.TimesInfo.Begin.ordinal()].add(beginTime);
                 times[Enums.TimesInfo.End.ordinal()].add(endTime);
@@ -68,15 +71,15 @@ class EventsBuilder {
     }
 
     private String getFormattedTitle(String title, String location) {
-        if (location != null && !location.isEmpty()) {
-            return title + " " + context.getString(R.string.at) + " " + location;
+        if (location != null && !location.isEmpty() && eventFormatter.location) {
+            return title + " " + eventFormatter.at + " " + location;
         }
         return title;
     }
 
-    private String getFormattedTime(long beginTime, long endTime, int allDay, int dayDiff, String timeFormat) {
+    private String getFormattedTime(long beginTime, long endTime, int allDay, int dayDiff) {
         DateFormat formatter;
-        switch (timeFormat) {
+        switch (eventFormatter.timeFormat) {
             case "12hr": {
                 formatter = new SimpleDateFormat("hh:mm a");
                 break;
@@ -91,24 +94,36 @@ class EventsBuilder {
         }
         String time = formatter.format(beginTime) + " - " + formatter.format(endTime);
         if (allDay == 1) {
-            time = context.getString(R.string.all_day);
+            time = eventFormatter.all_day;
         }
         switch (dayDiff) {
             case 0: {
                 break;
             }
             case 1: {
-                time += context.getString(R.string.comma) + " " + context.getString(R.string.tomorrow);
+                time += eventFormatter.separator + " " + eventFormatter.tomorrow;
                 break;
             }
             case 2: {
-                time += context.getString(R.string.comma) + " " + context.getString(R.string.day_after_tomorrow);
+                time += eventFormatter.separator + " " + eventFormatter.day_after_tomorrow;
                 break;
             }
             default: {
-                time += context.getString(R.string.comma) + " " + context.getString(R.string.after) + " " + (dayDiff - 1) + " " + context.getString(R.string.days);
+                time += eventFormatter.separator + " " + eventFormatter.after + " " + (dayDiff - 1) + " " + eventFormatter.days;
             }
         }
         return time;
+    }
+
+    static class EventFormatter {
+        String timeFormat;
+        String tomorrow;
+        String day_after_tomorrow;
+        String days;
+        String after;
+        String all_day;
+        String at;
+        String separator;
+        boolean location;
     }
 }

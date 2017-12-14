@@ -1,13 +1,4 @@
 <resources>
-
-    <!-- Mostly for internal use, shown in app data -->
-    <string name="application_name">EventLock</string>
-    <string name="calendar_loader_service_name">EventLockCalendarLoaderService</string>
-    <string name="current_event_updater_service_name">EventLockCurrentEventUpdaterService</string>
-    <string name="calendar_loader_alarm_name">EventLockCalendarLoaderAlarm</string>
-    <string name="current_event_updater_alarm_name">EventLockCurrentEventUpdaterAlarm</string>
-    <string name="common_receiver_alarm_name">EventLockCommonReceiverAlarm</string>
-
     <!-- Shown in dialogs, warnings -->
     <string name="xposed_not_installed">Xposed framework is not installed</string>
     <string name="enable_xposed_module_title">Enable this module</string>
@@ -25,37 +16,21 @@
 
     <string name="help">Please press the refresh button after making any setting changes.\n\nThe eye button in the title bar can be used to show/hide preview.\n\nKeeping the bottom padding in Gismo high will lead to more space between notifications and events.\n\nTo make the oval color block circular, set height equal to width.\n\nThere are loads of combinations possible! Mess up those settings! :-D</string>
 
-    <!-- Shown in time -->
-    <string name="tomorrow">tomorrow</string>
-    <string name="day_after_tomorrow">day after tomorrow</string>
-    <string name="days">days</string>
-    <string name="after">after</string>
-    <string name="all_day">All day</string>
-    <string name="at">at</string>
-    <string name="comma">,</string>
-
-    <!-- Shown in version toasts -->
-    <string name="version_title">Version</string>
-    <string name="version_count_1">What? I thought no one clicked this</string>
-    <string name="version_count_6">Nothing interesting ahead…</string>
-    <string name="version_count_12">Still???</string>
-    <string name="version_count_18">The answer is 42.</string>
-    <string name="version_count_25">I already told you answer!</string>
-    <string name="version_count_30">You are one stubborn fellow</string>
-    <string name="version_count_40">If you do this a few more times, your phone will blast :-)</string>
-    <string name="version_count_50">Just kidding, but I\'ve got your credit card details now.</string>
-    <string name="version_count_60">Support the developer, please he is poor af.</string>
-    <string name="version_count_70">Poor, not with money but with likes on his github :\'(</string>
-    <string name="version_count_80">Help him get more likes, he\'s an attention seeker!</string>
-    <string name="version_count_90">Don\'t you have any work to do?</string>
-    <string name="version_count_100">WOW! You\'ve just wasted 100 clicks of your life!</string>
+    <!-- Translatable and user changable strings -->
+    <string name="tomorrow_default">tomorrow</string>
+    <string name="day_after_tomorrow_default">day after tomorrow</string>
+    <string name="days_default">days</string>
+    <string name="after_default">after</string>
+    <string name="all_day_default">All day</string>
+    <string name="at_default">at</string>
+    <string name="separator_default">,</string>
 
     <string name="help_title">Help</string>
     <string name="help_summary">Details about various features</string>
 
     <!-- Shown in action bar -->
     <string name="action_preview_title">Preview</string>
-    <string name="action_refresh_title">Refresh Title</string>
+    <string name="action_refresh_title">Refresh</string>
     <string name="projectgithub_title">View project on Github</string>
 
     <!-- Shown in settings -->
@@ -160,6 +135,21 @@
     <string name="current_time_bold_title">Time bold</string>
     <string name="current_color_outline_summary">Outline the color block of the current event</string>
     <string name="current_color_outline_title">Color outline</string>
+
+    <string name="tomorrow_title">Tomorrow</string>
+    <string name="tomorrow_summary">\'tomorrow\' shown in time</string>
+    <string name="day_after_tomorrow_title">Day after tomorrow</string>
+    <string name="day_after_tomorrow_summary">\'day after tomorrow\' shown in time</string>
+    <string name="days_title">Days</string>
+    <string name="days_summary">\'days\' shown in time</string>
+    <string name="after_title">After</string>
+    <string name="after_summary">\'after\' shown in time</string>
+    <string name="all_day_title">All day</string>
+    <string name="all_day_summary">\'all day\' shown in time</string>
+    <string name="at_title">At</string>
+    <string name="at_summary">\'at\' shown in title</string>
+    <string name="separator_title">Separator</string>
+    <string name="separator_summary">\',\' shown in title</string>
 
     <!-- options for various settings -->
     <string-array name="time_format_entvals">

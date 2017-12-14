@@ -72,6 +72,14 @@ public class Constants {
     public static final String current_time_bold_key = "current_time_bold";
     public static final String current_color_outline_key = "current_color_outline";
 
+    public static final String tomorrow_key = "tomorrow";
+    public static final String day_after_tomorrow_key = "day_after_tomorrow";
+    public static final String days_key = "days";
+    public static final String after_key = "after";
+    public static final String all_day_key = "all_day";
+    public static final String at_key = "at";
+    public static final String separator_key = "separator";
+
     //defaults
     public static final Set<String> selected_calendars_default = new HashSet<>(Collections.singletonList("1"));
 
@@ -121,6 +129,8 @@ public class Constants {
     public static final String current_title_bold_default = "true";
     public static final String current_time_bold_default = "false";
     public static final String current_color_outline_default = "true";
+
+    // some defaults are present in strings.xml because their defaults can be translated
 
     private Constants() {
     }
