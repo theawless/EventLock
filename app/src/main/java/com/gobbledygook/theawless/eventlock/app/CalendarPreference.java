@@ -6,6 +6,8 @@ import android.preference.MultiSelectListPreference;
 import android.provider.CalendarContract;
 import android.util.AttributeSet;
 
+import com.gobbledygook.theawless.eventlock.helper.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +16,6 @@ class CalendarPreference extends MultiSelectListPreference {
     public CalendarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
-    //TODO differentiate between various types of calendars
 
     @SuppressWarnings("MissingPermission")
     void getCalendarIds() {
@@ -32,8 +32,20 @@ class CalendarPreference extends MultiSelectListPreference {
         }
         if (cursor != null) {
             cursor.close();
+            updateSameCalenders(calendarNames);
             setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
-            setEntryValues(calendarIds.toArray(new CharSequence[calendarNames.size()]));
+            setEntryValues(calendarIds.toArray(new CharSequence[calendarIds.size()]));
+        }
+    }
+
+    private void updateSameCalenders(List<String> calendarNames) {
+        for (int i = 0; i < calendarNames.size(); ++i) {
+            List<Integer> indices = Utils.indexOfAll(calendarNames.get(i), calendarNames);
+            if (indices.size() > 1) {
+                for (int j = 0; j < indices.size(); ++j) {
+                    calendarNames.set(indices.get(j), calendarNames.get(indices.get(j)) + " - " + j);
+                }
+            }
         }
     }
 }

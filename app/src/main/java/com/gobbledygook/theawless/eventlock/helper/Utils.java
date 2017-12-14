@@ -4,8 +4,21 @@ import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utils {
     private Utils() {
+    }
+
+    public static <T extends Comparable<T>> List<Integer> indexOfAll(T object, List<T> list) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i < list.size(); ++i) {
+            if (object.equals(list.get(i))) {
+                indexes.add(i);
+            }
+        }
+        return indexes;
     }
 
     public static int dpToPixel(Context context, String dp) {
@@ -21,6 +34,7 @@ public class Utils {
                         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
                             case MotionEvent.ACTION_UP:
                                 view.getParent().requestDisallowInterceptTouchEvent(false);
+                                view.performClick();
                                 break;
                         }
                         return false;
