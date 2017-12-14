@@ -1,6 +1,7 @@
 package com.gobbledygook.theawless.eventlock.gismo;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -40,18 +41,20 @@ class EventViewBuilder {
         textContainerLinearLayout.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
     }
 
-    void setupTitleTextView(int padding[], int size, String alignment) {
+    void setupTitleTextView(int[] padding, int size, String alignment, boolean dark_mode) {
         TextView titleTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(titleTextView);
         setupCommonTextView(titleTextView, padding, size, alignment);
         titleTextView.setTag(Enums.ItemTag.Title);
+        titleTextView.setTextColor(dark_mode ? Color.BLACK : Color.WHITE);
     }
 
-    void setupTimeTextView(int padding[], int size, String alignment) {
+    void setupTimeTextView(int[] padding, int size, String alignment, boolean dark_mode) {
         TextView timeTextView = new TextView(gismoContext);
         textContainerLinearLayout.addView(timeTextView);
         setupCommonTextView(timeTextView, padding, size, alignment);
         timeTextView.setTag(Enums.ItemTag.Time);
+        timeTextView.setTextColor(dark_mode ? Color.BLACK : Color.WHITE);
     }
 
     private void setupCommonTextView(TextView textView, int[] padding, int size, String alignment) {

@@ -62,7 +62,7 @@ public class EventsBuildDirector {
         eventFormatter.all_day = preferences.getString(Constants.all_day_key, context.getString(R.string.all_day_default));
         eventFormatter.at = preferences.getString(Constants.at_key, context.getString(R.string.at_default));
         eventFormatter.separator = preferences.getString(Constants.separator_key, context.getString(R.string.separator_default));
-        eventFormatter.location = true;
+        eventFormatter.location = preferences.getBoolean(Constants.location_key, Boolean.parseBoolean(Constants.location_default));
         return eventFormatter;
     }
 }

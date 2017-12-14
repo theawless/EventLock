@@ -80,6 +80,9 @@ public class Constants {
     public static final String at_key = "at";
     public static final String separator_key = "separator";
 
+    public static final String location_key = "location";
+    public static final String dark_mode_key = "dark_mode";
+
     //defaults
     public static final Set<String> selected_calendars_default = new HashSet<>(Collections.singletonList("1"));
 
@@ -131,6 +134,9 @@ public class Constants {
     public static final String current_color_outline_default = "true";
 
     // some defaults are present in strings.xml because their defaults can be translated
+
+    public static final String location_default = "true";
+    public static final String dark_mode_default = "false";
 
     private Constants() {
     }

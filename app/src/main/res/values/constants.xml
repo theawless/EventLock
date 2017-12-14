@@ -57,6 +57,9 @@
     <string name="at_key">at</string>
     <string name="separator_key">separator</string>
 
+    <string name="location_key">location</string>
+    <string name="dark_mode_key">dark_mode</string>
+
     <!-- preference defaults -->
 
     <string-array name="selected_calendars_default">
@@ -109,5 +112,8 @@
     <string name="current_color_outline_default">true</string>
 
     <!-- the time string are present in strings.xml because their defaults can be translated -->
+
+    <string name="location_default">true</string>
+    <string name="dark_mode_default">false</string>
 
 </resources>

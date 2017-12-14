@@ -118,6 +118,7 @@ public class EventsGismo {
                 preferences.getBoolean(Constants.current_title_bold_key, Boolean.parseBoolean(Constants.current_title_bold_default)),
                 preferences.getBoolean(Constants.current_time_bold_key, Boolean.parseBoolean(Constants.current_time_bold_default)),
                 preferences.getBoolean(Constants.current_color_outline_key, Boolean.parseBoolean(Constants.current_color_outline_default)),
+                preferences.getBoolean(Constants.dark_mode_key, Boolean.parseBoolean(Constants.dark_mode_default))
         };
     }
 }

@@ -41,7 +41,8 @@ class EventViewBuildDirector {
                         dpToPixel(gismoContext, preferences.getString(Constants.title_padding_below_key, Constants.title_padding_below_default)),
                 },
                 Integer.parseInt(preferences.getString(Constants.title_font_size_key, Constants.title_font_size_default)),
-                preferences.getString(Constants.title_alignment_key, Constants.title_alignment_default)
+                preferences.getString(Constants.title_alignment_key, Constants.title_alignment_default),
+                preferences.getBoolean(Constants.dark_mode_key, Boolean.parseBoolean(Constants.dark_mode_default))
         );
         builder.setupTimeTextView(
                 new int[]{
@@ -51,7 +52,8 @@ class EventViewBuildDirector {
                         dpToPixel(gismoContext, preferences.getString(Constants.time_padding_below_key, Constants.time_padding_below_default)),
                 },
                 Integer.parseInt(preferences.getString(Constants.time_font_size_key, Constants.time_font_size_default)),
-                preferences.getString(Constants.time_alignment_key, Constants.time_alignment_default)
+                preferences.getString(Constants.time_alignment_key, Constants.time_alignment_default),
+                preferences.getBoolean(Constants.dark_mode_key, Boolean.parseBoolean(Constants.dark_mode_default))
         );
         if (preferences.getBoolean(Constants.show_color_key, Boolean.parseBoolean(Constants.show_color_default))) {
             builder.setupColorImageView(

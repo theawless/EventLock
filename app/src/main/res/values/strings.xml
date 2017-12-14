@@ -151,6 +151,11 @@
     <string name="separator_title">Separator</string>
     <string name="separator_summary">\',\' shown in title</string>
 
+    <string name="location_title">Show location</string>
+    <string name="location_summary">Should location be added to the title</string>
+    <string name="dark_mode_title">Dark mode</string>
+    <string name="dark_mode_summary">Helpful when the background is bright</string>
+
     <!-- options for various settings -->
     <string-array name="time_format_entvals">
         <item>auto</item>

@@ -107,6 +107,11 @@
             </PreferenceCategory>
             <PreferenceCategory android:title="Current event">
                 <SwitchPreference
+                    android:defaultValue="@string/dark_mode_default"
+                    android:key="@string/dark_mode_key"
+                    android:summary="@string/dark_mode_summary"
+                    android:title="@string/dark_mode_title" />
+                <SwitchPreference
                     android:defaultValue="@string/current_title_bold_default"
                     android:key="@string/current_title_bold_key"
                     android:summary="@string/current_title_bold_summary"
@@ -134,6 +139,11 @@
                     android:title="@string/text_position_title" />
             </PreferenceCategory>
             <PreferenceCategory android:title="Title">
+                <SwitchPreference
+                    android:defaultValue="@string/location_default"
+                    android:key="@string/location_key"
+                    android:summary="@string/location_summary"
+                    android:title="@string/location_title" />
                 <EditTextPreference
                     android:defaultValue="@string/title_font_size_default"
                     android:inputType="number"

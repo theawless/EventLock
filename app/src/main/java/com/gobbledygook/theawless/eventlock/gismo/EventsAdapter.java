@@ -23,7 +23,6 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
     int currentEventIndex;
     boolean currentHighlight[];
     private int[][] innerDimensions = new int[][]{};
-
     EventsAdapter(SharedPreferences preferences) {
         this.preferences = preferences;
     }
@@ -47,12 +46,12 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
             ((ShapeDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(0)).getPaint().setColor(Integer.parseInt(events[Enums.EventInfo.Color.ordinal()].get(position)));
         }
         if (position == currentEventIndex) {
-            if (currentHighlight[Enums.EventInfo.Title.ordinal()])
+            if (currentHighlight[CurrentHighlight.TitleBold.ordinal()])
                 holder.getTitleTextView().setTypeface(holder.getTitleTextView().getTypeface(), Typeface.BOLD);
-            if (currentHighlight[Enums.EventInfo.Time.ordinal()])
+            if (currentHighlight[CurrentHighlight.TimeBold.ordinal()])
                 holder.getTimeTextView().setTypeface(holder.getTimeTextView().getTypeface(), Typeface.BOLD);
-            if (currentHighlight[Enums.EventInfo.Color.ordinal()] && holder.getColorImageView() != null && Integer.parseInt(events[Enums.EventInfo.Color.ordinal()].get(position)) != Color.TRANSPARENT) {
-                ((GradientDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(1)).setStroke(2, Color.WHITE);
+            if (currentHighlight[CurrentHighlight.ColorOutline.ordinal()] && holder.getColorImageView() != null && Integer.parseInt(events[Enums.EventInfo.Color.ordinal()].get(position)) != Color.TRANSPARENT) {
+                ((GradientDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(1)).setStroke(2, currentHighlight[CurrentHighlight.DarkMode.ordinal()] ? Color.BLACK : Color.WHITE);
             }
         }
         holder.getTitleTextView().setText(events[Enums.EventInfo.Title.ordinal()].get(position));
@@ -61,11 +60,11 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     @Override
     public void onViewRecycled(ViewHolder holder) {
-        if (currentHighlight[Enums.EventInfo.Title.ordinal()])
+        if (currentHighlight[CurrentHighlight.TitleBold.ordinal()])
             holder.getTitleTextView().setTypeface(Typeface.create(holder.getTitleTextView().getTypeface(), Typeface.NORMAL));
-        if (currentHighlight[Enums.EventInfo.Time.ordinal()])
+        if (currentHighlight[CurrentHighlight.TimeBold.ordinal()])
             holder.getTimeTextView().setTypeface(Typeface.create(holder.getTimeTextView().getTypeface(), Typeface.NORMAL));
-        if (currentHighlight[Enums.EventInfo.Color.ordinal()] && holder.getColorImageView() != null) {
+        if (currentHighlight[CurrentHighlight.ColorOutline.ordinal()] && holder.getColorImageView() != null) {
             ((GradientDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(1)).setStroke(2, Color.TRANSPARENT);
         }
         super.onViewRecycled(holder);
@@ -77,6 +76,13 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
             return 0;
         }
         return events[Enums.EventInfo.Title.ordinal()].size();
+    }
+
+    enum CurrentHighlight {
+        TitleBold,
+        TimeBold,
+        ColorOutline,
+        DarkMode,
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
