@@ -18,19 +18,20 @@ public abstract class UpdateReceiver extends BroadcastReceiver {
             return;
         }
         Bundle bundle = intent.getExtras();
-        if (bundle == null) {
-            return;
-        }
         switch (action) {
             case Constants.events_update:
-                eventsGismo.deliverNewEvents(
-                        bundle.getStringArrayList(Constants.formatted_titles),
-                        bundle.getStringArrayList(Constants.formatted_times),
-                        bundle.getStringArrayList(Constants.colors)
-                );
+                if (bundle != null) {
+                    eventsGismo.deliverNewEvents(
+                            bundle.getStringArrayList(Constants.formatted_titles),
+                            bundle.getStringArrayList(Constants.formatted_times),
+                            bundle.getStringArrayList(Constants.colors)
+                    );
+                }
                 break;
             case Constants.current_event_update:
-                eventsGismo.deliverNewCurrentEvent(bundle.getInt(Constants.current_event));
+                if (bundle != null) {
+                    eventsGismo.deliverNewCurrentEvent(bundle.getInt(Constants.current_event));
+                }
                 break;
             case Constants.looks_update:
                 eventsGismo.notifyUpdatedPreferences();
