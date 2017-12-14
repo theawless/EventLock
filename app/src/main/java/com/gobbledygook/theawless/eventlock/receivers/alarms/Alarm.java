@@ -11,9 +11,6 @@ import org.joda.time.DateTime;
 
 
 public abstract class Alarm extends WakefulBroadcastReceiver {
-    protected PendingIntent alarmIntent;
-    protected AlarmManager alarmManager;
-
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.v(getClass().getSimpleName(), "Received alarm");
@@ -22,9 +19,11 @@ public abstract class Alarm extends WakefulBroadcastReceiver {
 
     public void setAlarm(Context context, long setTimeMillis, Intent intent) {
         Log.v(getClass().getSimpleName(), "Alarm at" + setTimeMillis + " " + new DateTime(setTimeMillis).toString("dd/MM/YYYY HH:mm:ss"));
-        alarmIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, getClass()).putExtras(intent), 0);
-        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, setTimeMillis, alarmIntent);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, new Intent(context, getClass()).putExtras(intent), 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, setTimeMillis, alarmIntent);
+        }
     }
 
     protected abstract Class getServiceClass();

@@ -18,11 +18,10 @@ import static com.gobbledygook.theawless.eventlock.helper.Utils.preventParentTou
 public class EventsGismo {
     protected final SharedPreferences preferences;
     private final GridLayout gridLayout;
-
+    private final DivisionLinearSnapHelper snapHelper;
+    private final LayoutManagerHandler layoutManagerHandler;
     private RecyclerView recyclerView = null;
     private EventsAdapter eventsAdapter = null;
-    private DivisionLinearSnapHelper snapHelper;
-    private LayoutManagerHandler layoutManagerHandler;
 
     public EventsGismo(GridLayout gridLayout, SharedPreferences preferences) {
         this.preferences = preferences;

@@ -13,7 +13,7 @@ import java.util.Set;
 public class EventsBuildDirector {
     private static final String[] EVENT_PROJECTION = {CalendarContract.Instances.TITLE, CalendarContract.Instances.EVENT_LOCATION, CalendarContract.Instances.BEGIN, CalendarContract.Instances.END, CalendarContract.Instances.ALL_DAY, CalendarContract.Instances.DISPLAY_COLOR, CalendarContract.Instances.EVENT_TIMEZONE};
     private final SharedPreferences preferences;
-    private EventsBuilder eventsBuilder;
+    private final EventsBuilder eventsBuilder;
 
     public EventsBuildDirector(Context context) {
         eventsBuilder = new EventsBuilder(context);
@@ -40,11 +40,11 @@ public class EventsBuildDirector {
     }
 
     private String buildSelection(int length) {
-        String selection = "( " + CalendarContract.Instances.CALENDAR_ID + " = ?";
+        StringBuilder selection = new StringBuilder("( " + CalendarContract.Instances.CALENDAR_ID + " = ?");
         for (int i = 0; i < length - 1; i++) {
-            selection = selection + " OR " + CalendarContract.Instances.CALENDAR_ID + " = ?";
+            selection.append(" OR " + CalendarContract.Instances.CALENDAR_ID + " = ?");
         }
-        selection = selection + " )";
-        return selection;
+        selection.append(" )");
+        return selection.toString();
     }
 }

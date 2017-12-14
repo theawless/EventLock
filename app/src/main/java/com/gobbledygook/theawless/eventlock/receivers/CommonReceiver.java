@@ -10,7 +10,7 @@ public class CommonReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        if (action.equals(Intent.ACTION_BOOT_COMPLETED) || action.equals(Intent.ACTION_PROVIDER_CHANGED)) {
+        if (action != null && (action.equals(Intent.ACTION_BOOT_COMPLETED) || action.equals(Intent.ACTION_PROVIDER_CHANGED))) {
             context.startService(new Intent(context, CalendarLoaderService.class));
         }
     }

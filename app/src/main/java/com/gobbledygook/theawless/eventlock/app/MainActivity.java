@@ -25,7 +25,7 @@ import com.gobbledygook.theawless.eventlock.services.CalendarLoaderService;
 public class MainActivity extends AppCompatActivity {
     private boolean previewOn = false;
     private EventsGismo eventGismo = null;
-    private UpdateReceiver updateReceiver = new UpdateReceiver() {
+    private final UpdateReceiver updateReceiver = new UpdateReceiver() {
         @Override
         protected EventsGismo getGismo(String action) {
             return eventGismo;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void handlePreview(MenuItem item) {
         if (eventGismo == null) {
-            GridLayout gridLayout = (GridLayout) findViewById(R.id.events_placeholder);
+            GridLayout gridLayout = findViewById(R.id.events_placeholder);
             eventGismo = new EventsGismo(gridLayout, PreferenceManager.getDefaultSharedPreferences(this));
             eventGismo.addRecyclerView();
             handleRefresh();

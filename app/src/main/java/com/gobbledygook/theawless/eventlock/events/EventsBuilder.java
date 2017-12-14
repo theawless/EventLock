@@ -18,9 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 class EventsBuilder {
+    final ArrayList<String>[] events = (ArrayList<String>[]) new ArrayList[Enums.EventInfo.values().length];
+    final ArrayList<Long>[] times = (ArrayList<Long>[]) new ArrayList[Enums.TimesInfo.values().length];
     private final Context context;
-    ArrayList<String>[] events = (ArrayList<String>[]) new ArrayList[Enums.EventInfo.values().length];
-    ArrayList<Long>[] times = (ArrayList<Long>[]) new ArrayList[Enums.TimesInfo.values().length];
     private Cursor cursor;
 
     EventsBuilder(Context context) {

@@ -78,4 +78,3 @@ class EventViewBuildDirector {
         return builder.fullContainerRelativeLayout;
     }
 }
-

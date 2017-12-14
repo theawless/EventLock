@@ -24,6 +24,9 @@ public class CurrentEventUpdaterService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
+        if (bundle == null) {
+            return;
+        }
         long[] beginTimes = bundle.getLongArray(Constants.begin_times);
         long[] endTimes = bundle.getLongArray(Constants.end_times);
         if (beginTimes == null || beginTimes.length == 0) {

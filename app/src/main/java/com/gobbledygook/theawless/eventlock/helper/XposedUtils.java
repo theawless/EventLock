@@ -9,7 +9,7 @@ import com.gobbledygook.theawless.eventlock.BuildConfig;
 public class XposedUtils {
     public static final String XPOSED_SECTION_MODULES = "modules";
     public static final String XPOSED_SECTION_INSTALL = "install";
-    private static final int MODULE_VERSION = BuildConfig.MODULE_VERSION;
+    private static final int MODULE_VERSION = BuildConfig.VERSION_CODE;
     private static final String XPOSED_PACKAGE = "de.robv.android.xposed.installer";
     private static final String XPOSED_ACTION = XPOSED_PACKAGE + ".OPEN_SECTION";
     private static final String XPOSED_EXTRA_SECTION = "section";

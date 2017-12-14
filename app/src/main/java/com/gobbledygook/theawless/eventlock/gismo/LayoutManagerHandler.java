@@ -18,10 +18,9 @@ import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
 class LayoutManagerHandler {
     private final SharedPreferences preferences;
     private final GridLayout gridLayout;
+    private final int divisionFactors[] = new int[]{1 /*external use*/, 1 /*internal use*/};
     private View eventView;
-
     private GridLayoutManager gridLayoutManager;
-    private int divisionFactors[] = new int[]{1 /*external use*/, 1 /*internal use*/};
     private int dimensions[][];
 
     LayoutManagerHandler(GridLayout gridLayout, SharedPreferences preferences) {
@@ -67,11 +66,9 @@ class LayoutManagerHandler {
                 )
                 .setInnerDimensions(getInnerDimensions())
                 .getEventView();
-        TextView titleView = ((TextView) eventView.findViewWithTag(Enums.ItemTag.Title));
-        titleView.setText("Please");
+        TextView titleView = eventView.findViewWithTag(Enums.ItemTag.Title);
         titleView.setTypeface(titleView.getTypeface(), Typeface.BOLD);
-        TextView timeView = ((TextView) eventView.findViewWithTag(Enums.ItemTag.Time));
-        timeView.setText("Wait");
+        TextView timeView = eventView.findViewWithTag(Enums.ItemTag.Time);
         timeView.setTypeface(timeView.getTypeface(), Typeface.BOLD);
     }
 

@@ -357,8 +357,6 @@
                 android:action="android.intent.action.VIEW"
                 android:data="@string/github_url" />
         </Preference>
-        <Preference
-            android:summary="@string/version_number"
-            android:title="@string/version_title" />
+        <com.gobbledygook.theawless.eventlock.app.VersionPreference android:title="@string/version_title" />
     </PreferenceCategory>
 </PreferenceScreen>

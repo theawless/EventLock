@@ -11,7 +11,6 @@ import java.util.List;
 
 
 class CalendarPreference extends MultiSelectListPreference {
-
     public CalendarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 
 class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
-
     private final SharedPreferences preferences;
     ArrayList<String>[] events;
     int currentEventIndex;

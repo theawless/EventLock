@@ -10,7 +10,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 public class XposedUtilsHook implements IXposedHookLoadPackage {
     private static final String EVENTLOCK_PACKAGE = BuildConfig.APPLICATION_ID;
-    private static final int MODULE_VERSION = BuildConfig.MODULE_VERSION;
+    private static final int MODULE_VERSION = BuildConfig.VERSION_CODE;
 
     private static void hookXposedUtils(XC_LoadPackage.LoadPackageParam lpparam) {
         XposedHelpers.findAndHookMethod(XposedUtils.class.getName(), lpparam.classLoader, "getModuleVersion",

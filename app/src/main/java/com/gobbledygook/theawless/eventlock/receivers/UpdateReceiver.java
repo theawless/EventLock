@@ -18,6 +18,9 @@ public abstract class UpdateReceiver extends BroadcastReceiver {
             return;
         }
         Bundle bundle = intent.getExtras();
+        if (bundle == null) {
+            return;
+        }
         switch (action) {
             case Constants.events_update:
                 eventsGismo.deliverNewEvents(

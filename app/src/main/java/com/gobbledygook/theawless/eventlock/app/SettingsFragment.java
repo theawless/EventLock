@@ -1,6 +1,7 @@
 package com.gobbledygook.theawless.eventlock.app;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -32,9 +33,8 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
             R.string.color_height_key, R.string.color_width_key, R.string.days_till_key,
             R.string.number_of_events_key,
     };
-    //reasons to fucking hate java
-    //no initialisers for map or even arraylist wtf bro
-    //shitty syntax
+
+    //reasons to hate java - shitty syntax
     private static final ArrayList<Integer> versionClicks = new ArrayList<>(Arrays.asList(1, 6, 12, 18, 25, 30, 40, 50, 60, 70, 80, 90, 100));
     private static final int versionStrings[] = new int[]{
             R.string.version_count_1, R.string.version_count_6, R.string.version_count_12,
@@ -43,16 +43,16 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
             R.string.version_count_70, R.string.version_count_80, R.string.version_count_90,
             R.string.version_count_100,
     };
-    private int versionClickCount = 0;
-    //stored in weakhash map; hence must store it to prevent garbage collection
-    private Preference.OnPreferenceChangeListener preferenceListener = new Preference.OnPreferenceChangeListener() {
+    private final Preference.OnPreferenceChangeListener preferenceListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             return !newValue.toString().trim().isEmpty();
         }
     };
+    private int versionClickCount = 0;
     private PresetMaker presetMaker;
 
+    @SuppressLint("WorldReadableFiles")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +103,9 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
     private void setUpPreferenceCleaners() {
         for (int keyId : nonEmptyPreferences) {
             Preference preference = getPreferenceManager().findPreference(getString(keyId));
-            preference.setOnPreferenceChangeListener(preferenceListener);
+            if (preference != null) {
+                preference.setOnPreferenceChangeListener(preferenceListener);
+            }
         }
     }
 
