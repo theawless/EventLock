@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(this, CalendarLoaderService.class));
     }
 
-    private void startXposedActivity(String section) {
-        if (!XposedUtils.startXposedActivity(this, section)) {
+    private void startXposedActivity() {
+        if (!XposedUtils.startXposedActivity(this)) {
             Toast.makeText(this, R.string.xposed_not_installed, Toast.LENGTH_SHORT).show();
             startBrowserActivity(getString(R.string.xposed_forum_url));
         }
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.enable, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startXposedActivity(XposedUtils.XPOSED_SECTION_MODULES);
+                        startXposedActivity();
                     }
                 })
                 .setNeutralButton(R.string.report_bug, new DialogInterface.OnClickListener() {
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNeutralButton(R.string.reboot, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startXposedActivity(XposedUtils.XPOSED_SECTION_INSTALL);
+                        startXposedActivity();
                     }
                 })
                 .setNegativeButton(R.string.ignore, null)

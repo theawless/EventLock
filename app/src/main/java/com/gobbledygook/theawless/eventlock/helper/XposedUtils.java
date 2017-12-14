@@ -7,12 +7,8 @@ import android.content.Intent;
 import com.gobbledygook.theawless.eventlock.BuildConfig;
 
 public class XposedUtils {
-    public static final String XPOSED_SECTION_MODULES = "modules";
-    public static final String XPOSED_SECTION_INSTALL = "install";
-    private static final int MODULE_VERSION = BuildConfig.VERSION_CODE;
     private static final String XPOSED_PACKAGE = "de.robv.android.xposed.installer";
-    private static final String XPOSED_ACTION = XPOSED_PACKAGE + ".OPEN_SECTION";
-    private static final String XPOSED_EXTRA_SECTION = "section";
+    private static final int MODULE_VERSION = BuildConfig.VERSION_CODE;
 
     public static boolean isModuleEnabled() {
         return getModuleVersion() >= 0;
@@ -26,10 +22,9 @@ public class XposedUtils {
         return -1;
     }
 
-    public static boolean startXposedActivity(Context context, String section) {
-        Intent intent = new Intent(XPOSED_ACTION);
-        intent.putExtra(XPOSED_EXTRA_SECTION, section);
+    public static boolean startXposedActivity(Context context) {
         try {
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(XPOSED_PACKAGE);
             context.startActivity(intent);
             return true;
         } catch (ActivityNotFoundException e) {
