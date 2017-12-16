@@ -1,16 +1,16 @@
 # EventLock
 
-An Xposed module to show your calendar events on the lockscreen.
+An Xposed module to show your calendar(s) events on the lockscreen (Android 5.0+ | Lollipop/Marshmallow/Nougat...).
 
 ### Why?
 
-* After Kitkat, the lockscreen widgets were disabled and so calendar widget can't be put on the lockscreen.
-* AOSP lockscreen for lolipop/marshmallow does not show calendar events on lockscreen either.
+* After Kitkat, lockscreen widgets were disabled. Hence, the calendar widget can't be put on the lockscreen.
+* AOSP lockscreen for lolipop/marshmallow/nougat does not show calendar events on lockscreen either.
 
-### Features
-
-* See multiple events by scrolling
-* Lots of customisations
+### Features:
+* Highlights the current event automatically
+* Displays upcoming events (scrollable)
+* Loads of customisations and presets
 
 <img src="/images/multiple_preset1.jpg" width="256" height="70"/>
 <img src="/images/multiple_preset2.jpg" width="256" height="53"/>
