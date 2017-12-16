@@ -13,13 +13,11 @@ import java.util.Set;
 class PresetMaker {
     private final Context context;
     private final SharedPreferences preferences;
-    private final SettingsRefreshable refereshable;
 
     private SharedPreferences.Editor editor;
 
-    PresetMaker(Context context, SettingsRefreshable settingsRefreshable) {
+    PresetMaker(Context context) {
         this.context = context;
-        this.refereshable = settingsRefreshable;
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -45,7 +43,6 @@ class PresetMaker {
     void end() {
         editor.commit();
         Toast.makeText(context, R.string.preset_set, Toast.LENGTH_SHORT).show();
-        refereshable.refreshUI();
     }
 
     private PresetMaker removeTextSpaceVertically() {

@@ -16,14 +16,7 @@ import android.widget.Toast;
 import com.gobbledygook.theawless.eventlock.R;
 import com.gobbledygook.theawless.eventlock.helper.Constants;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-interface SettingsRefreshable {
-    void refreshUI();
-}
-
-public class SettingsFragment extends PreferenceFragment implements SettingsRefreshable {
+public class SettingsFragment extends PreferenceFragment {
     private static final int CALENDAR_READ_REQUEST_CODE = 0;
     private static final int nonEmptyPreferences[] = new int[]{
             R.string.gismo_padding_above_key, R.string.gismo_padding_below_key, R.string.gismo_padding_left_key, R.string.gismo_padding_right_key,
@@ -31,18 +24,9 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
             R.string.time_padding_above_key, R.string.time_padding_below_key, R.string.time_padding_left_key, R.string.time_padding_right_key,
             R.string.color_padding_above_key, R.string.color_padding_below_key, R.string.color_padding_left_key, R.string.color_padding_right_key,
             R.string.color_height_key, R.string.color_width_key, R.string.days_till_key,
-            R.string.number_of_events_key,
+            R.string.number_of_events_key, R.string.title_font_size_key, R.string.time_font_size_key,
     };
 
-    //reasons to hate java - shitty syntax
-    private static final ArrayList<Integer> versionClicks = new ArrayList<>(Arrays.asList(1, 6, 12, 18, 25, 30, 40, 50, 60, 70, 80, 90, 100));
-    private static final int versionStrings[] = new int[]{
-            R.string.version_count_1, R.string.version_count_6, R.string.version_count_12,
-            R.string.version_count_18, R.string.version_count_25, R.string.version_count_30,
-            R.string.version_count_40, R.string.version_count_50, R.string.version_count_60,
-            R.string.version_count_70, R.string.version_count_80, R.string.version_count_90,
-            R.string.version_count_100,
-    };
     private final Preference.OnPreferenceChangeListener preferenceListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -58,7 +42,7 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
         super.onCreate(savedInstanceState);
         getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
         addPreferencesFromResource(R.xml.preferences);
-        presetMaker = new PresetMaker(getActivity(), this);
+        presetMaker = new PresetMaker(getActivity());
     }
 
     @Override
@@ -76,8 +60,7 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
         }
     }
 
-    @Override
-    public void refreshUI() {
+    private void refreshUI() {
         setPreferenceScreen(null);
         addPreferencesFromResource(R.xml.preferences);
         permissionCheck();
@@ -113,9 +96,10 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         switch (preference.getTitleRes()) {
             case R.string.version_title: {
-                int index = versionClicks.indexOf(++versionClickCount);
-                if (index != -1) {
-                    Toast.makeText(getActivity(), versionStrings[index], Toast.LENGTH_SHORT).show();
+                String resourceName = "version_count_" + String.valueOf(++versionClickCount);
+                int id = getResources().getIdentifier(resourceName, "string", getActivity().getPackageName());
+                if (id != 0) {
+                    Toast.makeText(getActivity(), getResources().getString(id), Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -134,7 +118,7 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
                         .makeTextSpaceVertically()
                         .setOrientations("vertical", "vertical")
                         .end();
-                return true;
+                break;
             }
             case R.string.multiple_preset2_title: {
                 presetMaker.begin()
@@ -142,13 +126,13 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
                         .makeColorSpaceVertically()
                         .centerText()
                         .end();
-                return true;
+                break;
             }
             case R.string.multiple_preset3_title: {
                 presetMaker.begin()
                         .lineLeft()
                         .end();
-                return true;
+                break;
             }
             case R.string.multiple_preset4_title: {
                 presetMaker.begin()
@@ -157,13 +141,13 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
                         .makeColorSpaceVertically()
                         .setOrientations("vertical", "vertical")
                         .end();
-                return true;
+                break;
             }
             case R.string.multiple_preset5_title: {
                 presetMaker.begin()
                         .lineAbove()
                         .end();
-                return true;
+                break;
             }
             case R.string.multiple_preset6_title: {
                 presetMaker.begin()
@@ -172,7 +156,7 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
                         .centerText()
                         .makeTextSpaceVertically()
                         .end();
-                return true;
+                break;
             }
             case R.string.single_preset1_title: {
                 presetMaker.begin()
@@ -180,14 +164,14 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
                         .setMultipleEvents(1)
                         .makeTextBig()
                         .end();
-                return true;
+                break;
             }
             case R.string.single_preset2_title: {
                 presetMaker.begin()
                         .setMultipleEvents(1)
                         .makeTextBig()
                         .end();
-                return true;
+                break;
             }
             case R.string.single_preset3_title: {
                 presetMaker.begin()
@@ -195,11 +179,14 @@ public class SettingsFragment extends PreferenceFragment implements SettingsRefr
                         .setMultipleEvents(1)
                         .makeTextBig()
                         .end();
-                return true;
+                break;
             }
             default: {
                 return super.onPreferenceTreeClick(preferenceScreen, preference);
             }
         }
+        // ends up here if one of the presets is clicked, otherwise returns early
+        refreshUI();
+        return true;
     }
 }
