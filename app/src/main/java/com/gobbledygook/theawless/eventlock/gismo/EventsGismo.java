@@ -1,5 +1,8 @@
 package com.gobbledygook.theawless.eventlock.gismo;
 
+import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
+import static com.gobbledygook.theawless.eventlock.helper.Utils.preventParentTouchTheft;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,17 +14,14 @@ import com.gobbledygook.theawless.eventlock.helper.Enums;
 
 import java.util.ArrayList;
 
-import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
-import static com.gobbledygook.theawless.eventlock.helper.Utils.preventParentTouchTheft;
-
 
 public class EventsGismo {
     protected final SharedPreferences preferences;
     private final GridLayout gridLayout;
     private final DivisionLinearSnapHelper snapHelper;
     private final LayoutManagerHandler layoutManagerHandler;
-    private RecyclerView recyclerView = null;
-    private EventsAdapter eventsAdapter = null;
+    private RecyclerView recyclerView;
+    private EventsAdapter eventsAdapter;
 
     public EventsGismo(GridLayout gridLayout, SharedPreferences preferences) {
         this.preferences = preferences;
@@ -92,10 +92,10 @@ public class EventsGismo {
             formattedTimes.add("");
             colors.add(String.valueOf(Color.TRANSPARENT));
         }
-        ArrayList<String> events[] = (ArrayList<String>[]) new ArrayList[3];
-        events[Enums.EventInfo.Title.ordinal()] = formattedTitles;
-        events[Enums.EventInfo.Time.ordinal()] = formattedTimes;
-        events[Enums.EventInfo.Color.ordinal()] = colors;
+        ArrayList<ArrayList<String>> events = new ArrayList<>();
+        events.set(Enums.EventInfo.Title.ordinal(), formattedTitles);
+        events.set(Enums.EventInfo.Time.ordinal(), formattedTimes);
+        events.set(Enums.EventInfo.Color.ordinal(), colors);
         eventsAdapter.events = events;
         eventsAdapter.notifyDataSetChanged();
     }

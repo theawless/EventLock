@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import com.gobbledygook.theawless.eventlock.helper.Utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 class CalendarPreference extends MultiSelectListPreference {
@@ -24,8 +23,8 @@ class CalendarPreference extends MultiSelectListPreference {
                 new String[]{CalendarContract.Calendars._ID, CalendarContract.Calendars.CALENDAR_DISPLAY_NAME},
                 null, null, null
         );
-        List<String> calendarNames = new ArrayList<>();
-        List<String> calendarIds = new ArrayList<>();
+        ArrayList<String> calendarNames = new ArrayList<>();
+        ArrayList<String> calendarIds = new ArrayList<>();
         while (cursor != null && cursor.moveToNext()) {
             calendarNames.add(cursor.getString(1));
             calendarIds.add(String.valueOf((cursor.getInt(0))));
@@ -33,14 +32,14 @@ class CalendarPreference extends MultiSelectListPreference {
         if (cursor != null) {
             cursor.close();
             updateSameCalenders(calendarNames);
-            setEntries(calendarNames.toArray(new CharSequence[calendarNames.size()]));
-            setEntryValues(calendarIds.toArray(new CharSequence[calendarIds.size()]));
+            setEntries(calendarNames.toArray(new CharSequence[0]));
+            setEntryValues(calendarIds.toArray(new CharSequence[0]));
         }
     }
 
-    private void updateSameCalenders(List<String> calendarNames) {
+    private void updateSameCalenders(ArrayList<String> calendarNames) {
         for (int i = 0; i < calendarNames.size(); ++i) {
-            List<Integer> indices = Utils.indexOfAll(calendarNames.get(i), calendarNames);
+            ArrayList<Integer> indices = Utils.indexOfAll(calendarNames.get(i), calendarNames);
             if (indices.size() > 1) {
                 for (int j = 0; j < indices.size(); ++j) {
                     calendarNames.set(indices.get(j), calendarNames.get(indices.get(j)) + " - " + j);

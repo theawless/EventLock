@@ -29,17 +29,17 @@ public class EventsBuildDirector {
             return;
         }
         String selection = buildSelection(selectionArgsSet.size());
-        String[] selectionArgs = selectionArgsSet.toArray(new String[selectionArgsSet.size()]);
+        String[] selectionArgs = selectionArgsSet.toArray(new String[0]);
         eventsBuilder.setEventFormatter(buildTimeFormatter());
         eventsBuilder.setUpCursor(Integer.parseInt(preferences.getString(Constants.days_till_key, Constants.days_till_default)), EVENT_PROJECTION, selection, selectionArgs);
         eventsBuilder.build();
     }
 
-    public ArrayList<String>[] getEvents() {
+    public ArrayList<ArrayList<String>> getEvents() {
         return eventsBuilder.events;
     }
 
-    public ArrayList<Long>[] getTimes() {
+    public ArrayList<ArrayList<Long>> getTimes() {
         return eventsBuilder.times;
     }
 

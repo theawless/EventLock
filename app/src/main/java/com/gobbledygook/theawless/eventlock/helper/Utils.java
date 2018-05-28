@@ -5,13 +5,12 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Utils {
     private Utils() {
     }
 
-    public static <T extends Comparable<T>> List<Integer> indexOfAll(T object, List<T> list) {
+    public static <T extends Comparable<T>> ArrayList<Integer> indexOfAll(T object, ArrayList<T> list) {
         ArrayList<Integer> indexes = new ArrayList<>();
         for (int i = 0; i < list.size(); ++i) {
             if (object.equals(list.get(i))) {

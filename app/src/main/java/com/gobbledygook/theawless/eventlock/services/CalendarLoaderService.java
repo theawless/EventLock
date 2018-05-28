@@ -40,15 +40,15 @@ public class CalendarLoaderService extends IntentService {
         if (!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED)) {
             EventsBuildDirector eventsBuildDirector = new EventsBuildDirector(this);
             eventsBuildDirector.construct();
-            ArrayList<String>[] events = eventsBuildDirector.getEvents();
+            ArrayList<ArrayList<String>> events = eventsBuildDirector.getEvents();
             sendBroadcast(new Intent()
                     .setAction(Constants.events_update)
-                    .putStringArrayListExtra(Constants.formatted_titles, events[Enums.EventInfo.Title.ordinal()])
-                    .putStringArrayListExtra(Constants.formatted_times, events[Enums.EventInfo.Time.ordinal()])
-                    .putStringArrayListExtra(Constants.colors, events[Enums.EventInfo.Color.ordinal()])
+                    .putStringArrayListExtra(Constants.formatted_titles, events.get(Enums.EventInfo.Title.ordinal()))
+                    .putStringArrayListExtra(Constants.formatted_times, events.get(Enums.EventInfo.Time.ordinal()))
+                    .putStringArrayListExtra(Constants.colors, events.get(Enums.EventInfo.Color.ordinal()))
             );
-            ArrayList<Long>[] times = eventsBuildDirector.getTimes();
-            startCurrentEventUpdater(times[Enums.TimesInfo.Begin.ordinal()], times[Enums.TimesInfo.End.ordinal()]);
+            ArrayList<ArrayList<Long>> times = eventsBuildDirector.getTimes();
+            startCurrentEventUpdater(times.get(Enums.TimesInfo.Begin.ordinal()), times.get(Enums.TimesInfo.End.ordinal()));
         }
         setAlarm();
         CalendarLoaderAlarm.completeWakefulIntent(intent);

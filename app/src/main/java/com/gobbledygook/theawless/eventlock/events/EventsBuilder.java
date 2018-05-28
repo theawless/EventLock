@@ -17,18 +17,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 class EventsBuilder {
-    final ArrayList<String>[] events = (ArrayList<String>[]) new ArrayList[Enums.EventInfo.values().length];
-    final ArrayList<Long>[] times = (ArrayList<Long>[]) new ArrayList[Enums.TimesInfo.values().length];
+    final ArrayList<ArrayList<String>> events = new ArrayList<>(Enums.EventInfo.values().length);
+    final ArrayList<ArrayList<Long>> times = new ArrayList<>(Enums.TimesInfo.values().length);
     private final Context context;
     private Cursor cursor;
     private EventFormatter eventFormatter;
+
     EventsBuilder(Context context) {
         this.context = context;
-        events[Enums.EventInfo.Title.ordinal()] = new ArrayList<>();
-        events[Enums.EventInfo.Time.ordinal()] = new ArrayList<>();
-        events[Enums.EventInfo.Color.ordinal()] = new ArrayList<>();
-        times[Enums.TimesInfo.Begin.ordinal()] = new ArrayList<>();
-        times[Enums.TimesInfo.End.ordinal()] = new ArrayList<>();
+        events.set(Enums.EventInfo.Title.ordinal(), new ArrayList<String>());
+        events.set(Enums.EventInfo.Time.ordinal(), new ArrayList<String>());
+        events.set(Enums.EventInfo.Color.ordinal(), new ArrayList<String>());
+        times.set(Enums.TimesInfo.Begin.ordinal(), new ArrayList<Long>());
+        times.set(Enums.TimesInfo.End.ordinal(), new ArrayList<Long>());
     }
 
     void setEventFormatter(EventFormatter eventFormatter) {
@@ -58,11 +59,11 @@ class EventsBuilder {
             }
             int dayDiff = Days.daysBetween(new DateTime().withTimeAtStartOfDay().toLocalDate(), new DateTime(beginTime).toLocalDate()).getDays();
             if (dayDiff >= 0) {
-                events[Enums.EventInfo.Title.ordinal()].add(getFormattedTitle(cursor.getString(0), cursor.getString(1)));
-                events[Enums.EventInfo.Time.ordinal()].add(getFormattedTime(beginTime, endTime, allDay, dayDiff));
-                events[Enums.EventInfo.Color.ordinal()].add(cursor.getString(5));
-                times[Enums.TimesInfo.Begin.ordinal()].add(beginTime);
-                times[Enums.TimesInfo.End.ordinal()].add(endTime);
+                events.get(Enums.EventInfo.Title.ordinal()).add(getFormattedTitle(cursor.getString(0), cursor.getString(1)));
+                events.get(Enums.EventInfo.Time.ordinal()).add(getFormattedTime(beginTime, endTime, allDay, dayDiff));
+                events.get(Enums.EventInfo.Color.ordinal()).add(cursor.getString(5));
+                times.get(Enums.TimesInfo.Begin.ordinal()).add(beginTime);
+                times.get(Enums.TimesInfo.End.ordinal()).add(endTime);
             }
         }
         if (cursor != null) {
