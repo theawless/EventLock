@@ -27,7 +27,7 @@ public class LockscreenHook implements IXposedHookLoadPackage {
     };
 
     @Override
-    public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) {
         if (lpparam.packageName.equals("com.android.systemui")) {
             XposedHelpers.findAndHookMethod("com.android.keyguard.KeyguardStatusView", lpparam.classLoader, "onFinishInflate", new KeyGuardHook());
         }

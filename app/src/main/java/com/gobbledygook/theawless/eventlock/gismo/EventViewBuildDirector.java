@@ -1,13 +1,13 @@
 package com.gobbledygook.theawless.eventlock.gismo;
 
+import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 
 import com.gobbledygook.theawless.eventlock.helper.Constants;
 import com.gobbledygook.theawless.eventlock.helper.Enums;
-
-import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
 
 class EventViewBuildDirector {
     private final Context gismoContext;

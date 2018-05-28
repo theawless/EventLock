@@ -20,8 +20,8 @@ public class EventsGismo {
     private final GridLayout gridLayout;
     private final DivisionLinearSnapHelper snapHelper;
     private final LayoutManagerHandler layoutManagerHandler;
-    private RecyclerView recyclerView;
-    private EventsAdapter eventsAdapter;
+    private final RecyclerView recyclerView;
+    private final EventsAdapter eventsAdapter;
 
     public EventsGismo(GridLayout gridLayout, SharedPreferences preferences) {
         this.preferences = preferences;
@@ -72,21 +72,21 @@ public class EventsGismo {
 
     //--------------------------------------------------------------------------------------------//
 
-    //when screen gets off
+    // when screen gets off
     public void scrollToCurrentEvent() {
         if (eventsAdapter.inRange() && recyclerView.getAdapter() != null) {
             recyclerView.scrollToPosition(eventsAdapter.currentEventIndex);
         }
     }
 
-    //called by update receiver, reset recycler view
+    // called by update receiver, reset recycler view
     public void notifyUpdatedPreferences() {
         setupRecyclerView();
     }
 
-    //called by update receiver, step 1
+    // called by update receiver, step 1
     public void deliverNewEvents(ArrayList<String> formattedTitles, ArrayList<String> formattedTimes, ArrayList<String> colors) {
-        //add empty event
+        // add empty event
         if (preferences.getBoolean(Constants.show_free_text_key, Boolean.parseBoolean(Constants.show_free_text_default))) {
             formattedTitles.add(preferences.getString(Constants.free_text_key, Constants.free_text_default));
             formattedTimes.add("");
@@ -100,7 +100,7 @@ public class EventsGismo {
         eventsAdapter.notifyDataSetChanged();
     }
 
-    //called by update receiver, step 2
+    // called by update receiver, step 2
     public void deliverNewCurrentEvent(int eventToDisplay) {
         if (eventsAdapter.inRange()) {
             eventsAdapter.notifyItemChanged(eventsAdapter.currentEventIndex);
@@ -112,7 +112,7 @@ public class EventsGismo {
         scrollToCurrentEvent();
     }
 
-    //cache these because they will be used in onBind on recycler view
+    // cache these because they will be used in onBind on recycler view
     private void updateCache() {
         eventsAdapter.currentHighlight = new boolean[]{
                 preferences.getBoolean(Constants.current_title_bold_key, Boolean.parseBoolean(Constants.current_title_bold_default)),

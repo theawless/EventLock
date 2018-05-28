@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +37,14 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
         return 0 <= currentEventIndex && currentEventIndex < getItemCount();
     }
 
+    @NonNull
     @Override
-    public EventsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EventsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new EventsAdapter.ViewHolder(new EventViewBuildDirector(parent.getContext(), preferences).setBuilder(new EventViewBuilder(parent.getContext())).setInnerDimensions(innerDimensions).getEventView());
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (holder.getColorImageView() != null) {
             ((ShapeDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(0)).getPaint().setColor(Integer.parseInt(events.get(Enums.EventInfo.Color.ordinal()).get(position)));
         }
@@ -62,7 +64,7 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
     }
 
     @Override
-    public void onViewRecycled(ViewHolder holder) {
+    public void onViewRecycled(@NonNull ViewHolder holder) {
         if (currentHighlight[CurrentHighlight.TitleBold.ordinal()]) {
             holder.getTitleTextView().setTypeface(Typeface.create(holder.getTitleTextView().getTypeface(), Typeface.NORMAL));
         }

@@ -209,7 +209,7 @@ class EventViewBuilder {
      */
 
 
-    // never look at this code. not even god knows what I wrote.
+    // never look at this code. not even god knows what I wrote
     void setupPositions(String textPosition, String colorPosition, boolean stickColor) {
         int textPositionRule;
         switch (textPosition) {

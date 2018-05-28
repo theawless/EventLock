@@ -8,13 +8,13 @@ import java.util.Set;
 
 public class Constants {
 
-    //intent filters
+    // intent filters
 
     public static final String events_update = BuildConfig.APPLICATION_ID + "." + "EventsUpdate";
     public static final String current_event_update = BuildConfig.APPLICATION_ID + "." + "CurrentEventUpdate";
     public static final String looks_update = BuildConfig.APPLICATION_ID + "." + "LooksUpdate";
 
-    //intent extras
+    // intent extras
 
     public static final String formatted_titles = "formattedTitles";
     public static final String formatted_times = "formattedTimes";
@@ -23,7 +23,7 @@ public class Constants {
     public static final String end_times = "endTimes";
     public static final String current_event = "currentEvent";
 
-    //keys
+    // keys
 
     public static final String selected_calendars_key = "selected_calendars";
     public static final String days_till_key = "days_till";
@@ -83,7 +83,7 @@ public class Constants {
     public static final String location_key = "location";
     public static final String dark_mode_key = "dark_mode";
 
-    //defaults
+    // defaults
     public static final Set<String> selected_calendars_default = new HashSet<>(Collections.singletonList("1"));
 
     public static final String days_till_default = "3";

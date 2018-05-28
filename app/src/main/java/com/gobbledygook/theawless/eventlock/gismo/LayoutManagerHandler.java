@@ -1,5 +1,7 @@
 package com.gobbledygook.theawless.eventlock.gismo;
 
+import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -13,12 +15,10 @@ import android.widget.TextView;
 import com.gobbledygook.theawless.eventlock.helper.Constants;
 import com.gobbledygook.theawless.eventlock.helper.Enums;
 
-import static com.gobbledygook.theawless.eventlock.helper.Utils.dpToPixel;
-
 class LayoutManagerHandler {
     private final SharedPreferences preferences;
     private final GridLayout gridLayout;
-    private final int divisionFactors[] = new int[]{1 /*external use*/, 1 /*internal use*/};
+    private final int divisionFactors[] = new int[]{1 /* external use */, 1 /* internal use */};
     private View eventView;
     private GridLayoutManager gridLayoutManager;
     private int dimensions[][];
@@ -31,9 +31,9 @@ class LayoutManagerHandler {
 
     private void setupDefaultDimensions() {
         dimensions = new int[][]{
-                new int[]{1, 1}, //color
-                new int[]{ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT}, //eventview
-                new int[]{ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT}, //recyclerview
+                new int[]{1, 1}, // color
+                new int[]{ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT}, // eventview
+                new int[]{ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT}, // recyclerview
         };
     }
 

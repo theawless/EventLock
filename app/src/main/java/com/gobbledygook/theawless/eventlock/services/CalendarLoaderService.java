@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
-//sets CalendarLoaderAlarm to receive at midnights, or when refresh is called
+// sets CalendarLoaderAlarm to receive at midnights, or when refresh is called
 public class CalendarLoaderService extends IntentService {
     private static final String TAG = CalendarLoaderService.class.getSimpleName();
 

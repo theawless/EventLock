@@ -13,12 +13,11 @@ public class XposedUtilsHook implements IXposedHookLoadPackage {
     private static final int MODULE_VERSION = BuildConfig.VERSION_CODE;
 
     private static void hookXposedUtils(XC_LoadPackage.LoadPackageParam lpparam) {
-        XposedHelpers.findAndHookMethod(XposedUtils.class.getName(), lpparam.classLoader, "getModuleVersion",
-                XC_MethodReplacement.returnConstant(MODULE_VERSION));
+        XposedHelpers.findAndHookMethod(XposedUtils.class.getName(), lpparam.classLoader, "getModuleVersion", XC_MethodReplacement.returnConstant(MODULE_VERSION));
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if (EVENTLOCK_PACKAGE.equals(lpparam.packageName)) {
             hookXposedUtils(lpparam);
         }

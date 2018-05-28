@@ -51,7 +51,7 @@ class EventsBuilder {
             long beginTime, endTime;
             if (allDay == 1) {
                 beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).withTimeAtStartOfDay().getMillis();
-                //to prevent multiple alarms at midnight. Even if current event says alarm at midnight, we anyway have loader alarm
+                // to prevent multiple alarms at midnight. Even if current event says alarm at midnight, we anyway have loader alarm
                 endTime = Long.MAX_VALUE;
             } else {
                 beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).getMillis();
