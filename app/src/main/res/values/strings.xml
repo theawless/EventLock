@@ -31,7 +31,7 @@
     <!-- Shown in action bar -->
     <string name="action_preview_title">Preview</string>
     <string name="action_refresh_title">Refresh</string>
-    <string name="projectgithub_title">View project on Github</string>
+    <string name="github_title">View project on Github</string>
 
     <!-- Shown in settings -->
 
