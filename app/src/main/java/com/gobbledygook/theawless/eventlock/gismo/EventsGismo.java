@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.GridLayout;
 
 import com.gobbledygook.theawless.eventlock.helper.Constants;
-import com.gobbledygook.theawless.eventlock.helper.Enums;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class EventsGismo {
@@ -92,11 +92,7 @@ public class EventsGismo {
             formattedTimes.add("");
             colors.add(String.valueOf(Color.TRANSPARENT));
         }
-        ArrayList<ArrayList<String>> events = new ArrayList<>();
-        events.set(Enums.EventInfo.Title.ordinal(), formattedTitles);
-        events.set(Enums.EventInfo.Time.ordinal(), formattedTimes);
-        events.set(Enums.EventInfo.Color.ordinal(), colors);
-        eventsAdapter.events = events;
+        eventsAdapter.events = new ArrayList<>(Arrays.asList(formattedTitles, formattedTimes, colors));
         eventsAdapter.notifyDataSetChanged();
     }
 

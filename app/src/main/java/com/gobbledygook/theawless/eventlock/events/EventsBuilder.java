@@ -15,21 +15,17 @@ import org.joda.time.Days;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class EventsBuilder {
-    final ArrayList<ArrayList<String>> events = new ArrayList<>(Enums.EventInfo.values().length);
-    final ArrayList<ArrayList<Long>> times = new ArrayList<>(Enums.TimesInfo.values().length);
+    final ArrayList<ArrayList<String>> events = new ArrayList<>(Arrays.asList(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>()));
+    final ArrayList<ArrayList<Long>> times = new ArrayList<>(Arrays.asList(new ArrayList<Long>(), new ArrayList<Long>()));
     private final Context context;
     private Cursor cursor;
     private EventFormatter eventFormatter;
 
     EventsBuilder(Context context) {
         this.context = context;
-        events.set(Enums.EventInfo.Title.ordinal(), new ArrayList<String>());
-        events.set(Enums.EventInfo.Time.ordinal(), new ArrayList<String>());
-        events.set(Enums.EventInfo.Color.ordinal(), new ArrayList<String>());
-        times.set(Enums.TimesInfo.Begin.ordinal(), new ArrayList<Long>());
-        times.set(Enums.TimesInfo.End.ordinal(), new ArrayList<Long>());
     }
 
     void setEventFormatter(EventFormatter eventFormatter) {
