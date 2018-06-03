@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.text.format.DateUtils;
 
 import com.gobbledygook.theawless.eventlock.helper.Enums;
 
@@ -12,8 +13,6 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,24 +42,15 @@ class EventsBuilder {
 
     void build() {
         while (cursor != null && cursor.moveToNext()) {
+            long beginTime = cursor.getLong(2);
+            long endTime = cursor.getLong(3);
+            String timeZone = cursor.getString(6);
             int allDay = cursor.getInt(4);
-            long beginTime, endTime;
-            if (allDay == 1) {
-                beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).withTimeAtStartOfDay().getMillis();
-                // to prevent multiple alarms at midnight. Even if current event says alarm at midnight, we anyway have loader alarm
-                endTime = Long.MAX_VALUE;
-            } else {
-                beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).getMillis();
-                endTime = new DateTime(cursor.getLong(3), DateTimeZone.forID(cursor.getString(6))).withZone(DateTimeZone.getDefault()).getMillis();
-            }
-            int dayDiff = Days.daysBetween(new DateTime().withTimeAtStartOfDay().toLocalDate(), new DateTime(beginTime).toLocalDate()).getDays();
-            if (dayDiff >= 0) {
-                events.get(Enums.EventInfo.Title.ordinal()).add(getFormattedTitle(cursor.getString(0), cursor.getString(1)));
-                events.get(Enums.EventInfo.Time.ordinal()).add(getFormattedTime(beginTime, endTime, allDay, dayDiff));
-                events.get(Enums.EventInfo.Color.ordinal()).add(cursor.getString(5));
-                times.get(Enums.TimesInfo.Begin.ordinal()).add(beginTime);
-                times.get(Enums.TimesInfo.End.ordinal()).add(endTime);
-            }
+            events.get(Enums.EventInfo.Title.ordinal()).add(getFormattedTitle(cursor.getString(0), cursor.getString(1)));
+            events.get(Enums.EventInfo.Time.ordinal()).add(getFormattedTime(beginTime, endTime, allDay, timeZone));
+            events.get(Enums.EventInfo.Color.ordinal()).add(cursor.getString(5));
+            times.get(Enums.TimesInfo.Begin.ordinal()).add(beginTime);
+            times.get(Enums.TimesInfo.End.ordinal()).add(endTime);
         }
         if (cursor != null) {
             cursor.close();
@@ -74,42 +64,38 @@ class EventsBuilder {
         return title;
     }
 
-    private String getFormattedTime(long beginTime, long endTime, int allDay, int dayDiff) {
-        DateFormat formatter;
-        switch (eventFormatter.timeFormat) {
-            case "12hr": {
-                formatter = new SimpleDateFormat("hh:mm a");
-                break;
+    private String getFormattedTime(long beginTime, long endTime, int allDay, String timeZone) {
+        beginTime = new DateTime(beginTime, DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
+        endTime = new DateTime(endTime, DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
+        long nowTime = DateTime.now(DateTimeZone.getDefault()).getMillis();
+
+        if (allDay == 0) {
+            String bd = String.valueOf(DateUtils.getRelativeTimeSpanString(beginTime, nowTime, DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_DATE));
+            String ed = String.valueOf(DateUtils.getRelativeTimeSpanString(endTime, nowTime, DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_DATE));
+            String bt = String.valueOf(DateUtils.formatDateTime(context, beginTime, DateUtils.FORMAT_SHOW_TIME));
+            String et = String.valueOf(DateUtils.formatDateTime(context, endTime, DateUtils.FORMAT_SHOW_TIME));
+
+            int numberOfDays = Days.daysBetween(new DateTime(beginTime, DateTimeZone.getDefault()), new DateTime(endTime, DateTimeZone.getDefault())).getDays();
+            if (numberOfDays != 0) {
+                return bd + ", " + bt + " - " + ed + ", " + et;
+            } else {
+                return bd + ", " + bt + " - " + et;
             }
-            case "24hr": {
-                formatter = new SimpleDateFormat("HH:mm");
-                break;
-            }
-            default: {
-                formatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
-            }
-        }
-        String time = formatter.format(beginTime) + " - " + formatter.format(endTime);
-        if (allDay == 1) {
-            time = eventFormatter.all_day;
-        }
-        switch (dayDiff) {
-            case 0: {
-                break;
-            }
-            case 1: {
-                time += eventFormatter.separator + " " + eventFormatter.tomorrow;
-                break;
-            }
-            case 2: {
-                time += eventFormatter.separator + " " + eventFormatter.day_after_tomorrow;
-                break;
-            }
-            default: {
-                time += eventFormatter.separator + " " + eventFormatter.after + " " + (dayDiff - 1) + " " + eventFormatter.days;
+        } else {
+            // making sure that prev/next day doesn't accidentally show up
+            beginTime += 1;
+            endTime -= 1;
+
+            String bd = String.valueOf(DateUtils.getRelativeTimeSpanString(beginTime, nowTime, DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_DATE));
+            String ed = String.valueOf(DateUtils.getRelativeTimeSpanString(endTime, nowTime, DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_DATE));
+
+            int numberOfDays = Days.daysBetween(new DateTime(beginTime, DateTimeZone.getDefault()), new DateTime(endTime, DateTimeZone.getDefault())).getDays();
+            if (numberOfDays != 0) {
+                return bd + " - " + ed;
+            } else {
+                return bd;
             }
         }
-        return time;
     }
 
     static class EventFormatter {
