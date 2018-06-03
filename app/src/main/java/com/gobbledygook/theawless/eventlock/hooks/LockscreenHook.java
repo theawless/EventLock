@@ -52,7 +52,7 @@ public class LockscreenHook implements IXposedHookLoadPackage {
             log("Added view to lockscreen");
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(Constants.events_update);
-            intentFilter.addAction(Constants.current_event_update);
+            intentFilter.addAction(Constants.current_events_update);
             intentFilter.addAction(Constants.looks_update);
             intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
             gridLayout.getContext().registerReceiver(updateReceiver, intentFilter);

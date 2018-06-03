@@ -73,9 +73,13 @@ public class EventsGismo {
     //--------------------------------------------------------------------------------------------//
 
     // when screen gets off
-    public void scrollToCurrentEvent() {
-        if (eventsAdapter.inRange() && recyclerView.getAdapter() != null) {
-            recyclerView.scrollToPosition(eventsAdapter.currentEventIndex);
+    public void scrollToCurrentEvents() {
+        if (recyclerView.getAdapter() != null) {
+            if (eventsAdapter.currentEventIndexes != null && !eventsAdapter.currentEventIndexes.isEmpty()) {
+                recyclerView.scrollToPosition(eventsAdapter.currentEventIndexes.get(eventsAdapter.currentEventIndexes.size() - 1));
+            } else if (eventsAdapter.events != null && !eventsAdapter.events.isEmpty()) {
+                recyclerView.scrollToPosition(eventsAdapter.events.size() - 1);
+            }
         }
     }
 
@@ -97,15 +101,19 @@ public class EventsGismo {
     }
 
     // called by update receiver, step 2
-    public void deliverNewCurrentEvent(int eventToDisplay) {
-        if (eventsAdapter.inRange()) {
-            eventsAdapter.notifyItemChanged(eventsAdapter.currentEventIndex);
+    public void deliverNewCurrentEvents(ArrayList<Integer> eventsToDisplay) {
+        ArrayList<Integer> oldEventsToDisplay = eventsAdapter.currentEventIndexes;
+        eventsAdapter.currentEventIndexes = eventsToDisplay;
+        if (oldEventsToDisplay != null) {
+            for (int eventToDisplay : oldEventsToDisplay) {
+                eventsAdapter.notifyItemChanged(eventToDisplay);
+            }
         }
-        eventsAdapter.currentEventIndex = eventToDisplay;
-        if (eventsAdapter.inRange()) {
-            eventsAdapter.notifyItemChanged(eventsAdapter.currentEventIndex);
+        for (int eventToDisplay : eventsToDisplay) {
+            eventsAdapter.notifyItemChanged(eventToDisplay);
         }
-        scrollToCurrentEvent();
+
+        scrollToCurrentEvents();
     }
 
     // cache these because they will be used in onBind on recycler view

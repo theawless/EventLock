@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constants.events_update);
-        intentFilter.addAction(Constants.current_event_update);
+        intentFilter.addAction(Constants.current_events_update);
         intentFilter.addAction(Constants.looks_update);
         registerReceiver(updateReceiver, intentFilter);
     }

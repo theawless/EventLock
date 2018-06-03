@@ -28,16 +28,16 @@ public abstract class UpdateReceiver extends BroadcastReceiver {
                     );
                 }
                 break;
-            case Constants.current_event_update:
+            case Constants.current_events_update:
                 if (bundle != null) {
-                    eventsGismo.deliverNewCurrentEvent(bundle.getInt(Constants.current_event));
+                    eventsGismo.deliverNewCurrentEvents(bundle.getIntegerArrayList(Constants.current_events));
                 }
                 break;
             case Constants.looks_update:
                 eventsGismo.notifyUpdatedPreferences();
                 break;
             case Intent.ACTION_SCREEN_OFF: {
-                eventsGismo.scrollToCurrentEvent();
+                eventsGismo.scrollToCurrentEvents();
                 break;
             }
         }

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
     private final SharedPreferences preferences;
     ArrayList<ArrayList<String>> events;
-    int currentEventIndex;
+    ArrayList<Integer> currentEventIndexes;
     boolean currentHighlight[];
     private int[][] innerDimensions = new int[][]{};
 
@@ -31,10 +31,6 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     void setupInnerDimensions(int[][] innerDimensions) {
         this.innerDimensions = innerDimensions;
-    }
-
-    boolean inRange() {
-        return 0 <= currentEventIndex && currentEventIndex < getItemCount();
     }
 
     @NonNull
@@ -48,7 +44,7 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
         if (holder.getColorImageView() != null) {
             ((ShapeDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(0)).getPaint().setColor(Integer.parseInt(events.get(Enums.EventInfo.Color.ordinal()).get(position)));
         }
-        if (position == currentEventIndex) {
+        if (currentEventIndexes != null && currentEventIndexes.contains(position)) {
             if (currentHighlight[CurrentHighlight.TitleBold.ordinal()]) {
                 holder.getTitleTextView().setTypeface(holder.getTitleTextView().getTypeface(), Typeface.BOLD);
             }

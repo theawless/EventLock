@@ -11,7 +11,7 @@ public class Constants {
     // intent filters
 
     public static final String events_update = BuildConfig.APPLICATION_ID + "." + "EventsUpdate";
-    public static final String current_event_update = BuildConfig.APPLICATION_ID + "." + "CurrentEventUpdate";
+    public static final String current_events_update = BuildConfig.APPLICATION_ID + "." + "CurrentEventUpdate";
     public static final String looks_update = BuildConfig.APPLICATION_ID + "." + "LooksUpdate";
 
     // intent extras
@@ -21,7 +21,7 @@ public class Constants {
     public static final String colors = "colors";
     public static final String begin_times = "beginTimes";
     public static final String end_times = "endTimes";
-    public static final String current_event = "currentEvent";
+    public static final String current_events = "currentEvents";
 
     // keys
 
