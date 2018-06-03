@@ -49,14 +49,9 @@
     <string name="current_time_bold_key">current_time_bold</string>
     <string name="current_color_outline_key">current_color_outline</string>
 
-    <string name="tomorrow_key">tomorrow</string>
-    <string name="day_after_tomorrow_key">day_after_tomorrow</string>
-    <string name="days_key">days</string>
-    <string name="after_key">after</string>
-    <string name="all_day_key">all_day</string>
-    <string name="at_key">at</string>
-    <string name="separator_key">separator</string>
-
+    <string name="time_separator_key">time_separator</string>
+    <string name="range_separator_key">range_separator</string>
+    <string name="location_separator_key">location_separator</string>
     <string name="location_key">location</string>
     <string name="dark_mode_key">dark_mode</string>
 
@@ -111,9 +106,10 @@
     <string name="current_time_bold_default">false</string>
     <string name="current_color_outline_default">true</string>
 
-    <!-- the time string are present in strings.xml because their defaults can be translated -->
-
-    <string name="location_default">true</string>
+    <string name="time_separator_default">,&#160;</string>
+    <string name="range_separator_default">&#160;-&#160;</string>
+    <string name="location_separator_default">&#160;|&#160;</string>
+    <string name="location_default">title</string>
     <string name="dark_mode_default">false</string>
 
 </resources>

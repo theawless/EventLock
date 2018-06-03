@@ -72,14 +72,9 @@ public class Constants {
     public static final String current_time_bold_key = "current_time_bold";
     public static final String current_color_outline_key = "current_color_outline";
 
-    public static final String tomorrow_key = "tomorrow";
-    public static final String day_after_tomorrow_key = "day_after_tomorrow";
-    public static final String days_key = "days";
-    public static final String after_key = "after";
-    public static final String all_day_key = "all_day";
-    public static final String at_key = "at";
-    public static final String separator_key = "separator";
-
+    public static final String time_separator_key = "time_separator";
+    public static final String range_separator_key = "range_separator";
+    public static final String location_separator_key = "location_separator";
     public static final String location_key = "location";
     public static final String dark_mode_key = "dark_mode";
 
@@ -133,9 +128,10 @@ public class Constants {
     public static final String current_time_bold_default = "false";
     public static final String current_color_outline_default = "true";
 
-    // some defaults are present in strings.xml because their defaults can be translated
-
-    public static final String location_default = "true";
+    public static final String time_separator_default = ", ";
+    public static final String range_separator_default = " - ";
+    public static final String location_separator_default = " | ";
+    public static final String location_default = "title";
     public static final String dark_mode_default = "false";
 
     private Constants() {

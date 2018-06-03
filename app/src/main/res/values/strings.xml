@@ -13,18 +13,7 @@
     <string name="reboot">Reboot</string>
     <string name="read_permission_error">Calendar read permission is required. Exiting!</string>
     <string name="preset_set">Settings set to preset, press refresh!</string>
-
     <string name="help">Please press the refresh button after making any setting changes.\n\nThe eye button in the title bar can be used to show/hide preview.\n\nI did not have the resources to translate the app, but the displayable parts can be translated by going to Title &amp; Time > Text\n\nKeeping the bottom padding in Gismo high will lead to more space between notifications and events.\n\nTo make the oval color block circular, set height equal to width.\n\nThere are loads of combinations possible! Mess up those settings! :-D</string>
-
-    <!-- Translatable and user changable strings -->
-    <string name="tomorrow_default">tomorrow</string>
-    <string name="day_after_tomorrow_default">day after tomorrow</string>
-    <string name="days_default">days</string>
-    <string name="after_default">after</string>
-    <string name="all_day_default">All day</string>
-    <string name="at_default">at</string>
-    <string name="separator_default">,</string>
-
     <string name="help_title">Help</string>
     <string name="help_summary">Details about various features</string>
 
@@ -136,31 +125,22 @@
     <string name="current_color_outline_summary">Outline the color block of the current event</string>
     <string name="current_color_outline_title">Color outline</string>
 
-    <string name="tomorrow_title">Tomorrow</string>
-    <string name="tomorrow_summary">\'tomorrow\' shown in time</string>
-    <string name="day_after_tomorrow_title">Day after tomorrow</string>
-    <string name="day_after_tomorrow_summary">\'day after tomorrow\' shown in time</string>
-    <string name="days_title">Days</string>
-    <string name="days_summary">\'days\' shown in time</string>
-    <string name="after_title">After</string>
-    <string name="after_summary">\'after\' shown in time</string>
-    <string name="all_day_title">All day</string>
-    <string name="all_day_summary">\'all day\' shown in time</string>
-    <string name="at_title">At</string>
-    <string name="at_summary">\'at\' shown in title</string>
-    <string name="separator_title">Separator</string>
-    <string name="separator_summary">\',\' shown in title</string>
-
+    <string name="time_separator_title">Time separator</string>
+    <string name="time_separator_summary">Separates date and time</string>
+    <string name="range_separator_title">Range separator</string>
+    <string name="range_separator_summary">Separates time range</string>
+    <string name="location_separator_title">Location separator</string>
+    <string name="location_separator_summary">Separates location from title or time</string>
     <string name="location_title">Show location</string>
-    <string name="location_summary">Should location be added to the title</string>
+    <string name="location_summary">Where should location be displayed</string>
     <string name="dark_mode_title">Dark mode</string>
     <string name="dark_mode_summary">Helpful when the background is bright</string>
 
     <!-- options for various settings -->
-    <string-array name="time_format_entvals">
-        <item>auto</item>
-        <item>24hr</item>
-        <item>12hr</item>
+    <string-array name="location_entvals">
+        <item>title</item>
+        <item>time</item>
+        <item>off</item>
     </string-array>
     <string-array name="lrud_entvals">
         <item>left</item>

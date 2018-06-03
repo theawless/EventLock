@@ -46,22 +46,27 @@ class EventsBuilder {
             long endTime = cursor.getLong(3);
             String timeZone = cursor.getString(6);
             int allDay = cursor.getInt(4);
-            events.get(Enums.EventInfo.Title.ordinal()).add(getFormattedTitle(cursor.getString(0), cursor.getString(1)));
-            events.get(Enums.EventInfo.Time.ordinal()).add(getFormattedTime(beginTime, endTime, allDay, timeZone));
-            events.get(Enums.EventInfo.Color.ordinal()).add(cursor.getString(5));
+            String title = cursor.getString(0);
+            String location = cursor.getString(1);
+            String time = getFormattedTime(beginTime, endTime, allDay, timeZone);
+            String color = cursor.getString(5);
+            if (location != null && !location.isEmpty() && eventFormatter.location) {
+                if (eventFormatter.locationWithTitle) {
+                    title += eventFormatter.locationSeparator + location;
+                } else {
+                    time += eventFormatter.locationSeparator + location;
+                }
+            }
+
+            events.get(Enums.EventInfo.Title.ordinal()).add(title);
+            events.get(Enums.EventInfo.Time.ordinal()).add(time);
+            events.get(Enums.EventInfo.Color.ordinal()).add(color);
             times.get(Enums.TimesInfo.Begin.ordinal()).add(beginTime);
             times.get(Enums.TimesInfo.End.ordinal()).add(endTime);
         }
         if (cursor != null) {
             cursor.close();
         }
-    }
-
-    private String getFormattedTitle(String title, String location) {
-        if (location != null && !location.isEmpty() && eventFormatter.location) {
-            return title + " " + eventFormatter.at + " " + location;
-        }
-        return title;
     }
 
     private String getFormattedTime(long beginTime, long endTime, int allDay, String timeZone) {
@@ -77,9 +82,9 @@ class EventsBuilder {
 
             int numberOfDays = Days.daysBetween(new DateTime(beginTime, DateTimeZone.getDefault()), new DateTime(endTime, DateTimeZone.getDefault())).getDays();
             if (numberOfDays != 0) {
-                return bd + ", " + bt + " - " + ed + ", " + et;
+                return bd + eventFormatter.timeSeparator + bt + eventFormatter.rangeSeparator + ed + eventFormatter.timeSeparator + et;
             } else {
-                return bd + ", " + bt + " - " + et;
+                return bd + eventFormatter.timeSeparator + bt + eventFormatter.rangeSeparator + et;
             }
         } else {
             // making sure that prev/next day doesn't accidentally show up
@@ -91,7 +96,7 @@ class EventsBuilder {
 
             int numberOfDays = Days.daysBetween(new DateTime(beginTime, DateTimeZone.getDefault()), new DateTime(endTime, DateTimeZone.getDefault())).getDays();
             if (numberOfDays != 0) {
-                return bd + " - " + ed;
+                return bd + eventFormatter.rangeSeparator + ed;
             } else {
                 return bd;
             }
@@ -99,14 +104,10 @@ class EventsBuilder {
     }
 
     static class EventFormatter {
-        String timeFormat;
-        String tomorrow;
-        String day_after_tomorrow;
-        String days;
-        String after;
-        String all_day;
-        String at;
-        String separator;
+        String timeSeparator;
+        String rangeSeparator;
+        String locationSeparator;
         boolean location;
+        boolean locationWithTitle;
     }
 }

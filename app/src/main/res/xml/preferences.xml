@@ -137,13 +137,19 @@
                     android:key="@string/text_position_key"
                     android:summary="@string/text_position_summary"
                     android:title="@string/text_position_title" />
+                <SwitchPreference
+                    android:defaultValue="@string/show_free_text_default"
+                    android:key="@string/show_free_text_key"
+                    android:summary="@string/show_free_text_summary"
+                    android:title="@string/show_free_text_title" />
+                <EditTextPreference
+                    android:defaultValue="@string/free_text_default"
+                    android:dependency="@string/show_free_text_key"
+                    android:key="@string/free_text_key"
+                    android:summary="@string/free_text_summary"
+                    android:title="@string/free_text_title" />
             </PreferenceCategory>
             <PreferenceCategory android:title="Title">
-                <SwitchPreference
-                    android:defaultValue="@string/location_default"
-                    android:key="@string/location_key"
-                    android:summary="@string/location_summary"
-                    android:title="@string/location_title" />
                 <EditTextPreference
                     android:defaultValue="@string/title_font_size_default"
                     android:inputType="number"
@@ -200,19 +206,22 @@
                     android:summary="@string/time_font_size_summary"
                     android:title="@string/time_font_size_title" />
                 <ListPreference
-                    android:defaultValue="@string/time_format_default"
-                    android:entries="@array/time_format_entvals"
-                    android:entryValues="@array/time_format_entvals"
-                    android:key="@string/time_format_key"
-                    android:summary="@string/time_format_summary"
-                    android:title="@string/time_format_title" />
-                <ListPreference
                     android:defaultValue="@string/time_alignment_default"
                     android:entries="@array/lrc_entvals"
                     android:entryValues="@array/lrc_entvals"
                     android:key="@string/time_alignment_key"
                     android:summary="@string/time_alignment_summary"
                     android:title="@string/time_alignment_title" />
+                <EditTextPreference
+                    android:defaultValue="@string/time_separator_default"
+                    android:key="@string/time_separator_key"
+                    android:summary="@string/time_separator_summary"
+                    android:title="@string/time_separator_title" />
+                <EditTextPreference
+                    android:defaultValue="@string/range_separator_default"
+                    android:key="@string/range_separator_key"
+                    android:summary="@string/range_separator_summary"
+                    android:title="@string/range_separator_title" />
                 <PreferenceScreen android:title="Padding">
                     <PreferenceCategory android:title="Time padding">
                         <EditTextPreference
@@ -246,53 +255,19 @@
                     </PreferenceCategory>
                 </PreferenceScreen>
             </PreferenceCategory>
-            <PreferenceCategory android:title="Text">
-                <SwitchPreference
-                    android:defaultValue="@string/show_free_text_default"
-                    android:key="@string/show_free_text_key"
-                    android:summary="@string/show_free_text_summary"
-                    android:title="@string/show_free_text_title" />
+            <PreferenceCategory android:title="Location">
+                <ListPreference
+                    android:defaultValue="@string/location_default"
+                    android:entries="@array/location_entvals"
+                    android:entryValues="@array/location_entvals"
+                    android:key="@string/location_key"
+                    android:summary="@string/location_summary"
+                    android:title="@string/location_title" />
                 <EditTextPreference
-                    android:defaultValue="@string/free_text_default"
-                    android:dependency="@string/show_free_text_key"
-                    android:key="@string/free_text_key"
-                    android:summary="@string/free_text_summary"
-                    android:title="@string/free_text_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/tomorrow_default"
-                    android:key="@string/tomorrow_key"
-                    android:summary="@string/tomorrow_summary"
-                    android:title="@string/tomorrow_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/day_after_tomorrow_default"
-                    android:key="@string/day_after_tomorrow_key"
-                    android:summary="@string/day_after_tomorrow_summary"
-                    android:title="@string/day_after_tomorrow_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/days_default"
-                    android:key="@string/days_key"
-                    android:summary="@string/days_summary"
-                    android:title="@string/days_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/after_default"
-                    android:key="@string/after_key"
-                    android:summary="@string/after_summary"
-                    android:title="@string/after_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/all_day_default"
-                    android:key="@string/all_day_key"
-                    android:summary="@string/all_day_summary"
-                    android:title="@string/all_day_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/at_default"
-                    android:key="@string/at_key"
-                    android:summary="@string/at_summary"
-                    android:title="@string/at_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/separator_default"
-                    android:key="@string/separator_key"
-                    android:summary="@string/separator_summary"
-                    android:title="@string/separator_title" />
+                    android:defaultValue="@string/location_separator_default"
+                    android:key="@string/location_separator_key"
+                    android:summary="@string/location_separator_summary"
+                    android:title="@string/location_separator_title" />
             </PreferenceCategory>
         </PreferenceScreen>
         <PreferenceScreen android:title="Color">
