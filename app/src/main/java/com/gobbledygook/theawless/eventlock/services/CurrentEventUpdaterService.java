@@ -30,7 +30,7 @@ public class CurrentEventUpdaterService extends IntentService {
         }
         long[] beginTimes = bundle.getLongArray(Constants.begin_times);
         long[] endTimes = bundle.getLongArray(Constants.end_times);
-        if (beginTimes == null || beginTimes.length == 0 || endTimes == null || endTimes.length == 0) {
+        if (beginTimes == null || endTimes == null) {
             return;
         }
         decideEvents(beginTimes, endTimes);

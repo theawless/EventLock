@@ -58,7 +58,7 @@ class EventsBuilder {
                 }
             }
 
-            if (endTime >= DateTime.now(DateTimeZone.getDefault()).getMillis()) {
+            if (endTime > DateTime.now(DateTimeZone.getDefault()).plusMillis(1).withTimeAtStartOfDay().getMillis()) {
                 events.get(Enums.EventInfo.Title.ordinal()).add(title);
                 events.get(Enums.EventInfo.Time.ordinal()).add(time);
                 events.get(Enums.EventInfo.Color.ordinal()).add(color);

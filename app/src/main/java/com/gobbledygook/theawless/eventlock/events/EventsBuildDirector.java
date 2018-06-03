@@ -14,10 +14,8 @@ public class EventsBuildDirector {
     private static final String[] EVENT_PROJECTION = {CalendarContract.Instances.TITLE, CalendarContract.Instances.EVENT_LOCATION, CalendarContract.Instances.BEGIN, CalendarContract.Instances.END, CalendarContract.Instances.ALL_DAY, CalendarContract.Instances.DISPLAY_COLOR, CalendarContract.Instances.EVENT_TIMEZONE};
     private final SharedPreferences preferences;
     private final EventsBuilder eventsBuilder;
-    private final Context context;
 
     public EventsBuildDirector(Context context) {
-        this.context = context;
         eventsBuilder = new EventsBuilder(context);
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
