@@ -370,8 +370,15 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/about_title">
         <Preference
-            android:summary="@string/help_summary"
-            android:title="@string/help_title" />
+            android:summary="@string/help_you_summary"
+            android:title="@string/help_you_title" />
+        <Preference
+            android:summary="@string/help_me_summary"
+            android:title="@string/help_me_title">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/paypal_url" />
+        </Preference>
         <Preference
             android:summary="@string/github_url"
             android:title="@string/github_title">
