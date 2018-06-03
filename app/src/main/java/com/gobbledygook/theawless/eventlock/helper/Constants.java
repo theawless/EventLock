@@ -45,8 +45,6 @@ public class Constants {
     public static final String title_padding_left_key = "title_padding_left";
     public static final String title_padding_right_key = "title_padding_right";
 
-    public static final String free_text_key = "free_text";
-    public static final String show_free_text_key = "show_free_text";
     public static final String number_of_events_key = "number_of_events";
     public static final String gismo_scroll_direction_key = "gismo_scroll";
     public static final String gismo_layout_direction_key = "gismo_layout";
@@ -99,9 +97,6 @@ public class Constants {
     public static final String title_padding_below_default = "0";
     public static final String title_padding_left_default = "0";
     public static final String title_padding_right_default = "0";
-
-    public static final String free_text_default = "No more events";
-    public static final String show_free_text_default = "false";
 
     public static final String number_of_events_default = "2";
     public static final String gismo_scroll_direction_default = "vertical";

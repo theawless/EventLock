@@ -137,17 +137,6 @@
                     android:key="@string/text_position_key"
                     android:summary="@string/text_position_summary"
                     android:title="@string/text_position_title" />
-                <SwitchPreference
-                    android:defaultValue="@string/show_free_text_default"
-                    android:key="@string/show_free_text_key"
-                    android:summary="@string/show_free_text_summary"
-                    android:title="@string/show_free_text_title" />
-                <EditTextPreference
-                    android:defaultValue="@string/free_text_default"
-                    android:dependency="@string/show_free_text_key"
-                    android:key="@string/free_text_key"
-                    android:summary="@string/free_text_summary"
-                    android:title="@string/free_text_title" />
             </PreferenceCategory>
             <PreferenceCategory android:title="@string/title_title">
                 <EditTextPreference

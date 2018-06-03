@@ -13,9 +13,11 @@
     <string name="reboot">Reboot</string>
     <string name="read_permission_error">Calendar read permission is required. Exiting!</string>
     <string name="preset_set">Settings set to preset, press refresh!</string>
-    <string name="help">Please press the refresh button after making any setting changes.\n\nThe eye button in the title bar can be used to show/hide preview.\n\nI did not have the resources to translate the app, but the displayable parts can be translated by going to Title &amp; Time > Text\n\nKeeping the bottom padding in Gismo high will lead to more space between notifications and events.\n\nTo make the oval color block circular, set height equal to width.\n\nThere are loads of combinations possible! Mess up those settings! :-D</string>
-    <string name="help_title">Help</string>
-    <string name="help_summary">Details about various features</string>
+    <string name="help">Please press the refresh button after making any setting changes.\n\nThe eye button in the title bar can be used to show/hide preview.\n\nKeeping the bottom padding in Gismo high will lead to more space between notifications and events.\n\nTo make the oval color block circular, set height equal to width.\n\nThere are loads of combinations possible! Mess up those settings! :-D</string>
+    <string name="help_you_title">Help you</string>
+    <string name="help_you_summary">Details about various features</string>
+    <string name="help_me_title">Help me</string>
+    <string name="help_me_summary">Buy a coffee for the developer</string>
 
     <!-- Shown in action bar -->
     <string name="action_preview_title">Preview</string>
@@ -89,11 +91,6 @@
     <string name="title_padding_right_title">Right</string>
     <string name="title_padding_left_summary">Title\'s padding from left in the lock screen</string>
     <string name="title_padding_left_title">Left</string>
-
-    <string name="free_text_summary">Shown when no more events in the range are found</string>
-    <string name="free_text_title">Free text</string>
-    <string name="show_free_text_summary">Should a last free event be added to the list</string>
-    <string name="show_free_text_title">Show free text</string>
 
     <string name="number_of_events_summary">Number of events on the same page</string>
     <string name="number_of_events_title">Number of events</string>

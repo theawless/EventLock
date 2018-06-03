@@ -103,9 +103,9 @@ public class SettingsFragment extends PreferenceFragment {
                 }
                 return true;
             }
-            case R.string.help_title: {
+            case R.string.help_you_title: {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.help_title)
+                        .setTitle(R.string.help_you_title)
                         .setMessage(R.string.help)
                         .setIcon(R.drawable.eventlock_icon)
                         .setPositiveButton(R.string.okay, null)

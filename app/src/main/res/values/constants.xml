@@ -21,9 +21,6 @@
     <string name="title_padding_left_key">title_padding_left</string>
     <string name="title_padding_right_key">title_padding_right</string>
 
-    <string name="show_free_text_key">show_free_text</string>
-    <string name="free_text_key">free_text</string>
-
     <string name="number_of_events_key">number_of_events</string>
     <string name="gismo_scroll_direction_key">gismo_scroll</string>
     <string name="gismo_layout_direction_key">gismo_layout</string>
@@ -79,8 +76,6 @@
     <string name="title_padding_left_default">0</string>
     <string name="title_padding_right_default">0</string>
 
-    <string name="free_text_default">No more events</string>
-    <string name="show_free_text_default">false</string>
     <string name="number_of_events_default">2</string>
     <string name="gismo_scroll_direction_default">vertical</string>
     <string name="gismo_layout_direction_default">vertical</string>

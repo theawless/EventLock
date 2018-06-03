@@ -138,21 +138,15 @@ class PresetMaker {
     private class SavedState {
         private Set<String> savedSelectedCalendarCalendars;
         private String savedDaysTill;
-        private String saveFreeText;
-        private boolean saveShowFreeEvent;
 
         void loadBack() {
             editor.putStringSet(Constants.selected_calendars_key, savedSelectedCalendarCalendars)
-                    .putString(Constants.days_till_key, savedDaysTill)
-                    .putString(Constants.free_text_key, saveFreeText)
-                    .putBoolean(Constants.show_free_text_key, saveShowFreeEvent);
+                    .putString(Constants.days_till_key, savedDaysTill);
         }
 
         void saveToMemory() {
             savedSelectedCalendarCalendars = preferences.getStringSet(Constants.selected_calendars_key, Constants.selected_calendars_default);
             savedDaysTill = preferences.getString(Constants.days_till_key, Constants.days_till_default);
-            saveFreeText = preferences.getString(Constants.free_text_key, Constants.free_text_default);
-            saveShowFreeEvent = preferences.getBoolean(Constants.show_free_text_key, Boolean.parseBoolean(Constants.show_free_text_default));
         }
 
         void reset() {

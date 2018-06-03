@@ -5,7 +5,6 @@ import static com.gobbledygook.theawless.eventlock.helper.Utils.preventParentTou
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.widget.GridLayout;
 
@@ -74,12 +73,8 @@ public class EventsGismo {
 
     // when screen gets off
     public void scrollToCurrentEvents() {
-        if (recyclerView.getAdapter() != null) {
-            if (eventsAdapter.currentEventIndexes != null && !eventsAdapter.currentEventIndexes.isEmpty()) {
-                recyclerView.scrollToPosition(eventsAdapter.currentEventIndexes.get(eventsAdapter.currentEventIndexes.size() - 1));
-            } else if (eventsAdapter.events != null && !eventsAdapter.events.isEmpty()) {
-                recyclerView.scrollToPosition(eventsAdapter.events.size() - 1);
-            }
+        if (recyclerView.getAdapter() != null && eventsAdapter.currentEventIndexes != null && !eventsAdapter.currentEventIndexes.isEmpty()) {
+            recyclerView.scrollToPosition(eventsAdapter.currentEventIndexes.get(eventsAdapter.currentEventIndexes.size() - 1));
         }
     }
 
@@ -90,12 +85,6 @@ public class EventsGismo {
 
     // called by update receiver, step 1
     public void deliverNewEvents(ArrayList<String> formattedTitles, ArrayList<String> formattedTimes, ArrayList<String> colors) {
-        // add empty event
-        if (preferences.getBoolean(Constants.show_free_text_key, Boolean.parseBoolean(Constants.show_free_text_default))) {
-            formattedTitles.add(preferences.getString(Constants.free_text_key, Constants.free_text_default));
-            formattedTimes.add("");
-            colors.add(String.valueOf(Color.TRANSPARENT));
-        }
         eventsAdapter.events = new ArrayList<>(Arrays.asList(formattedTitles, formattedTimes, colors));
         eventsAdapter.notifyDataSetChanged();
     }

@@ -51,7 +51,7 @@ class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
             if (currentHighlight[CurrentHighlight.TimeBold.ordinal()]) {
                 holder.getTimeTextView().setTypeface(holder.getTimeTextView().getTypeface(), Typeface.BOLD);
             }
-            if (currentHighlight[CurrentHighlight.ColorOutline.ordinal()] && holder.getColorImageView() != null && Integer.parseInt(events.get(Enums.EventInfo.Color.ordinal()).get(position)) != Color.TRANSPARENT) {
+            if (currentHighlight[CurrentHighlight.ColorOutline.ordinal()] && holder.getColorImageView() != null) {
                 ((GradientDrawable) ((LayerDrawable) holder.getColorImageView().getDrawable()).getDrawable(1)).setStroke(2, currentHighlight[CurrentHighlight.DarkMode.ordinal()] ? Color.BLACK : Color.WHITE);
             }
         }
