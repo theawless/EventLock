@@ -42,13 +42,13 @@ class EventsBuilder {
 
     void build() {
         while (cursor != null && cursor.moveToNext()) {
-            long beginTime = cursor.getLong(2);
-            long endTime = cursor.getLong(3);
             String timeZone = cursor.getString(6);
+            long beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
+            long endTime = new DateTime(cursor.getLong(3), DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
             int allDay = cursor.getInt(4);
             String title = cursor.getString(0);
             String location = cursor.getString(1);
-            String time = getFormattedTime(beginTime, endTime, allDay, timeZone);
+            String time = getFormattedTime(beginTime, endTime, allDay);
             String color = cursor.getString(5);
             if (location != null && !location.isEmpty() && eventFormatter.location) {
                 if (eventFormatter.locationWithTitle) {
@@ -58,22 +58,21 @@ class EventsBuilder {
                 }
             }
 
-            events.get(Enums.EventInfo.Title.ordinal()).add(title);
-            events.get(Enums.EventInfo.Time.ordinal()).add(time);
-            events.get(Enums.EventInfo.Color.ordinal()).add(color);
-            times.get(Enums.TimesInfo.Begin.ordinal()).add(beginTime);
-            times.get(Enums.TimesInfo.End.ordinal()).add(endTime);
+            if (endTime >= DateTime.now(DateTimeZone.getDefault()).getMillis()) {
+                events.get(Enums.EventInfo.Title.ordinal()).add(title);
+                events.get(Enums.EventInfo.Time.ordinal()).add(time);
+                events.get(Enums.EventInfo.Color.ordinal()).add(color);
+                times.get(Enums.TimesInfo.Begin.ordinal()).add(beginTime);
+                times.get(Enums.TimesInfo.End.ordinal()).add(endTime);
+            }
         }
         if (cursor != null) {
             cursor.close();
         }
     }
 
-    private String getFormattedTime(long beginTime, long endTime, int allDay, String timeZone) {
-        beginTime = new DateTime(beginTime, DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
-        endTime = new DateTime(endTime, DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
+    private String getFormattedTime(long beginTime, long endTime, int allDay) {
         long nowTime = DateTime.now(DateTimeZone.getDefault()).getMillis();
-
         if (allDay == 0) {
             String bd = String.valueOf(DateUtils.getRelativeTimeSpanString(beginTime, nowTime, DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_DATE));
             String ed = String.valueOf(DateUtils.getRelativeTimeSpanString(endTime, nowTime, DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_SHOW_DATE));

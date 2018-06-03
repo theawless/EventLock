@@ -13,6 +13,7 @@ import com.gobbledygook.theawless.eventlock.helper.Enums;
 import com.gobbledygook.theawless.eventlock.receivers.alarms.CalendarLoaderAlarm;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,7 @@ public class CalendarLoaderService extends IntentService {
     }
 
     private void setAlarm() {
-        new CalendarLoaderAlarm().setAlarm(this, new DateTime().plusDays(1).withTimeAtStartOfDay().plusSeconds(1).getMillis(), new Intent());
+        new CalendarLoaderAlarm().setAlarm(this, DateTime.now(DateTimeZone.getDefault()).plusDays(1).withTimeAtStartOfDay().plusSeconds(1).getMillis(), new Intent());
     }
 
     private void startCurrentEventUpdater(ArrayList<Long> beginTimes, ArrayList<Long> endTimes) {
