@@ -24,6 +24,25 @@
 
     <!-- Shown in settings -->
 
+    <string name="settings_title">Settings</string>
+    <string name="customisation_title">Customisation</string>
+    <string name="presets_title">Presets</string>
+    <string name="multiple_title">Multiple</string>
+    <string name="single_title">Single</string>
+    <string name="padding_title">Padding</string>
+    <string name="gismo_title">Gismo</string>
+    <string name="gismo_padding_title">Gismo Padding</string>
+    <string name="current_event_title">Current event</string>
+    <string name="title_and_time_title">Title &amp; Time</string>
+    <string name="container_title">Container</string>
+    <string name="title_title">Title</string>
+    <string name="title_padding_title">Title padding</string>
+    <string name="time_title">Time</string>
+    <string name="time_padding_title">Time padding</string>
+    <string name="color_title">Color</string>
+    <string name="color_padding_title">Color padding</string>
+    <string name="about_title">About</string>
+
     <string name="multiple_preset1_title">Preset 1</string>
     <string name="multiple_preset2_title">Preset 2</string>
     <string name="multiple_preset3_title">Preset 3</string>
@@ -131,8 +150,8 @@
     <string name="range_separator_summary">Separates time range</string>
     <string name="location_separator_title">Location separator</string>
     <string name="location_separator_summary">Separates location from title or time</string>
-    <string name="location_title">Show location</string>
-    <string name="location_summary">Where should location be displayed</string>
+    <string name="location_title">Location</string>
+    <string name="location_summary">Where should location be shown</string>
     <string name="dark_mode_title">Dark mode</string>
     <string name="dark_mode_summary">Helpful when the background is bright</string>
 
