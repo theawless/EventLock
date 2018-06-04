@@ -35,15 +35,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         if (savedInstanceState == null) {
             if (!XposedUtils.isModuleEnabled()) {
                 showEnableModuleDialog();
+                return;
             } else if (XposedUtils.isModuleUpdated()) {
                 showModuleUpdatedDialog();
+                return;
             }
         }
+        onCreate();
+    }
+
+    private void onCreate() {
+        setContentView(R.layout.activity_main);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
     }
 
     @Override
@@ -124,19 +130,27 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle(R.string.enable_xposed_module_title)
                 .setMessage(R.string.enable_xposed_module_message)
                 .setIcon(R.drawable.warning_icon)
+                .setCancelable(false)
                 .setPositiveButton(R.string.enable, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startXposedActivity();
+                        finish();
                     }
                 })
                 .setNeutralButton(R.string.report_bug, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startBrowserActivity(getString(R.string.github_issues_url));
+                        finish();
                     }
                 })
-                .setNegativeButton(R.string.ignore, null)
+                .setNegativeButton(R.string.ignore, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onCreate();
+                    }
+                })
                 .show();
     }
 
@@ -145,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle(R.string.module_outdated_title)
                 .setMessage(R.string.module_outdated_message)
                 .setIcon(R.drawable.warning_icon)
+                .setCancelable(false)
                 .setPositiveButton(R.string.clear_data, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -152,15 +167,22 @@ public class MainActivity extends AppCompatActivity {
                                 .addCategory(Intent.CATEGORY_DEFAULT)
                                 .setData(Uri.parse("package:" + getPackageName()))
                         );
+                        finish();
                     }
                 })
                 .setNeutralButton(R.string.reboot, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startXposedActivity();
+                        finish();
                     }
                 })
-                .setNegativeButton(R.string.ignore, null)
+                .setNegativeButton(R.string.ignore, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onCreate();
+                    }
+                })
                 .show();
     }
 }
