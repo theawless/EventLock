@@ -1,5 +1,7 @@
 # EventLock
 
+<img src="Logotype primary.png" width="65%" height="65%" />
+
 An Xposed module to show your calendar(s) events on the lockscreen (Android 5.0+ | Lollipop/Marshmallow/Nougat...).
 
 ### Why?
