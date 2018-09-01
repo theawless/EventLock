@@ -10,7 +10,9 @@
         android:icon="@drawable/eventlock_icon"
         android:label="@string/application_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:allowBackup="true"
+        android:fullBackupContent="true">
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

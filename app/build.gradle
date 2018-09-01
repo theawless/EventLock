@@ -6,8 +6,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 23
         applicationId "com.gobbledygook.theawless.eventlock"
-        versionCode 33
-        versionName "3.3"
+        versionCode 56
+        versionName "3.4"
         vectorDrawables.useSupportLibrary = true
     }
 }
