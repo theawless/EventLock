@@ -36,7 +36,6 @@ public class Constants {
     public static final String time_padding_below_key = "time_padding_below";
     public static final String time_padding_left_key = "time_padding_left";
     public static final String time_padding_right_key = "time_padding_right";
-    public static final String time_format_key = "time_format";
 
     public static final String title_alignment_key = "title_alignment";
     public static final String title_font_size_key = "title_font_size";
@@ -89,7 +88,6 @@ public class Constants {
     public static final String time_padding_below_default = "3";
     public static final String time_padding_left_default = "0";
     public static final String time_padding_right_default = "0";
-    public static final String time_format_default = "auto";
 
     public static final String title_font_size_default = "14";
     public static final String title_alignment_default = "left";

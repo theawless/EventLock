@@ -12,7 +12,6 @@
     <string name="time_padding_below_key">time_padding_below</string>
     <string name="time_padding_left_key">time_padding_left</string>
     <string name="time_padding_right_key">time_padding_right</string>
-    <string name="time_format_key">time_format</string>
 
     <string name="title_alignment_key">title_alignment</string>
     <string name="title_font_size_key">title_font_size</string>
@@ -67,7 +66,6 @@
     <string name="time_padding_below_default">3</string>
     <string name="time_padding_left_default">0</string>
     <string name="time_padding_right_default">0</string>
-    <string name="time_format_default">auto</string>
 
     <string name="title_font_size_default">14</string>
     <string name="title_alignment_default">left</string>

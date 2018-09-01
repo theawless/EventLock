@@ -76,8 +76,6 @@
     <string name="time_padding_right_title">Right</string>
     <string name="time_padding_left_summary">Time\'s padding from left in the lock screen</string>
     <string name="time_padding_left_title">Left</string>
-    <string name="time_format_summary">Time format of the lockscreen</string>
-    <string name="time_format_title">Format</string>
 
     <string name="title_font_size_summary">The display size of title</string>
     <string name="title_font_size_title">Font size</string>
