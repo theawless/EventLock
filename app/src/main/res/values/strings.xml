@@ -14,18 +14,15 @@
     <string name="read_permission_error">Calendar read permission is required. Exiting!</string>
     <string name="preset_set">Settings set to preset, press refresh!</string>
     <string name="help">Please press the refresh button after making any setting changes.\n\nThe eye button in the title bar can be used to show/hide preview.\n\nKeeping the bottom padding in Gismo high will lead to more space between notifications and events.\n\nTo make the oval color block circular, set height equal to width.\n\nThere are loads of combinations possible! Mess up those settings! :-D</string>
-    <string name="help_you_title">Help you</string>
-    <string name="help_you_summary">Details about various features</string>
-    <string name="help_me_title">Help me</string>
-    <string name="help_me_summary">Buy a coffee for the developer</string>
+    <string name="project">Hey,\n\nI built this project for my personal use, but I am glad that it could help you too.\n\nMany people have helped me (on Github and XDA) in testing and by suggesting new ideas. Special mention to Mansya Prime for designing the icon.\n\nThanks a lot everyone!</string>
+    <string name="github">Github</string>
+    <string name="paypal">Donate</string>
 
     <!-- Shown in action bar -->
     <string name="action_preview_title">Preview</string>
     <string name="action_refresh_title">Refresh</string>
-    <string name="github_title">View project on Github</string>
 
     <!-- Shown in settings -->
-
     <string name="settings_title">Settings</string>
     <string name="customisation_title">Customisation</string>
     <string name="presets_title">Presets</string>
@@ -44,6 +41,10 @@
     <string name="color_title">Color</string>
     <string name="color_padding_title">Color padding</string>
     <string name="about_title">About</string>
+    <string name="help_title">Help</string>
+    <string name="help_summary">Details about various features</string>
+    <string name="project_title">Project</string>
+    <string name="project_summary">Credits and urls</string>
 
     <string name="multiple_preset1_title">Preset 1</string>
     <string name="multiple_preset2_title">Preset 2</string>
