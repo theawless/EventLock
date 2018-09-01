@@ -21,6 +21,7 @@ import java.util.ArrayList;
 class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
     private final SharedPreferences preferences;
     ArrayList<ArrayList<String>> events;
+    int scrollEventIndex;
     ArrayList<Integer> currentEventIndexes;
     boolean currentHighlight[];
     private int[][] innerDimensions = new int[][]{};
