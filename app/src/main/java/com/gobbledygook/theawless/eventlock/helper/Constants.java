@@ -21,6 +21,7 @@ public class Constants {
     public static final String colors = "colors";
     public static final String begin_times = "beginTimes";
     public static final String end_times = "endTimes";
+    public static final String scroll_event = "scroll_event";
     public static final String current_events = "currentEvents";
 
     // keys

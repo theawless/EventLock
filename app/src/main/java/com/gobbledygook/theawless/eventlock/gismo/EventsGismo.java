@@ -72,9 +72,9 @@ public class EventsGismo {
     //--------------------------------------------------------------------------------------------//
 
     // when screen gets off
-    public void scrollToCurrentEvents() {
-        if (recyclerView.getAdapter() != null && eventsAdapter.currentEventIndexes != null && !eventsAdapter.currentEventIndexes.isEmpty()) {
-            recyclerView.scrollToPosition(eventsAdapter.currentEventIndexes.get(eventsAdapter.currentEventIndexes.size() - 1));
+    public void scrollToEvent() {
+        if (recyclerView.getAdapter() != null && 0 <= eventsAdapter.scrollEventIndex && eventsAdapter.scrollEventIndex < eventsAdapter.events.size()) {
+            recyclerView.scrollToPosition(eventsAdapter.scrollEventIndex);
         }
     }
 
@@ -90,19 +90,20 @@ public class EventsGismo {
     }
 
     // called by update receiver, step 2
-    public void deliverNewCurrentEvents(ArrayList<Integer> eventsToDisplay) {
-        ArrayList<Integer> oldEventsToDisplay = eventsAdapter.currentEventIndexes;
-        eventsAdapter.currentEventIndexes = eventsToDisplay;
-        if (oldEventsToDisplay != null) {
-            for (int eventToDisplay : oldEventsToDisplay) {
-                eventsAdapter.notifyItemChanged(eventToDisplay);
+    public void deliverNewCurrentEvents(int scrollEventIndex, ArrayList<Integer> currentEventIndexes) {
+        ArrayList<Integer> oldEventIndexes = eventsAdapter.currentEventIndexes;
+        eventsAdapter.scrollEventIndex = scrollEventIndex;
+        eventsAdapter.currentEventIndexes = currentEventIndexes;
+        if (oldEventIndexes != null) {
+            for (int eventIndex : oldEventIndexes) {
+                eventsAdapter.notifyItemChanged(eventIndex);
             }
         }
-        for (int eventToDisplay : eventsToDisplay) {
-            eventsAdapter.notifyItemChanged(eventToDisplay);
+        for (int eventIndex : currentEventIndexes) {
+            eventsAdapter.notifyItemChanged(eventIndex);
         }
 
-        scrollToCurrentEvents();
+        scrollToEvent();
     }
 
     // cache these because they will be used in onBind on recycler view
