@@ -56,9 +56,14 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
             <intent-filter>
-                <data android:scheme="content" />
                 <action android:name="android.intent.action.PROVIDER_CHANGED" />
+
+                <data android:scheme="content" />
                 <data android:host="com.android.calendar" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
         </receiver>
     </application>

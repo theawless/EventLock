@@ -43,9 +43,16 @@ class EventsBuilder {
     void build() {
         while (cursor != null && cursor.moveToNext()) {
             String timeZone = cursor.getString(6);
-            long beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
-            long endTime = new DateTime(cursor.getLong(3), DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
             int allDay = cursor.getInt(4);
+            long beginTime, endTime;
+            if (allDay == 0) {
+                beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(timeZone)).withZone(DateTimeZone.getDefault()).getMillis();
+                endTime = new DateTime(cursor.getLong(3), DateTimeZone.forID(timeZone)).withZone(DateTimeZone.getDefault()).getMillis();
+            } else {
+                // this is in UTC, but we want to have it as an all day event
+                beginTime = new DateTime(cursor.getLong(2), DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
+                endTime = new DateTime(cursor.getLong(3), DateTimeZone.forID(timeZone)).withZoneRetainFields(DateTimeZone.getDefault()).getMillis();
+            }
             String title = cursor.getString(0);
             String location = cursor.getString(1);
             String time = getFormattedTime(beginTime, endTime, allDay);
