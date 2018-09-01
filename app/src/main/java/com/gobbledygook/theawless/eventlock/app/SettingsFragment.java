@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -103,11 +104,37 @@ public class SettingsFragment extends PreferenceFragment {
                 }
                 return true;
             }
-            case R.string.help_you_title: {
+            case R.string.project_title: {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.help_you_title)
+                        .setTitle(R.string.project_title)
+                        .setMessage(R.string.project)
+                        .setIcon(R.drawable.action_preview_on_icon)
+                        .setNeutralButton(R.string.report_bug, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((MainActivity) getActivity()).startBrowserActivity(getString(R.string.github_issues_url));
+                            }
+                        })
+                        .setNegativeButton(R.string.paypal, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((MainActivity) getActivity()).startBrowserActivity(getString(R.string.paypal_url));
+                            }
+                        })
+                        .setPositiveButton(R.string.github, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((MainActivity) getActivity()).startBrowserActivity(getString(R.string.github_url));
+                            }
+                        })
+                        .show();
+                return true;
+            }
+            case R.string.help_title: {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.help_title)
                         .setMessage(R.string.help)
-                        .setIcon(R.drawable.eventlock_icon)
+                        .setIcon(R.drawable.action_refresh_icon)
                         .setPositiveButton(R.string.okay, null)
                         .show();
                 return true;

@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startBrowserActivity(String url) {
+    void startBrowserActivity(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
