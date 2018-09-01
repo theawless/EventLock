@@ -1,4 +1,4 @@
-# EventLock
+<img src="/images/banner.png" width="320" height="66"/>
 
 An Xposed module to show your calendar(s) events on the lockscreen (Android 5.0+ | Lollipop/Marshmallow/Nougat...).
 
