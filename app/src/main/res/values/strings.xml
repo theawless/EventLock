@@ -114,7 +114,7 @@
     <string name="show_color_title">Show event color</string>
     <string name="color_stick_summary">Whether the color block should be placed very close to text</string>
     <string name="color_stick_title">Stick to text</string>
-    <string name="color_type_summary">Block Type</string>
+    <string name="color_type_summary">Block type</string>
     <string name="color_type_title">Color block type on the lockscreen</string>
     <string name="color_anti_snap_height_summary">Disable setting color height based on text size</string>
     <string name="color_anti_snap_height_title">Manual Height</string>
