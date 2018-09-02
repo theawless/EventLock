@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory android:title="@string/settings_title">
         <com.gobbledygook.theawless.eventlock.app.CalendarPreference
             android:defaultValue="@array/selected_calendars_default"
@@ -15,38 +16,37 @@
             android:title="@string/days_till_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/customisation_title">
-        <PreferenceScreen xmlns:customNS="http://schemas.android.com/apk/res/com.gobbledygook.theawless.eventlock"
-            android:title="@string/presets_title">
+        <PreferenceScreen android:title="@string/presets_title">
             <PreferenceCategory android:title="@string/multiple_title">
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/multiple_preset1_title"
-                    customNS:preset_image="@drawable/multiple_preset1" />
+                    app:preset_image="@drawable/multiple_preset1" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/multiple_preset2_title"
-                    customNS:preset_image="@drawable/multiple_preset2" />
+                    app:preset_image="@drawable/multiple_preset2" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/multiple_preset3_title"
-                    customNS:preset_image="@drawable/multiple_preset3" />
+                    app:preset_image="@drawable/multiple_preset3" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/multiple_preset4_title"
-                    customNS:preset_image="@drawable/multiple_preset4" />
+                    app:preset_image="@drawable/multiple_preset4" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/multiple_preset5_title"
-                    customNS:preset_image="@drawable/multiple_preset5" />
+                    app:preset_image="@drawable/multiple_preset5" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/multiple_preset6_title"
-                    customNS:preset_image="@drawable/multiple_preset6" />
+                    app:preset_image="@drawable/multiple_preset6" />
             </PreferenceCategory>
             <PreferenceCategory android:title="@string/single_title">
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/single_preset1_title"
-                    customNS:preset_image="@drawable/single_preset1" />
+                    app:preset_image="@drawable/single_preset1" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/single_preset2_title"
-                    customNS:preset_image="@drawable/single_preset2" />
+                    app:preset_image="@drawable/single_preset2" />
                 <com.gobbledygook.theawless.eventlock.app.PresetPreference
                     android:title="@string/single_preset3_title"
-                    customNS:preset_image="@drawable/single_preset3" />
+                    app:preset_image="@drawable/single_preset3" />
             </PreferenceCategory>
         </PreferenceScreen>
         <PreferenceScreen android:title="@string/gismo_title">
@@ -363,7 +363,7 @@
             android:title="@string/help_title" />
         <Preference
             android:summary="@string/project_summary"
-            android:title="@string/project_title"/>
+            android:title="@string/project_title" />
         <com.gobbledygook.theawless.eventlock.app.VersionPreference android:title="@string/version_title" />
     </PreferenceCategory>
 </PreferenceScreen>

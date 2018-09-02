@@ -16,7 +16,7 @@ class PresetPreference extends Preference {
 
     public PresetPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PresetPreference, 0, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PresetPreference);
         try {
             image_res = typedArray.getResourceId(R.styleable.PresetPreference_preset_image, 0);
         } finally {
@@ -32,9 +32,13 @@ class PresetPreference extends Preference {
         linearLayout.addView(view);
         ImageView imageView = new ImageView(parent.getContext());
         imageView.setAdjustViewBounds(true);
-        imageView.setPadding(0, 0, 0, 20);
-        imageView.setImageResource(image_res);
         linearLayout.addView(imageView);
         return linearLayout;
+    }
+
+    @Override
+    protected void onBindView(View view) {
+        ((ImageView) ((LinearLayout) view).getChildAt(1)).setImageResource(image_res);
+        super.onBindView(view);
     }
 }
